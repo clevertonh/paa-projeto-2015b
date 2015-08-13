@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/08/2015 12:46:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="fazenda" name="com.minhafazenda.model.PropriedadeRural" optimistic-lock="version" table="propriedade_rural">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.minhafazenda.model.Cidade" fetch="select" name="cidade">
+      <column name="cidades_id" not-null="true"/>
+    </many-to-one>
+    <property name="descricao" type="string">
+      <column length="100" name="descricao" not-null="true"/>
+    </property>
+    <property name="endereco" type="string">
+      <column length="100" name="endereco"/>
+    </property>
+    <property name="tamanho" type="java.lang.Integer">
+      <column name="tamanho"/>
+    </property>
+    <property name="cep" type="string">
+      <column length="9" name="cep"/>
+    </property>
+    <set fetch="select" inverse="false" lazy="true" name="usuarios" table="usuario_propriedade_rural">
+      <key>
+        <column name="id_propriedade_rural" not-null="true"/>
+      </key>
+      <many-to-many entity-name="com.minhafazenda.conttroler.Usuario">
+        <column name="id_usuario" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="animals" table="animal">
+      <key>
+        <column name="propriedade_rural_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.minhafazenda.model.Animal"/>
+    </set>
+  </class>
+</hibernate-mapping>

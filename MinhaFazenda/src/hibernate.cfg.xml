@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fazenda?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">teste123</property>
+    <mapping resource="com/minhafazenda/conttroler/UsuarioTipo.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/GrauSangue.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Raca.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Pais.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Fotos.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Categoria.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Estado.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Animal.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/PropriedadeRural.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Cidade.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Vacina.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/ProducaoLeite.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/Usuario.hbm.xml"/>
+    <mapping resource="com/minhafazenda/conttroler/VacinaAnimal.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

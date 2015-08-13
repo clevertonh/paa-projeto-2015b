@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/08/2015 12:46:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="fazenda" name="com.minhafazenda.model.Animal" optimistic-lock="version" table="animal">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="com.minhafazenda.model.Animal" fetch="select" name="animalByIdPai">
+      <column name="id_pai"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.Animal" fetch="select" name="animalByIdMae">
+      <column name="id_mae"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.Categoria" fetch="select" name="categoria">
+      <column name="categoria_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.GrauSangue" fetch="select" name="grauSangue">
+      <column name="grau_sangue_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.PropriedadeRural" fetch="select" name="propriedadeRural">
+      <column name="propriedade_rural_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.Raca" fetch="select" name="raca">
+      <column name="raca_id" not-null="true"/>
+    </many-to-one>
+    <property name="nome" type="string">
+      <column length="100" name="nome" not-null="true"/>
+    </property>
+    <property name="sexo" type="java.lang.Character">
+      <column length="1" name="sexo"/>
+    </property>
+    <property name="dataNascimento" type="date">
+      <column length="10" name="data_nascimento"/>
+    </property>
+    <property name="numeroBotton" type="java.lang.Integer">
+      <column name="numero_botton"/>
+    </property>
+    <property name="tipoRegistro" type="java.lang.Integer">
+      <column name="tipo_registro"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="vacinaAnimals" table="vacina_animal">
+      <key>
+        <column name="id_animal" not-null="true"/>
+      </key>
+      <one-to-many class="com.minhafazenda.model.VacinaAnimal"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="animalsForIdPai" table="animal">
+      <key>
+        <column name="id_pai"/>
+      </key>
+      <one-to-many class="com.minhafazenda.model.Animal"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="animalsForIdMae" table="animal">
+      <key>
+        <column name="id_mae"/>
+      </key>
+      <one-to-many class="com.minhafazenda.model.Animal"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="producaoLeites" table="producao_leite">
+      <key>
+        <column name="id_animal" not-null="true"/>
+      </key>
+      <one-to-many class="com.minhafazenda.model.ProducaoLeite"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="fotoses" table="fotos">
+      <key>
+        <column name="animal_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.minhafazenda.model.Fotos"/>
+    </set>
+  </class>
+</hibernate-mapping>

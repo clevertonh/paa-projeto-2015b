@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/08/2015 12:46:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="fazenda" name="com.minhafazenda.model.VacinaAnimal" optimistic-lock="version" table="vacina_animal">
+    <composite-id class="com.minhafazenda.model.VacinaAnimalId" name="id">
+      <key-property name="idVacina" type="int">
+        <column name="id_vacina"/>
+      </key-property>
+      <key-property name="idAnimal" type="int">
+        <column name="id_animal"/>
+      </key-property>
+      <key-property name="sequencia" type="int">
+        <column name="sequencia"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="com.minhafazenda.model.Animal" fetch="select" insert="false" name="animal" update="false">
+      <column name="id_animal" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.Usuario" fetch="select" name="usuario">
+      <column name="id_usuario" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.minhafazenda.model.Vacina" fetch="select" insert="false" name="vacina" update="false">
+      <column name="id_vacina" not-null="true"/>
+    </many-to-one>
+    <property name="dataAplicacao" type="date">
+      <column length="10" name="data_aplicacao"/>
+    </property>
+    <property name="dataVencimento" type="date">
+      <column length="10" name="data_vencimento"/>
+    </property>
+    <property name="dose" type="java.lang.Integer">
+      <column name="dose"/>
+    </property>
+  </class>
+</hibernate-mapping>
