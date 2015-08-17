@@ -1,2 +1,11 @@
-# paa-projeto-2015b
-Projeto da disciplina Programação Avançada de Aplicações
+# Programação Avançada de Aplicações
+
+### Equipe
+* Cléverton Heming
+* Rodrigo Pinheiro de Oliveira
+
+### Tecnologias
+* Banco de dados: MySQL
+* Linguagem: Java
+* Framework: Hibernate
+* Interface gráfica: Swing
