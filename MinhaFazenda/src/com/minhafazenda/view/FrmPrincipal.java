@@ -5,17 +5,26 @@
  */
 package com.minhafazenda.view;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+
 /**
  *
- * @author cleverton
+ * @author Cléverton Heming
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
+    private FrmCategoriaCadastro frmCategoriaCadastro;
+    
     /**
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
         initComponents();
+        //Inicia o form principal maximizado
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -27,21 +36,58 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuCadastriCategoria = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+
+        jMenu1.setText("Cadastros");
+
+        menuCadastriCategoria.setText("Categoria");
+        menuCadastriCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastriCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuCadastriCategoria);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sobre");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuCadastriCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastriCategoriaActionPerformed
+        try {   
+            //Verifica se o formulario ja existe
+            if(frmCategoriaCadastro == null){
+                //Cria o form
+                frmCategoriaCadastro = new FrmCategoriaCadastro();
+                //Adiciona o formulario dentro do DESKTOP
+                this.jDesktopPane1.add(frmCategoriaCadastro);
+                //diz que a janela interna é maximizável     
+                frmCategoriaCadastro.setMaximizable(true);     
+                //set o tamanho máximo dela, que depende da janela pai     
+                frmCategoriaCadastro.setMaximum(true);     
+            }
+            
+            //Verifica se o formulario nao esta visivel
+            if(!frmCategoriaCadastro.isVisible()){
+                //Mostra o formulário
+                frmCategoriaCadastro.setVisible(true);
+            }
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +125,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuCadastriCategoria;
     // End of variables declaration//GEN-END:variables
 }
