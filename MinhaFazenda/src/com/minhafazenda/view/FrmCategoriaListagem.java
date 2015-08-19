@@ -20,7 +20,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
 
-    
+    private FrmCategoriaCadastro frm;
     
     /**
      * Creates new form FrmCategoriaListagem
@@ -37,7 +37,7 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         //
         Criteria objCriteria = objSession.createCriteria(Categoria.class);
         //Cria um
-        objCriteria.add(Restrictions.like("descricao", txtBusca.getText(), MatchMode.EXACT));
+        objCriteria.add(Restrictions.ilike("descricao", txtBusca.getText(), MatchMode.EXACT));
         //Cria uma lista de Categoria com o resultado da consulta
         List<Categoria> lstCategoria = objCriteria.list();
         //
@@ -56,9 +56,9 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         btnBUscar = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         btnNovo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         btnBUscar.setText("Buscar");
         btnBUscar.setName("btnBUscar"); // NOI18N
@@ -70,8 +70,6 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
 
         txtBusca.setName(""); // NOI18N
 
-        jScrollPane1.setViewportView(jList1);
-
         btnNovo.setText("Novo");
         btnNovo.setName("btnNovo"); // NOI18N
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +78,19 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,9 +98,9 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtBusca)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBUscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -105,8 +116,8 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         txtBusca.getAccessibleContext().setAccessibleName("");
@@ -121,18 +132,26 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBUscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        if(frm == null){
+            frm = new FrmCategoriaCadastro();
+            frm.setModal(true);
+            
+        }
         
         
-        
+        if(frm.isVisible())      
+            frm.setVisible(false);
+        else
+            frm.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBUscar;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

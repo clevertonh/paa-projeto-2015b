@@ -17,7 +17,7 @@ import org.hibernate.Transaction;
  *
  * @author cleverton
  */
-public class FrmCategoriaCadastro extends javax.swing.JInternalFrame {
+public class FrmCategoriaCadastro extends javax.swing.JDialog {
 
     private CategoriaController objController; 
     
@@ -132,10 +132,6 @@ public class FrmCategoriaCadastro extends javax.swing.JInternalFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setName("Categoria"); // NOI18N
 
         jLabel1.setText("Descrição");
@@ -207,6 +203,9 @@ public class FrmCategoriaCadastro extends javax.swing.JInternalFrame {
                         .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(234, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("teste1");
+        getAccessibleContext().setAccessibleDescription("222");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
