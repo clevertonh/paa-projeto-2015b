@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/08/2015 12:46:11 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2015 19:49:14 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="fazenda" name="com.minhafazenda.model.Fotos" optimistic-lock="version" table="fotos">
-    <id name="id" type="java.lang.Integer">
-      <column name="id"/>
-      <generator class="identity"/>
-    </id>
-    <many-to-one class="com.minhafazenda.model.Animal" fetch="select" name="animal">
-      <column name="animal_id" not-null="true"/>
-    </many-to-one>
-    <property name="descricao" type="string">
-      <column length="100" name="descricao" not-null="true"/>
-    </property>
-    <property name="nomeArquivo" type="string">
-      <column length="100" name="nome_arquivo" not-null="true"/>
-    </property>
-  </class>
+    <class name="com.minhafazenda.model.Fotos" table="fotos" catalog="fazenda" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="animal" class="com.minhafazenda.model.Animal" fetch="select">
+            <column name="animal_id" not-null="true" />
+        </many-to-one>
+        <property name="descricao" type="string">
+            <column name="descricao" length="100" not-null="true" />
+        </property>
+        <property name="nomeArquivo" type="string">
+            <column name="nome_arquivo" length="100" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

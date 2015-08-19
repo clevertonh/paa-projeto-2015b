@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/08/2015 12:46:11 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2015 19:49:14 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="fazenda" name="com.minhafazenda.model.UsuarioTipo" optimistic-lock="version" table="usuario_tipo">
-    <id name="id" type="int">
-      <column name="id"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="descricao" type="string">
-      <column length="45" name="descricao"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="usuarios" table="usuario">
-      <key>
-        <column name="id_usuario_tipo" not-null="true"/>
-      </key>
-      <one-to-many class="com.minhafazenda.model.Usuario"/>
-    </set>
-  </class>
+    <class name="com.minhafazenda.model.UsuarioTipo" table="usuario_tipo" catalog="fazenda" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="descricao" type="string">
+            <column name="descricao" length="45" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario_tipo" not-null="true" />
+            </key>
+            <one-to-many class="com.minhafazenda.model.Usuario" />
+        </set>
+    </class>
 </hibernate-mapping>

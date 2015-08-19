@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/08/2015 12:46:11 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2015 19:49:14 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="fazenda" name="com.minhafazenda.model.ProducaoLeite" optimistic-lock="version" table="producao_leite">
-    <id name="id" type="int">
-      <column name="id"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="com.minhafazenda.model.Animal" fetch="select" name="animal">
-      <column name="id_animal" not-null="true"/>
-    </many-to-one>
-    <property name="dataHora" type="timestamp">
-      <column length="19" name="data_hora"/>
-    </property>
-    <property name="quantidadeMl" type="java.lang.Integer">
-      <column name="quantidade_ml"/>
-    </property>
-  </class>
+    <class name="com.minhafazenda.model.ProducaoLeite" table="producao_leite" catalog="fazenda" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="animal" class="com.minhafazenda.model.Animal" fetch="select">
+            <column name="id_animal" not-null="true" />
+        </many-to-one>
+        <property name="dataHora" type="timestamp">
+            <column name="data_hora" length="19" />
+        </property>
+        <property name="quantidadeMl" type="java.lang.Integer">
+            <column name="quantidade_ml" />
+        </property>
+    </class>
 </hibernate-mapping>

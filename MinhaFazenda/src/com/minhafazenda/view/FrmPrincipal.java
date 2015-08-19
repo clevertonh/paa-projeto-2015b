@@ -16,6 +16,7 @@ import javax.swing.JFrame;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
+    private FrmCategoriaListagem frmCategoria;
     private FrmCategoriaCadastro frmCategoriaCadastro;
     
     /**
@@ -36,10 +37,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuCadastriCategoria = new javax.swing.JMenuItem();
+        itemCategoriaCadastro = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,6 +58,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuCadastriCategoria);
 
+        itemCategoriaCadastro.setText("Categoria Cadastro");
+        itemCategoriaCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCategoriaCadastroActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemCategoriaCadastro);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Sobre");
@@ -66,6 +77,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCadastriCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastriCategoriaActionPerformed
+        try {   
+            //Verifica se o formulario ja existe
+            if(frmCategoria == null){
+                //Cria o form
+                frmCategoria = new FrmCategoriaListagem();
+                //Adiciona o formulario dentro do DESKTOP
+                this.jDesktopPane1.add(frmCategoria);
+                //diz que a janela interna é maximizável     
+                frmCategoria.setMaximizable(true);     
+                //set o tamanho máximo dela, que depende da janela pai     
+                frmCategoria.setMaximum(true);     
+            }
+            
+            //Verifica se o formulario nao esta visivel
+            if(!frmCategoria.isVisible()){
+                //Mostra o formulário
+                frmCategoria.setVisible(true);
+            }
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
+
+    private void itemCategoriaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCategoriaCadastroActionPerformed
         try {   
             //Verifica se o formulario ja existe
             if(frmCategoriaCadastro == null){
@@ -87,7 +122,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } catch (PropertyVetoException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
+    }//GEN-LAST:event_itemCategoriaCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,10 +160,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemCategoriaCadastro;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem menuCadastriCategoria;
     // End of variables declaration//GEN-END:variables
 }

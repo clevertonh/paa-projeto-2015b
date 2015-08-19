@@ -5,12 +5,23 @@
  */
 package com.minhafazenda.view;
 
+import com.minhafazenda.model.Categoria;
+import com.minhafazenda.util.MinhaFazendaHibernateUtil;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+
 /**
  *
  * @author cleverton
  */
 public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
 
+    
+    
     /**
      * Creates new form FrmCategoriaListagem
      */
@@ -18,6 +29,21 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         initComponents();
     }
 
+    public void pesquisar(){
+        //Recebe o Session Factory do HIbernate
+        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
+        //Abre um sessão
+        Session objSession = objSessionFactory.openSession();    
+        //
+        Criteria objCriteria = objSession.createCriteria(Categoria.class);
+        //Cria um
+        objCriteria.add(Restrictions.like("descricao", txtBusca.getText(), MatchMode.EXACT));
+        //Cria uma lista de Categoria com o resultado da consulta
+        List<Categoria> lstCategoria = objCriteria.list();
+        //
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +53,86 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+        jPanel1 = new javax.swing.JPanel();
+        btnBUscar = new javax.swing.JButton();
+        txtBusca = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        btnNovo = new javax.swing.JButton();
+
+        btnBUscar.setText("Buscar");
+        btnBUscar.setName("btnBUscar"); // NOI18N
+        btnBUscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBUscarActionPerformed(evt);
+            }
+        });
+
+        txtBusca.setName(""); // NOI18N
+
+        jScrollPane1.setViewportView(jList1);
+
+        btnNovo.setText("Novo");
+        btnNovo.setName("btnNovo"); // NOI18N
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtBusca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBUscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBUscar)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        txtBusca.getAccessibleContext().setAccessibleName("");
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBUscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBUscarActionPerformed
+        pesquisar();
+    }//GEN-LAST:event_btnBUscarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnNovoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBUscar;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JList jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,19 +7,19 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fazenda?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">teste123</property>
-    <mapping resource="com/minhafazenda/conttroler/UsuarioTipo.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/GrauSangue.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Raca.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Pais.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Fotos.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Categoria.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Estado.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Animal.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/PropriedadeRural.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Cidade.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Vacina.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/ProducaoLeite.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/Usuario.hbm.xml"/>
-    <mapping resource="com/minhafazenda/conttroler/VacinaAnimal.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Usuario.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Estado.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/GrauSangue.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/PropriedadeRural.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Pais.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Fotos.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Categoria.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Cidade.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/ProducaoLeite.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/VacinaAnimal.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Vacina.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Raca.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/Animal.hbm.xml"/>
+    <mapping resource="com/minhafazenda/model/UsuarioTipo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

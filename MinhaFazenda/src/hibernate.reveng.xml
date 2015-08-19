@@ -2,19 +2,19 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="fazenda"/>
-  <table-filter match-name="pais"/>
-  <table-filter match-name="grau_sangue"/>
-  <table-filter match-name="usuario"/>
-  <table-filter match-name="vacina"/>
-  <table-filter match-name="producao_leite"/>
-  <table-filter match-name="cidade"/>
   <table-filter match-name="propriedade_rural"/>
   <table-filter match-name="fotos"/>
-  <table-filter match-name="animal"/>
+  <table-filter match-name="usuario"/>
   <table-filter match-name="usuario_propriedade_rural"/>
+  <table-filter match-name="vacina"/>
   <table-filter match-name="vacina_animal"/>
-  <table-filter match-name="usuario_tipo"/>
   <table-filter match-name="categoria"/>
+  <table-filter match-name="producao_leite"/>
+  <table-filter match-name="cidade"/>
   <table-filter match-name="estado"/>
+  <table-filter match-name="pais"/>
+  <table-filter match-name="animal"/>
   <table-filter match-name="raca"/>
+  <table-filter match-name="usuario_tipo"/>
+  <table-filter match-name="grau_sangue"/>
 </hibernate-reverse-engineering>
