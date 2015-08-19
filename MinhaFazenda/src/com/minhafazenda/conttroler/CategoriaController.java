@@ -20,14 +20,49 @@ public class CategoriaController {
         this.objModel = new CategoriaModel();
     }
     
-    public void insert(Categoria obj){
+    public Boolean insert(Categoria obj){
         if (obj.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "A descrição da categoria não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if(obj.getDescricao().length() > 50){
+            JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
+            return false;
         } else {
             String msg = objModel.insert(obj);
             if(!msg.equals("")){
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }else{
+                return true;
             }
+        }
+    }
+    
+    public Boolean update(Categoria obj){
+        if (obj.getDescricao().equals("")) {
+            JOptionPane.showMessageDialog(null, "A descrição da categoria não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if(obj.getDescricao().length() > 50){
+            JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        } else {
+            String msg = objModel.update(obj);
+            if(!msg.equals("")){
+                JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }else{
+                return true;
+            }
+        }
+    }
+    
+    public Boolean delete(Categoria obj){    
+        String msg = objModel.insert(obj);
+        if(!msg.equals("")){
+            JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else{
+            return true;
         }
     }
 }

@@ -19,5 +19,19 @@ public class CategoriaModel {
         //Chama método INSERT do serviço passando o objeto categoria por parametro
         return objService.insert(obj);
     }
+    
+    public String update(Categoria obj) {
+        //Cria objeto de serviço
+        CategoriaService objService = new CategoriaService();
+        //Chama método UPDATE do serviço passando o objeto categoria por parametro
+        return objService.update(obj);
+    }
+    
+    public String delete(Categoria obj) {
+        //Cria objeto de serviço
+        CategoriaService objService = new CategoriaService();
+        //Chama método UPDATE do serviço passando o objeto categoria por parametro
+        return objService.delete(obj);
+    }
 
 }
