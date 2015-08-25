@@ -7,17 +7,37 @@ package com.minhafazenda.conttroler;
 
 import com.minhafazenda.model.Categoria;
 import com.minhafazenda.model.CategoriaModel;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author cleverton
  */
-public class CategoriaController {
-    private CategoriaModel objModel;
+public final class CategoriaController extends AbstractTableModel {
+    //Cria o objeto do Model
+    private final CategoriaModel objModel;
+    //Table model
+    private ArrayList<Categoria> lstCategoria = null;  
+    private String[] lstColunas = null;
     
+    /*
+     * Método construtor da classe
+     */
     public CategoriaController(){
+        //Inicia o objeto model
         this.objModel = new CategoriaModel();
+        //Inicia a lista da lstColunas para o TableMOdel
+        setColunas(new String[]{"id", "descricao"});  
+    }
+    
+    public String[] getColunas() {
+        return lstColunas;
+    }
+
+    public void setColunas(String[] colunas) {
+        this.lstColunas = colunas;
     }
     
     public Boolean insert(Categoria obj){
@@ -64,5 +84,40 @@ public class CategoriaController {
         }else{
             return true;
         }
+    }
+    
+    public ArrayList<Categoria> findByAll() {  
+        this.lstCategoria = objModel.findByAll();
+        return this.lstCategoria;
+    } 
+
+    //Métodos implementados pela classe AbstractTableModel
+    @Override
+    public int getRowCount() {
+        return lstCategoria.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return getColunas().length;  
+    }
+
+    @Override
+    public Object getValueAt(int linhaIndex, int colunaIndex){
+        
+        Object value = null;  
+        
+        final Categoria c = (Categoria)lstCategoria.get(linhaIndex);  
+
+        switch(colunaIndex){  
+            case 0:   
+                value = c.getId();
+                break;  
+            case 1:  
+                value = c.getDescricao();  
+                break; 
+        }
+
+        return value;
     }
 }

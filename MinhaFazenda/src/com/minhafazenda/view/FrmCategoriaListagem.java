@@ -5,8 +5,10 @@
  */
 package com.minhafazenda.view;
 
+import com.minhafazenda.conttroler.CategoriaController;
 import com.minhafazenda.model.Categoria;
 import com.minhafazenda.util.MinhaFazendaHibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -21,14 +23,24 @@ import org.hibernate.criterion.Restrictions;
 public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
 
     private FrmCategoriaCadastro frm;
+    private CategoriaController objController;
     
     /**
      * Creates new form FrmCategoriaListagem
      */
     public FrmCategoriaListagem() {
         initComponents();
+        //Inicia o objeto de controller
+        objController = new CategoriaController();
+        //Carrega a lista de categorias no controller
+        objController.findByAll();
+        //Seta o controller no JTABLE
+        jTableCategoria.setModel(objController);        
     }
 
+    
+        
+    
     public void pesquisar(){
         //Recebe o Session Factory do HIbernate
         SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
@@ -58,7 +70,7 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         txtBusca = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableCategoria = new javax.swing.JTable();
 
         btnBUscar.setText("Buscar");
         btnBUscar.setName("btnBUscar"); // NOI18N
@@ -78,7 +90,7 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -89,7 +101,8 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jTableCategoria.setEnabled(false);
+        jScrollPane2.setViewportView(jTableCategoria);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,7 +148,6 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         if(frm == null){
             frm = new FrmCategoriaCadastro();
             frm.setModal(true);
-            
         }
         
         
@@ -151,7 +163,8 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableCategoria;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
+
 }
