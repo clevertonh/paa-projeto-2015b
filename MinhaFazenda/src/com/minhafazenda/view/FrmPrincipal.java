@@ -5,10 +5,26 @@
  */
 package com.minhafazenda.view;
 
+import com.minhafazenda.library.common.Licenca;
+import com.minhafazenda.library.protocol.LicencaProtocol;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyVetoException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ConnectException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -25,6 +41,61 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         //Inicia o form principal maximizado
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
+        Licenca obj = new Licenca();
+        obj.mantemLicenca();
+        
+//        Thread objThread;
+//        
+//        objThread = new Thread(new Runnable() {
+//            public void run() {
+//                try {
+//                    //Inicia conexao
+//                    //Loop infinito para menter a execução do processo
+//                    while(true){
+//                        //Tratamento de erro
+//                        try {
+//                            Thread.sleep(1000);
+//                            
+//                    
+//                    Socket clientSocket = new Socket("127.0.0.1", 6789);
+//                    ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());
+//                    ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
+//                    
+//                    LicencaProtocol objLicenca = new LicencaProtocol();
+//                    objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
+//                    
+//                            
+//                            //Solicita licenca
+//                            outToServer.writeObject(objLicenca);
+//                            //Retorno do servidor
+//                            objLicenca = (LicencaProtocol)inFromServer.readObject();
+//                            
+//                            if(objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_RENOVADA)
+//                                System.out.println("Renovada");
+//                            else
+//                                System.out.println("NAO Renovada");
+//                            
+//                            
+//                            
+//                            objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
+//
+//                            clientSocket.close();
+//                            
+//                        } catch (InterruptedException | ClassNotFoundException ex) {
+//                            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//                            
+//                        }
+//                    }
+//                } catch (IOException ex) {
+//                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//        
+//        //Inicia thread
+//        objThread.start();
     }
 
     /**
@@ -38,6 +109,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jSeparator1 = new javax.swing.JSeparator();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuCadastriCategoria = new javax.swing.JMenuItem();
@@ -45,6 +118,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jMenu1.setText("Cadastros");
 
@@ -94,6 +172,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -117,19 +196,77 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmPrincipal().setVisible(true);
+        try {
+            
+            Socket clientSocket = new Socket("127.0.0.1", 6789);
+            ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());    
+            ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
+                
+            LicencaProtocol objLicenca = new LicencaProtocol();
+            objLicenca.setHost("");
+            objLicenca.setIp("");
+            objLicenca.setStatus(LicencaProtocol.StatusType.SOLICITA_LICENCA);
+            
+            //Solicita licenca
+            outToServer.writeObject(objLicenca);
+                
+            //Retorno do servidor
+            objLicenca = (LicencaProtocol)inFromServer.readObject();
+            
+            //Valida o STATUS do retorno
+            if(objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_FORNECIDA){
+                //A licenca foi fornecida pelo servidor
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    //Abre o formulário principal
+                    public void run() {
+                        final FrmPrincipal frm = new FrmPrincipal();
+                        //frm.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                        frm.addWindowListener(new WindowAdapter() {
+                            //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
+                            public void windowClosing(WindowEvent ev) {
+//                                try {
+//                                    //Libera a licenca
+//                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
+//                                    //Envia a solicitacao para o servidor
+//                                    outToServer.writeObject(objLicenca);
+//                                    
+//                                    objLicenca = (LicencaProtocol)inFromServer.readObject();
+//                                    
+//                                    System.out.println("");
+//                                    //Fecha conexao
+//                                    //clientSocket.close();
+//                                } catch (IOException ex) {
+//                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//                                } catch (ClassNotFoundException ex) {
+//                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//                                }
+                            }
+                        });
+                        frm.setVisible(true);
+                    }
+                });
+            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SEM_LICENCA){
+                JOptionPane.showMessageDialog(null, "Não existe licenças disponíveis para iniciar o sistema!", "Sem licença", JOptionPane.ERROR_MESSAGE);
+            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SISTEMA_BLOQUEADO){
+                JOptionPane.showMessageDialog(null, "O sistema está bloqueado, entre em contato com a Software House", "Aviso", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro.....", "ERRO", JOptionPane.ERROR_MESSAGE);
             }
-        });
+        } catch (ConnectException e){
+            JOptionPane.showMessageDialog(null, "Não foi possível conectar no servidor de Licença", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem menuCadastriCategoria;
     // End of variables declaration//GEN-END:variables
