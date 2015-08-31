@@ -17,8 +17,10 @@ import java.util.logging.Logger;
  *
  * @author cleverton
  */
-public class Licenca extends Thread{
+//public class Licenca extends Thread{
+public class Licenca{    
     private Thread objThread;
+    private Socket clientSocket;
     
     public void mantemLicenca(){
     
@@ -32,13 +34,12 @@ public class Licenca extends Thread{
                         try {
                             Thread.sleep(1000);
                             
+                            clientSocket = new Socket("127.0.0.1", 6789);
+                            ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());
+                            ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
                     
-                    Socket clientSocket = new Socket("127.0.0.1", 6789);
-                    ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());
-                    ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
-                    
-                    LicencaProtocol objLicenca = new LicencaProtocol();
-                    objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
+                            LicencaProtocol objLicenca = new LicencaProtocol();
+                            objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
                     
                             
                             //Solicita licenca
@@ -72,6 +73,11 @@ public class Licenca extends Thread{
         objThread.start();
         
     
+    }
+    
+    public void stop(){
+    
+        objThread.stop();
     }
     
     public void run() {
