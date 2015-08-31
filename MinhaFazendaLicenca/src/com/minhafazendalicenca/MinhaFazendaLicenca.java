@@ -96,7 +96,7 @@ public class MinhaFazendaLicenca {
      */
     public static void main(String[] args){
         //Informa a quantidade de licenca para esse cliente
-        quantidadeLicenca = 2;
+        quantidadeLicenca = 30;
         //Inicia serviço
         run(6789);        
     }
