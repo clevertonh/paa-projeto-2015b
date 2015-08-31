@@ -33,6 +33,8 @@ import javax.swing.WindowConstants;
 public class FrmPrincipal extends javax.swing.JFrame {
 
     private FrmCategoriaListagem frmCategoria;
+    private FrmRacaListagem frmRaca;
+    
     
     /**
      * Creates new form FrmPrincipal
@@ -114,6 +116,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuCadastriCategoria = new javax.swing.JMenuItem();
+        menuCadastroRaca = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,6 +136,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menuCadastriCategoria);
+
+        menuCadastroRaca.setText("Raça");
+        menuCadastroRaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroRacaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuCadastroRaca);
 
         jMenuBar1.add(jMenu1);
 
@@ -167,6 +178,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
+
+    private void menuCadastroRacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroRacaActionPerformed
+        try {   
+            //Verifica se o formulario ja existe
+            if(frmRaca == null){
+                //Cria o form
+                frmRaca = new FrmRacaListagem();
+                //Adiciona o formulario dentro do DESKTOP
+                this.jDesktopPane1.add(frmRaca);
+                //diz que a janela interna é maximizável     
+                frmRaca.setMaximizable(true);     
+                //set o tamanho máximo dela, que depende da janela pai     
+                frmRaca.setMaximum(true);     
+            }
+            
+            //Verifica se o formulario nao esta visivel
+            if(!frmRaca.isVisible()){
+                //Mostra o formulário
+                frmRaca.setVisible(true);
+            }
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuCadastroRacaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,5 +304,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem menuCadastriCategoria;
+    private javax.swing.JMenuItem menuCadastroRaca;
     // End of variables declaration//GEN-END:variables
 }
