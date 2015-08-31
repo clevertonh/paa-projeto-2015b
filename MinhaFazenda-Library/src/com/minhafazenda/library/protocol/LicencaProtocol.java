@@ -13,19 +13,6 @@ import java.io.Serializable;
  */
 public class LicencaProtocol implements Serializable{
 
-    /**
-     * @return the status
-     */
-    public StatusType getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(StatusType status) {
-        this.status = status;
-    }
     public enum StatusType {
         SOLICITA_LICENCA    /* Usuário está solicitando uma licença para abrir o sistema */
         ,LICENCA_FORNECIDA  /* Uma licenca foi fornecida para o usuario */
@@ -40,6 +27,20 @@ public class LicencaProtocol implements Serializable{
     private String host;
     private Boolean liberadoAcesso;    
     private StatusType status;
+    
+    /**
+     * @return the status
+     */
+    public StatusType getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(StatusType status) {
+        this.status = status;
+    }
     
     /**
      * @return the ip
