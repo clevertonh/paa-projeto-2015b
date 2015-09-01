@@ -20,7 +20,7 @@ public final class CategoriaController extends AbstractTableModel {
     private final CategoriaModel objModel;
     //Table model
     private ArrayList<Categoria> lstCategoria = null;  
-    private String[] lstColunas = null;
+    private String[] column = {"Código", "Descrição"};
     
     /*
      * Método construtor da classe
@@ -29,15 +29,15 @@ public final class CategoriaController extends AbstractTableModel {
         //Inicia o objeto model
         this.objModel = new CategoriaModel();
         //Inicia a lista da lstColunas para o TableMOdel
-        setColunas(new String[]{"id", "descricao"});  
+        //setColunas(new String[]{"id", "descricao"});  
     }
     
-    public String[] getColunas() {
-        return lstColunas;
+    public String getColumnName(int columnIndex) {
+        return column[columnIndex];
     }
 
     public void setColunas(String[] colunas) {
-        this.lstColunas = colunas;
+        this.column = colunas;
     }
     
     public Boolean insert(Categoria obj){
@@ -99,7 +99,7 @@ public final class CategoriaController extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return getColunas().length;  
+        return column.length;  
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.minhafazenda.model.Categoria;
 import com.minhafazenda.util.MinhaFazendaHibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.TableColumnModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,6 +37,13 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         objController.findByAll();
         //Seta o controller no JTABLE
         jTableCategoria.setModel(objController);        
+        
+        //Personalização da JTABLE
+        TableColumnModel objColumn = jTableCategoria.getColumnModel();
+        objColumn.getColumn(0).setMaxWidth(100);
+        
+        jTableCategoria.setPreferredScrollableViewportSize(jTableCategoria.getPreferredSize());
+jTableCategoria.setFillsViewportHeight(true);
     }
 
     
@@ -72,6 +80,11 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableCategoria = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         btnBUscar.setText("Buscar");
         btnBUscar.setName("btnBUscar"); // NOI18N
         btnBUscar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +114,7 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableCategoria.setToolTipText("");
         jTableCategoria.setEnabled(false);
         jScrollPane2.setViewportView(jTableCategoria);
 
@@ -129,8 +143,8 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         txtBusca.getAccessibleContext().setAccessibleName("");
