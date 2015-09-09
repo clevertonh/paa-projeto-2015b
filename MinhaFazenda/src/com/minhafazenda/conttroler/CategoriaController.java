@@ -16,16 +16,18 @@ import javax.swing.table.AbstractTableModel;
  * @author cleverton
  */
 public final class CategoriaController extends AbstractTableModel {
+
     //Cria o objeto do Model
+
     private final CategoriaModel objModel;
     //Table model
-    private ArrayList<Categoria> lstCategoria = null;  
+    private ArrayList<Categoria> lstCategoria = null;    
     private String[] column = {"Código", "Descrição"};
-    
+
     /*
      * Método construtor da classe
      */
-    public CategoriaController(){
+    public CategoriaController() {
         //Inicia o objeto model
         this.objModel = new CategoriaModel();
         //Inicia a lista da lstColunas para o TableMOdel
@@ -35,89 +37,94 @@ public final class CategoriaController extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return column[columnIndex];
     }
-
+    
     public void setColunas(String[] colunas) {
         this.column = colunas;
     }
     
-    public Boolean insert(Categoria obj){
+    public Boolean insert(Categoria obj) {
         if (obj.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "A descrição da categoria não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if(obj.getDescricao().length() > 50){
+        } else if (obj.getDescricao().length() > 50) {
             JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {
             String msg = objModel.insert(obj);
-            if(!msg.equals("")){
+            if (!msg.equals("")) {
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
     }
     
-    public Boolean update(Categoria obj){
+    public Boolean update(Categoria obj) {
         if (obj.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "A descrição da categoria não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if(obj.getDescricao().length() > 50){
+        } else if (obj.getDescricao().length() > 50) {
             JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {
             String msg = objModel.update(obj);
-            if(!msg.equals("")){
+            if (!msg.equals("")) {
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
     }
     
-    public Boolean delete(Categoria obj){    
+    public Boolean delete(Categoria obj) {        
         String msg = objModel.insert(obj);
-        if(!msg.equals("")){
+        if (!msg.equals("")) {
             JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else{
+        } else {
             return true;
         }
     }
     
-    public ArrayList<Categoria> findByAll() {  
+    public ArrayList<Categoria> findByAll() {        
         this.lstCategoria = objModel.findByAll();
         return this.lstCategoria;
-    } 
+    }    
+    
+    public ArrayList<Categoria> findByAll(String condicao) {        
+        this.lstCategoria = objModel.findByAll(condicao);
+        return this.lstCategoria;
+    }
 
     //Métodos implementados pela classe AbstractTableModel
     @Override
     public int getRowCount() {
         return lstCategoria.size();
     }
-
+    
     @Override
     public int getColumnCount() {
-        return column.length;  
+        return column.length;        
     }
-
+    
     @Override
-    public Object getValueAt(int linhaIndex, int colunaIndex){
+    public Object getValueAt(int linhaIndex, int colunaIndex) {
         
-        Object value = null;  
+        Object value = null;        
         
-        final Categoria c = (Categoria)lstCategoria.get(linhaIndex);  
-
-        switch(colunaIndex){  
-            case 0:   
+        final Categoria c = (Categoria) lstCategoria.get(linhaIndex);        
+        
+        switch (colunaIndex) {            
+            case 0:                
                 value = c.getId();
-                break;  
-            case 1:  
-                value = c.getDescricao();  
-                break; 
+                break;            
+            case 1:                
+                value = c.getDescricao();                
+                break;            
         }
-
+        
         return value;
     }
 }

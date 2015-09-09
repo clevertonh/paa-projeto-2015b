@@ -116,6 +116,21 @@ public class RacaModel {
         return lstRaca;  
     } 
     
+     public ArrayList<Raca> findByAll(String condicao) {  
+        //Cria lista de objetos
+        ArrayList<Raca> lstRaca = null;  
+        //Abre um sessão
+        Session objSession = this.objSessionFactory.openSession();    
+
+        try {  
+            Query objQuery = objSession.createQuery("from Raca where descricao like '%"+condicao+"%'");
+            lstRaca = (ArrayList<Raca>)objQuery.list();  
+        } catch (ObjectNotFoundException e) {  
+            return null;  
+        }  
+  
+        return lstRaca;  
+    } 
     /**
      * 
      */

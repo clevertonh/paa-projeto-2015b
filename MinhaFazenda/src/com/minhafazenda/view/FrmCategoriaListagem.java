@@ -6,16 +6,7 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.conttroler.CategoriaController;
-import com.minhafazenda.model.Categoria;
-import com.minhafazenda.util.MinhaFazendaHibernateUtil;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.TableColumnModel;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -25,45 +16,51 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
 
     private FrmCategoriaCadastro frm;
     private CategoriaController objController;
-    
+
     /**
      * Creates new form FrmCategoriaListagem
      */
     public FrmCategoriaListagem() {
         initComponents();
+
+        //Define o título para a janela
+        this.setTitle("SGF - Relação de Categorias");
+
         //Inicia o objeto de controller
         objController = new CategoriaController();
         //Carrega a lista de categorias no controller
         objController.findByAll();
         //Seta o controller no JTABLE
-        jTableCategoria.setModel(objController);        
-        
+        jTableCategoria.setModel(objController);
+
         //Personalização da JTABLE
-        TableColumnModel objColumn = jTableCategoria.getColumnModel();
-        objColumn.getColumn(0).setMaxWidth(100);
-        
-        jTableCategoria.setPreferredScrollableViewportSize(jTableCategoria.getPreferredSize());
-jTableCategoria.setFillsViewportHeight(true);
+        personalizarJtable();
     }
 
-    
-        
-    
-    public void pesquisar(){
-        //Recebe o Session Factory do HIbernate
-        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
-        //Abre um sessão
-        Session objSession = objSessionFactory.openSession();    
-        //
-        Criteria objCriteria = objSession.createCriteria(Categoria.class);
-        //Cria um
-        objCriteria.add(Restrictions.ilike("descricao", txtBusca.getText(), MatchMode.EXACT));
-        //Cria uma lista de Categoria com o resultado da consulta
-        List<Categoria> lstCategoria = objCriteria.list();
-        //
-        
+    public void pesquisar() {
+        objController = new CategoriaController();
+        //Carrega a lista de categorias no controller
+        objController.findByAll(txtBusca.getText());
+        //Seta o controller no JTABLE
+        jTableCategoria.setModel(objController);
+        // jTableCategoria.setName(title);
+
+        //Personalização da JTABLE
+        personalizarJtable();
+
+//        //Recebe o Session Factory do HIbernate
+//        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
+//        //Abre um sessão
+//        Session objSession = objSessionFactory.openSession();    
+//        //
+//        Criteria objCriteria = objSession.createCriteria(Categoria.class);
+//        //Cria um
+//        objCriteria.add(Restrictions.ilike("descricao", txtBusca.getText(), MatchMode.EXACT));
+//        //Cria uma lista de Categoria com o resultado da consulta
+//        List<Categoria> lstCategoria = objCriteria.list();
+//        //
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,11 +76,13 @@ jTableCategoria.setFillsViewportHeight(true);
         btnNovo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableCategoria = new javax.swing.JTable();
+        jBFechar = new javax.swing.JButton();
 
-        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setName("Relação de Categorias"); // NOI18N
+        setVerifyInputWhenFocusTarget(false);
 
         btnBUscar.setText("Buscar");
         btnBUscar.setName("btnBUscar"); // NOI18N
@@ -118,6 +117,13 @@ jTableCategoria.setFillsViewportHeight(true);
         jTableCategoria.setEnabled(false);
         jScrollPane2.setViewportView(jTableCategoria);
 
+        jBFechar.setText("Fechar");
+        jBFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -127,29 +133,40 @@ jTableCategoria.setFillsViewportHeight(true);
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBUscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBUscar)
-                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNovo))
+                    .addComponent(btnBUscar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBFechar)
                 .addContainerGap())
         );
 
         txtBusca.getAccessibleContext().setAccessibleName("");
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jPanel1.getAccessibleContext().setAccessibleName("Relação de Categorias");
+        jPanel1.getAccessibleContext().setAccessibleDescription("Relação de Categorias");
+
+        getAccessibleContext().setAccessibleName("Cadastro de Categorias");
+        getAccessibleContext().setAccessibleDescription("Cadastro de Categorias");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,26 +176,39 @@ jTableCategoria.setFillsViewportHeight(true);
     }//GEN-LAST:event_btnBUscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        if(frm == null){
+        if (frm == null) {
             frm = new FrmCategoriaCadastro();
             frm.setModal(true);
         }
-        
-        
-        if(frm.isVisible())      
+
+        if (frm.isVisible()) {
             frm.setVisible(false);
-        else
+        } else {
             frm.setVisible(true);
+        }
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void jBFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFecharActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jBFecharActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBUscar;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton jBFechar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCategoria;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
+
+    public void personalizarJtable() {
+        TableColumnModel objColumn = jTableCategoria.getColumnModel();
+        objColumn.getColumn(0).setMaxWidth(100);
+
+        jTableCategoria.setPreferredScrollableViewportSize(jTableCategoria.getPreferredSize());
+        jTableCategoria.setFillsViewportHeight(true);
+    }
 
 }
