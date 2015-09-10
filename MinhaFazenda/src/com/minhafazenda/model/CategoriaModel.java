@@ -7,7 +7,6 @@ package com.minhafazenda.model;
 
 import com.minhafazenda.util.MinhaFazendaHibernateUtil;
 import java.util.ArrayList;
-import javax.swing.table.AbstractTableModel;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -109,6 +108,22 @@ public class CategoriaModel {
 
         try {  
             Query objQuery = objSession.createQuery("from Categoria");
+            lstCategoria = (ArrayList<Categoria>)objQuery.list();  
+        } catch (ObjectNotFoundException e) {  
+            return null;  
+        }  
+  
+        return lstCategoria;  
+    } 
+    
+    public ArrayList<Categoria> findByAll(String condicao) {  
+        //Cria lista de objetos
+        ArrayList<Categoria> lstCategoria = null;  
+        //Abre um sessão
+        Session objSession = this.objSessionFactory.openSession();    
+
+        try {  
+            Query objQuery = objSession.createQuery("from Categoria where descricao like '%"+condicao+"%'");
             lstCategoria = (ArrayList<Categoria>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  

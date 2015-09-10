@@ -16,23 +16,30 @@ import javax.swing.table.AbstractTableModel;
  * @author cleverton
  */
 public final class RacaController extends AbstractTableModel {
+
     //Cria o objeto do Model
+
     private final RacaModel objModel;
     //Table model
-    private ArrayList<Raca> lstRaca = null;  
+    private ArrayList<Raca> lstRaca = null;
     private String[] lstColunas = null;
-    
+    private String[] column = {"Código", "Descrição", "Nome Arquivo"};
+
     /*
      * Método construtor da classe
      */
-    public RacaController(){
+    public RacaController() {
         //Inicia o objeto model
         this.objModel = new RacaModel();
         //Inicia a lista da lstColunas para o TableMOdel
-        setColunas(new String[]{"id", "descricao", "nome_arquivo"}); 
-        
+        setColunas(new String[]{"id", "descricao", "nome_arquivo"});
+
     }
-    
+
+    public String getColumnName(int columnIndex) {
+        return column[columnIndex];
+    }
+
     public String[] getColunas() {
         return lstColunas;
     }
@@ -40,57 +47,62 @@ public final class RacaController extends AbstractTableModel {
     public void setColunas(String[] colunas) {
         this.lstColunas = colunas;
     }
-    
-    public Boolean insert(Raca obj){
+
+    public Boolean insert(Raca obj) {
         if (obj.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "A descrição da raça não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if(obj.getDescricao().length() > 50){
+        } else if (obj.getDescricao().length() > 50) {
             JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {
             String msg = objModel.insert(obj);
-            if(!msg.equals("")){
+            if (!msg.equals("")) {
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
     }
-    
-    public Boolean update(Raca obj){
+
+    public Boolean update(Raca obj) {
         if (obj.getDescricao().equals("")) {
             JOptionPane.showMessageDialog(null, "A descrição da raça não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        } else if(obj.getDescricao().length() > 50){
+        } else if (obj.getDescricao().length() > 50) {
             JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {
             String msg = objModel.update(obj);
-            if(!msg.equals("")){
+            if (!msg.equals("")) {
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
     }
-    
-    public Boolean delete(Raca obj){    
+
+    public Boolean delete(Raca obj) {
         String msg = objModel.insert(obj);
-        if(!msg.equals("")){
+        if (!msg.equals("")) {
             JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-    
-    public ArrayList<Raca> findByAll() {  
+
+    public ArrayList<Raca> findByAll() {
         this.lstRaca = objModel.findByAll();
         return this.lstRaca;
-    } 
+    }
+
+    public ArrayList<Raca> findByAll(String condicao) {
+        this.lstRaca = objModel.findByAll(condicao);
+        return this.lstRaca;
+    }
 
     //Métodos implementados pela classe AbstractTableModel
     @Override
@@ -100,25 +112,25 @@ public final class RacaController extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return getColunas().length;  
+        return getColunas().length;
     }
 
     @Override
-    public Object getValueAt(int linhaIndex, int colunaIndex){
-        
-        Object value = null;  
-        
-        final Raca c = (Raca)lstRaca.get(linhaIndex);  
+    public Object getValueAt(int linhaIndex, int colunaIndex) {
 
-        switch(colunaIndex){  
-            case 0:   
+        Object value = null;
+
+        final Raca c = (Raca) lstRaca.get(linhaIndex);
+
+        switch (colunaIndex) {
+            case 0:
                 value = c.getId();
-                break;  
-            case 1:  
-                value = c.getDescricao();  
+                break;
+            case 1:
+                value = c.getDescricao();
                 break;
             case 2:
-                value = c.getNomeArquivo();  
+                value = c.getNomeArquivo();
                 break;
         }
 

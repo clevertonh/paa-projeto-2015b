@@ -26,6 +26,7 @@ public class MinhaFazendaHibernateUtil {
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);
+
             throw new ExceptionInInitializerError(ex);
         }
     }

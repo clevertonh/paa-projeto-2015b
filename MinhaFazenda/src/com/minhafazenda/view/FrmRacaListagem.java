@@ -6,14 +6,7 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.conttroler.RacaController;
-import com.minhafazenda.model.Raca;
-import com.minhafazenda.util.MinhaFazendaHibernateUtil;
-import java.util.List;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -29,29 +22,45 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
      */
     public FrmRacaListagem() {
         initComponents();
+        
+        //Define o título para a janela
+        this.setTitle("SGF - Relação de Raças");
+
         //Inicia o objeto de controller
         objController = new RacaController();
-        //Carrega a lista de categorias no controller
+        //Carrega a lista no controller
         objController.findByAll();
         //Seta o controller no JTABLE
-       jTableRaca.setModel(objController);
-       jTableRaca.setName(title);
-        
+        jTableRaca.setModel(objController);
+        jTableRaca.setName(title);
+
+        //Personalização da JTABLE
+        personalizarJtable();
     }
 
     public void pesquisar() {
-        //Recebe o Session Factory do HIbernate
-        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();
-        //Abre um sessão
-        Session objSession = objSessionFactory.openSession();
-        //
-        Criteria objCriteria = objSession.createCriteria(Raca.class);
-        //Cria um
-        objCriteria.add(Restrictions.ilike("descricao", txtBusca.getText(), MatchMode.EXACT));
-        //Cria uma lista de Raças com o resultado da consulta
-        List<Raca> lstRaca = objCriteria.list();
-        //
 
+        objController = new RacaController();
+        //Carrega a lista de categorias no controller
+        objController.findByAll(txtBusca.getText());
+        //Seta o controller no JTABLE
+        jTableRaca.setModel(objController);
+        jTableRaca.setName(title);
+
+        //Personalização da JTABLE
+        personalizarJtable();
+
+//        //Recebe o Session Factory do HIbernate
+//        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();
+//        //Abre um sessão
+//        Session objSession = objSessionFactory.openSession();
+//        //
+//        Criteria objCriteria = objSession.createCriteria(Raca.class);
+//        //Cria um
+//        objCriteria.add(Restrictions.ilike("descricao", txtBusca.getText(), MatchMode.EXACT));
+//        //Cria uma lista de Raças com o resultado da consulta
+//        List<Raca> lstRaca = objCriteria.list();
+//        //
     }
 
     /**
@@ -69,6 +78,7 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         btnNovo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableRaca = new javax.swing.JTable();
+        jBFechar = new javax.swing.JButton();
 
         btnBUscar.setText("Buscar");
         btnBUscar.setName("btnBUscar"); // NOI18N
@@ -102,6 +112,13 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         jTableRaca.setEnabled(false);
         jScrollPane2.setViewportView(jTableRaca);
 
+        jBFechar.setText("Fechar");
+        jBFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,7 +132,10 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBUscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,14 +146,18 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
                     .addComponent(btnBUscar)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBFechar)
+                .addContainerGap())
         );
 
         txtBusca.getAccessibleContext().setAccessibleName("");
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        getAccessibleContext().setAccessibleName("Cadastro de Raças");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -155,14 +179,26 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void jBFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFecharActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jBFecharActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBUscar;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton jBFechar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableRaca;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 
+    public void personalizarJtable() {
+        TableColumnModel objColumn = jTableRaca.getColumnModel();
+        objColumn.getColumn(0).setMaxWidth(100);
+
+        jTableRaca.setPreferredScrollableViewportSize(jTableRaca.getPreferredSize());
+        jTableRaca.setFillsViewportHeight(true);
+    }
 }
