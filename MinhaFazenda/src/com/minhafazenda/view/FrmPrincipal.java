@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -219,9 +220,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
                 
             LicencaProtocol objLicenca = new LicencaProtocol();
-            objLicenca.setHost("");
-            objLicenca.setIp("");
             objLicenca.setStatus(LicencaProtocol.StatusType.SOLICITA_LICENCA);
+            objLicenca.setDataHora(new Date());
             
             //Solicita licenca
             outToServer.writeObject(objLicenca);
@@ -240,7 +240,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         frm.addWindowListener(new WindowAdapter() {
                             //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
                             public void windowClosing(WindowEvent ev) {
-                                
 //                                try {
 //                                    //Libera a licenca
 //                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
