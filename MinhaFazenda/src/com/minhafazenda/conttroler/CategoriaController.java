@@ -93,8 +93,12 @@ public final class CategoriaController extends AbstractTableModel {
         return this.lstCategoria;
     }    
     
-    public ArrayList<Categoria> findByAll(String condicao) {        
-        this.lstCategoria = objModel.findByAll(condicao);
+    public Categoria findById(int id){
+        return objModel.findById(id);
+    }
+    
+    public ArrayList<Categoria> findByDescricao(String descricao) {        
+        this.lstCategoria = objModel.findByDescricao(descricao);
         return this.lstCategoria;
     }
 

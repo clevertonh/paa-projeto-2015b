@@ -7,6 +7,7 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.library.common.Licenca;
 import com.minhafazenda.library.protocol.LicencaProtocol;
+import com.minhafazenda.util.ConfiguracaoSistema;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyVetoException;
@@ -42,7 +43,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         objLicenca = new Licenca();
         objLicenca.mantemLicenca();
-        this.setTitle("SGF - Sistema Gerenciador de Fazendas");
+        //Altera o título do sistema
+        this.setTitle(ConfiguracaoSistema.tituloJanela);
     }
 
     /**
@@ -56,6 +58,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jSeparator1 = new javax.swing.JSeparator();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuCadastriCategoria = new javax.swing.JMenuItem();
@@ -65,6 +69,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(723, 598));
+        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+
+        jToolBar1.setRollover(true);
+
+        jButton1.setText("Categoria");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setPreferredSize(new java.awt.Dimension(64, 40));
+        jButton1.setRolloverEnabled(false);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
         jMenu1.setText("Cadastros");
 
@@ -91,41 +108,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCadastriCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastriCategoriaActionPerformed
-        try {   
-            //Verifica se o formulario ja existe
-            if(frmCategoria == null){
-                //Cria o form
-                frmCategoria = new FrmCategoriaListagem();
-                //Adiciona o formulario dentro do DESKTOP
-                this.jDesktopPane1.add(frmCategoria);
-                //diz que a janela interna é maximizável     
-                frmCategoria.setMaximizable(true);     
-                //set o tamanho máximo dela, que depende da janela pai     
-                frmCategoria.setMaximum(true);     
-            }
-            
-            //Verifica se o formulario nao esta visivel
-            if(!frmCategoria.isVisible()){
-                //Mostra o formulário
-                frmCategoria.setVisible(true);
-            }
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if(frmCategoria == null){
+            //Cria o form
+            frmCategoria = new FrmCategoriaListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmCategoria);
+            //diz que a janela interna é maximizável
+            frmCategoria.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if(!frmCategoria.isVisible()){
+            //Mostra o formulário
+            frmCategoria.setVisible(true);
         }
     }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
 
@@ -245,11 +244,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem menuCadastriCategoria;
     private javax.swing.JMenuItem menuCadastroRaca;
     // End of variables declaration//GEN-END:variables

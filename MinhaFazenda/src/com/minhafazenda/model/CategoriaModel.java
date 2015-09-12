@@ -114,16 +114,31 @@ public class CategoriaModel {
         }  
   
         return lstCategoria;  
-    } 
+    }
     
-    public ArrayList<Categoria> findByAll(String condicao) {  
+    public Categoria findById(int id) {  
+        //Cria lista de objetos
+        Categoria objCategoria = null;  
+        //Abre um sessão
+        Session objSession = this.objSessionFactory.openSession();    
+
+        try {  
+            objCategoria = (Categoria)objSession.load(Categoria.class, id);
+        } catch (ObjectNotFoundException e) {  
+            return null;  
+        }  
+  
+        return objCategoria;
+    }    
+    
+    public ArrayList<Categoria> findByDescricao(String descricao) {  
         //Cria lista de objetos
         ArrayList<Categoria> lstCategoria = null;  
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            Query objQuery = objSession.createQuery("from Categoria where descricao like '%"+condicao+"%'");
+            Query objQuery = objSession.createQuery("from Categoria where descricao like '%" + descricao + "%'");
             lstCategoria = (ArrayList<Categoria>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  
