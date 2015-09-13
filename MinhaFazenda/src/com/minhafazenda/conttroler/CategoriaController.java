@@ -79,7 +79,7 @@ public final class CategoriaController extends AbstractTableModel {
     }
     
     public Boolean delete(Categoria obj) {        
-        String msg = objModel.insert(obj);
+        String msg = objModel.delete(obj);
         if (!msg.equals("")) {
             JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;

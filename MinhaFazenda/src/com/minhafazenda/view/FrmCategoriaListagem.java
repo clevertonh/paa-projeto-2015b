@@ -36,6 +36,7 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
         jTableCategoria.setModel(objController);
         //
         jTableCategoria.setFillsViewportHeight(true);
+        
         //LIbera a seleção das linhas da jTAble
         jTableCategoria.setRowSelectionAllowed(true);
         //Aceita somente uma linha selecionada por vez
@@ -59,7 +60,8 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
             frm.setModal(true);
         }
         
-        frm.fCarregaCadastro(id);
+        if(id > 0)
+            frm.fCarregaCadastro(id);
 
         if (frm.isVisible()) {
             frm.setVisible(false);

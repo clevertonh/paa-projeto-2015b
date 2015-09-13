@@ -25,27 +25,23 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
         initComponents();
         //Cria o objeto de controller
         this.objController = new CategoriaController();
+        //Por padrão oculta o botão excluir
+        btnExcluir.setVisible(false);
+        //POr padrão limpa o campo texto
+        txtDescricao.setText("");
+        //Adiciona o status de edição
+        this.edicao = false;
     }
     
     public void fCarregaCadastro(int id){
-        if(id == 0){
-            //Limpa campos
-            txtDescricao.setText("");
-            //Adiciona o status de edição
-            this.edicao = false;       
-            //Oculta o botão excluir
-            btnExcluir.setVisible(false);        
-        }else{
-            //Se for passado um código por parâmetro, pesquisa no banco
-            this.objCategoria = this.objController.findById(id);
-            //Carrega na tela a descrição da categoria
-            txtDescricao.setText(this.objCategoria.getDescricao());
-            //Adiciona o status de edição
-            this.edicao = true;    
-            //MOstra o botão excluir
-            btnExcluir.setVisible(true);
-        }
-        
+        //Se for passado um código por parâmetro, pesquisa no banco
+        this.objCategoria = this.objController.findById(id);
+        //Carrega na tela a descrição da categoria
+        txtDescricao.setText(this.objCategoria.getDescricao());
+        //Adiciona o status de edição
+        this.edicao = true;    
+        //MOstra o botão excluir
+        btnExcluir.setVisible(true);
     }
 
     /**
@@ -89,6 +85,11 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -116,9 +117,9 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
                 .addComponent(btnSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar)
-                .addContainerGap())
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,17 +158,9 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        if(this.objCategoria.getId() == 0){
-            //Caso não for passado o codigo por parâmetro, cria um objeto novo
-            this.objCategoria = new Categoria();
-            //Limpa campos
-            txtDescricao.setText("");
-            //Adiciona o status de edição
-            this.edicao = false;       
-            //Oculta o botão excluir
-            btnExcluir.setVisible(false);
-        }
-
+        if(this.objCategoria == null)
+             this.objCategoria = new Categoria();
+        
         //Adiciona os atributos
         objCategoria.setDescricao(txtDescricao.getText());
         //Verifica se deve adicionar ou atualizar um registro
@@ -193,6 +186,12 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        objController.delete(objCategoria);
+        //Fecha o formulário
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
