@@ -25,12 +25,19 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
         initComponents();
         //Cria o objeto de controller
         this.objController = new CategoriaController();
+    }
+    
+    public void fNovoRegistro(){
+        //
+        this.objCategoria = new Categoria();
         //Por padrão oculta o botão excluir
-        btnExcluir.setVisible(false);
+        btnExcluir.setEnabled(false);
         //POr padrão limpa o campo texto
         txtDescricao.setText("");
         //Adiciona o status de edição
         this.edicao = false;
+        //Seta o focu no campo de descrição ao abrir o formulário
+        txtDescricao.requestFocus();
     }
     
     public void fCarregaCadastro(int id){
@@ -41,7 +48,9 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
         //Adiciona o status de edição
         this.edicao = true;    
         //MOstra o botão excluir
-        btnExcluir.setVisible(true);
+        btnExcluir.setEnabled(true);
+        //Seta o focu no campo de descrição ao abrir o formulário
+        txtDescricao.requestFocus();
     }
 
     /**
@@ -157,10 +166,6 @@ public class FrmCategoriaCadastro extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDescricaoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
-        if(this.objCategoria == null)
-             this.objCategoria = new Categoria();
-        
         //Adiciona os atributos
         objCategoria.setDescricao(txtDescricao.getText());
         //Verifica se deve adicionar ou atualizar um registro

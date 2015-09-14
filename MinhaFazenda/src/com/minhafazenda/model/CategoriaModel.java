@@ -20,12 +20,13 @@ import org.hibernate.Transaction;
 public class CategoriaModel {
     //
     private final SessionFactory objSessionFactory;
+    
     //String para mensagem de erro
     String msg = "";
     
     public CategoriaModel(){    
         //Recebe o Session Factory do HIbernate
-        this.objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
+        this.objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory(); 
     }
     
     public String insert(Categoria obj) {
@@ -76,15 +77,21 @@ public class CategoriaModel {
         return msg;
     }
     
-    public String delete(Categoria obj) {
+    public String delete(Categoria obj) {        
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();    
         //Inicia uma transação dentro da sessão aberta
         Transaction objTransaction = objSession.beginTransaction();
         
         try {    
-            //ATUALIZA o objeto categoria, assim o hibernate persiste no bancoapagando o registro.
-            objSession.delete(obj);
+            //Cria QUERY para excluir o registro
+            Query query = objSession.createQuery("delete Categoria where id = :id");
+            //Seta os parâmetros
+            query.setParameter("id", obj.getId());
+            //Executa a QUERY
+            query.executeUpdate();
+                //ATUALIZA o objeto categoria, assim o hibernate persiste no bancoapagando o registro.
+                //objSession.delete(obj);
             //Realiza um commit do UPDATE
             objTransaction.commit();
         } catch (Exception e) {
@@ -112,7 +119,10 @@ public class CategoriaModel {
         } catch (ObjectNotFoundException e) {  
             return null;  
         }  
-  
+        
+        //Fecha a sessão
+        objSession.close();
+        //Retorna lista de categoria
         return lstCategoria;  
     }
     
@@ -127,7 +137,9 @@ public class CategoriaModel {
         } catch (ObjectNotFoundException e) {  
             return null;  
         }  
-  
+        //Fecha a sessão
+        //objSession.close();
+        //Retorna objeto categoria
         return objCategoria;
     }    
     
@@ -143,76 +155,11 @@ public class CategoriaModel {
         } catch (ObjectNotFoundException e) {  
             return null;  
         }  
+        
+        //Fecha a sessão
+        objSession.close();
+        //Retorna lista de categoria
   
         return lstCategoria;  
     } 
-    
-    /**
-     * 
-     */
-//    public class CategoriaTableModel extends AbstractTableModel{     
-//
-//        private ArrayList linhas = null;  
-//        private String [] colunas = null;  
-//    
-//        public CategoriaTableModel(ArrayList dados, String[] colunas){  
-//            setLinhas(dados);  
-//            setColunas(colunas);     
-//        }
-//        
-//        public ArrayList getLinhas() {
-//            return linhas;
-//        }
-//
-//        public void setLinhas(ArrayList linhas) {
-//            this.linhas = linhas;
-//        }
-//
-//        public String[] getColunas() {
-//            return colunas;
-//        }
-//
-//        public void setColunas(String[] colunas) {
-//            this.colunas = colunas;
-//        }        
-//        
-//        @Override
-//        public int getRowCount() {
-//            return getLinhas().size();  
-//        }
-//
-//        @Override
-//        public int getColumnCount() {
-//            return getColunas().length;  
-//        }
-//
-//        @Override
-//        public Object getValueAt(int rowIndex, int columnIndex){
-//
-//            Object value = null;  
-//            final Categoria c = (Categoria)linhas.get(rowIndex);  
-//
-//            switch(columnIndex){  
-//            case 0:   
-//                value = c.getId();
-//                break;  
-//            case 1:  
-//                value = c.getDescricao();  
-//                break; 
-//            }
-//            return value;  
-//
-//        }
-//
-//        public String getColumnName(int col) {  
-//            return colunas[col];  
-//        }
-//
-//    }
-
-
 }
-
-
-
-

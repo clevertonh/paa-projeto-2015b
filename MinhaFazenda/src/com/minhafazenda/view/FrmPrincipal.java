@@ -71,6 +71,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(723, 598));
         getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
         jButton1.setText("Categoria");
@@ -180,66 +181,70 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        try {
-            
-            Socket clientSocket = new Socket("127.0.0.1", 6789);
-            ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());    
-            ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
-                
-            LicencaProtocol objLicenca = new LicencaProtocol();
-            objLicenca.setStatus(LicencaProtocol.StatusType.SOLICITA_LICENCA);
-            objLicenca.setDataHora(new Date());
-            
-            //Solicita licenca
-            outToServer.writeObject(objLicenca);
-                
-            //Retorno do servidor
-            objLicenca = (LicencaProtocol)inFromServer.readObject();
-            
-            //Valida o STATUS do retorno
-            if(objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_FORNECIDA){
-                //A licenca foi fornecida pelo servidor
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    //Abre o formulário principal
-                    public void run() {
-                        final FrmPrincipal frm = new FrmPrincipal();
-                        //frm.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                        frm.addWindowListener(new WindowAdapter() {
-                            //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
-                            public void windowClosing(WindowEvent ev) {
-//                                try {
-//                                    //Libera a licenca
-//                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
-//                                    //Envia a solicitacao para o servidor
-//                                    outToServer.writeObject(objLicenca);
-//                                    
-//                                    objLicenca = (LicencaProtocol)inFromServer.readObject();
-//                                    
-//                                    System.out.println("");
-//                                    //Fecha conexao
-//                                    //clientSocket.close();
-//                                } catch (IOException ex) {
-//                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//                                } catch (ClassNotFoundException ex) {
-//                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//                                }
-                            }
-                        });
-                        frm.setVisible(true);
-                    }
-                });
-            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SEM_LICENCA){
-                JOptionPane.showMessageDialog(null, "Não existe licenças disponíveis para iniciar o sistema!", "Sem licença", JOptionPane.ERROR_MESSAGE);
-            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SISTEMA_BLOQUEADO){
-                JOptionPane.showMessageDialog(null, "O sistema está bloqueado, entre em contato com a Software House", "Aviso", JOptionPane.ERROR_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro.....", "ERRO", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (ConnectException e){
-            JOptionPane.showMessageDialog(null, "Não foi possível conectar no servidor de Licença", "Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        }        
+        
+         final FrmPrincipal frm = new FrmPrincipal();
+         frm.setVisible(true);
+        
+//        try {
+//            
+//            Socket clientSocket = new Socket("127.0.0.1", 6789);
+//            ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());    
+//            ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
+//                
+//            LicencaProtocol objLicenca = new LicencaProtocol();
+//            objLicenca.setStatus(LicencaProtocol.StatusType.SOLICITA_LICENCA);
+//            objLicenca.setDataHora(new Date());
+//            
+//            //Solicita licenca
+//            outToServer.writeObject(objLicenca);
+//                
+//            //Retorno do servidor
+//            objLicenca = (LicencaProtocol)inFromServer.readObject();
+//            
+//            //Valida o STATUS do retorno
+//            if(objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_FORNECIDA){
+//                //A licenca foi fornecida pelo servidor
+//                java.awt.EventQueue.invokeLater(new Runnable() {
+//                    //Abre o formulário principal
+//                    public void run() {
+//                        final FrmPrincipal frm = new FrmPrincipal();
+//                        //frm.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+//                        frm.addWindowListener(new WindowAdapter() {
+//                            //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
+//                            public void windowClosing(WindowEvent ev) {
+////                                try {
+////                                    //Libera a licenca
+////                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
+////                                    //Envia a solicitacao para o servidor
+////                                    outToServer.writeObject(objLicenca);
+////                                    
+////                                    objLicenca = (LicencaProtocol)inFromServer.readObject();
+////                                    
+////                                    System.out.println("");
+////                                    //Fecha conexao
+////                                    //clientSocket.close();
+////                                } catch (IOException ex) {
+////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+////                                } catch (ClassNotFoundException ex) {
+////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+////                                }
+//                            }
+//                        });
+//                        frm.setVisible(true);
+//                    }
+//                });
+//            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SEM_LICENCA){
+//                JOptionPane.showMessageDialog(null, "Não existe licenças disponíveis para iniciar o sistema!", "Sem licença", JOptionPane.ERROR_MESSAGE);
+//            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SISTEMA_BLOQUEADO){
+//                JOptionPane.showMessageDialog(null, "O sistema está bloqueado, entre em contato com a Software House", "Aviso", JOptionPane.ERROR_MESSAGE);
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Erro.....", "ERRO", JOptionPane.ERROR_MESSAGE);
+//            }
+//        } catch (ConnectException e){
+//            JOptionPane.showMessageDialog(null, "Não foi possível conectar no servidor de Licença", "Erro", JOptionPane.ERROR_MESSAGE);
+//        } catch (IOException | ClassNotFoundException e) {
+//            JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+//        }        
         
     }
 

@@ -209,7 +209,21 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        fAbreCadastro(0);
+        if (frm == null) {
+            frm = new FrmCategoriaCadastro();
+            frm.setModal(true);
+        }
+        
+        frm.fNovoRegistro();
+
+        if (frm.isVisible()) {
+            frm.setVisible(false);
+        } else {
+            frm.setLocationRelativeTo(null);
+            frm.setVisible(true);
+        }
+        
+        pesquisar();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
