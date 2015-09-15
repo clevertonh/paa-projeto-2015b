@@ -5,7 +5,7 @@
  */
 package com.minhafazenda.view;
 
-import com.minhafazenda.conttroler.RacaController;
+import com.minhafazenda.controller.RacaController;
 import javax.swing.table.TableColumnModel;
 
 /**

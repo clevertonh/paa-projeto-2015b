@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.minhafazenda.conttroler;
+package com.minhafazenda.controller;
 
 import com.minhafazenda.model.Raca;
 import com.minhafazenda.model.RacaModel;

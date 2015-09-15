@@ -5,7 +5,7 @@
  */
 package com.minhafazenda.view;
 
-import com.minhafazenda.conttroler.CategoriaController;
+import com.minhafazenda.controller.CategoriaController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
 import javax.swing.table.TableColumnModel;
