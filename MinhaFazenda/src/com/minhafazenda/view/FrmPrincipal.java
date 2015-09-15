@@ -6,45 +6,46 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.library.common.Licenca;
-import com.minhafazenda.library.protocol.LicencaProtocol;
-import com.minhafazenda.util.ConfiguracaoSistema;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Component;
 import java.beans.PropertyVetoException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ConnectException;
-import java.net.Socket;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /**
  *
- * @author Cléverton Heming
+ * @author Rodrigo de Oliveira
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
     private FrmCategoriaListagem frmCategoria;
     private FrmRacaListagem frmRaca;
-    
+
     private Licenca objLicenca;
-    
+
     /**
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
         initComponents();
-        //Inicia o form principal maximizado
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        objLicenca = new Licenca();
-        objLicenca.mantemLicenca();
-        //Altera o título do sistema
-        this.setTitle(ConfiguracaoSistema.tituloJanela);
+
+        // aplica skin = LookAndFeel a todas as janelas
+        try {
+
+            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (Exception e) {
+        }
+
+        this.setExtendedState(MAXIMIZED_BOTH);
+
+    }
+
+    public void novaJanela(Component janela) {
+        jDesktopPane1.add(janela);
+
     }
 
     /**
@@ -56,37 +57,139 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSeparator1 = new javax.swing.JSeparator();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnCategoria = new javax.swing.JButton();
+        btnItem = new javax.swing.JButton();
+        btnItem2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
+        btnRaca = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuCadastriCategoria = new javax.swing.JMenuItem();
         menuCadastroRaca = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+
+        jFormattedTextField1.setText("jFormattedTextField1");
+
+        jMenu4.setText("File");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("Edit");
+        jMenuBar2.add(jMenu5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SGV - Sistema Gerenciador de Vagas");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFocusCycleRoot(false);
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
 
-        jDesktopPane1.setPreferredSize(new java.awt.Dimension(723, 598));
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        jDesktopPane1.setBackground(new java.awt.Color(240, 240, 240));
 
-        jToolBar1.setFloatable(false);
-        jToolBar1.setRollover(true);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atalhos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jButton1.setText("Categoria");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setPreferredSize(new java.awt.Dimension(64, 40));
-        jButton1.setRolloverEnabled(false);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btnCategoria.setText("Categorias");
+        btnCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriaActionPerformed(evt);
+            }
+        });
 
-        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
+        btnItem.setText("Item");
+        btnItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnItemActionPerformed(evt);
+            }
+        });
+
+        btnItem2.setText("Item");
+        btnItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnItem2ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(jTextPane1);
+
+        btnRaca.setText("Raças");
+        btnRaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRacaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(btnItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnItem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addGap(60, 60, 60))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCategoria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRaca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnItem2)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(499, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(356, Short.MAX_VALUE))
+        );
+        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenu1.setText("Cadastros");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         menuCadastriCategoria.setText("Categoria");
+        menuCadastriCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                menuCadastriCategoriaFocusLost(evt);
+            }
+        });
         menuCadastriCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastriCategoriaActionPerformed(evt);
@@ -104,16 +207,60 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Sobre");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
+        jMenuBar1.getAccessibleContext().setAccessibleName("Gerenciador");
+        jMenuBar1.getAccessibleContext().setAccessibleDescription("");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
+        getAccessibleContext().setAccessibleName("SGF - Sistema Gerenciador de Fazendas");
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuCadastriCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastriCategoriaActionPerformed
-        if(frmCategoria == null){
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // jMenu1.setEnabled(false);
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void menuCadastroRacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroRacaActionPerformed
+    {//GEN-HEADEREND:event_menuCadastroRacaActionPerformed
+        try {
+            //Verifica se o formulario ja existe
+            if (frmRaca == null) {
+                //Cria o form
+                frmRaca = new FrmRacaListagem();
+                //Adiciona o formulario dentro do DESKTOP
+                this.jDesktopPane1.add(frmRaca);
+                //diz que a janela interna é maximizável     
+                frmRaca.setMaximizable(true);
+                //set o tamanho máximo dela, que depende da janela pai     
+                frmRaca.setMaximum(true);
+            }
+
+            //Verifica se o formulario nao esta visivel
+            if (!frmRaca.isVisible()) {
+                //Mostra o formulário
+                frmRaca.setVisible(true);
+            }
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_menuCadastroRacaActionPerformed
+
+    private void menuCadastriCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastriCategoriaActionPerformed
+    {//GEN-HEADEREND:event_menuCadastriCategoriaActionPerformed
+        if (frmCategoria == null) {
             //Cria o form
             frmCategoria = new FrmCategoriaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -123,41 +270,92 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if(!frmCategoria.isVisible()){
+        if (!frmCategoria.isVisible()) {
             //Mostra o formulário
             frmCategoria.setVisible(true);
         }
+
+
     }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
 
-    private void menuCadastroRacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroRacaActionPerformed
-        try {   
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowStateChanged
+    {//GEN-HEADEREND:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void menuCadastriCategoriaFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_menuCadastriCategoriaFocusLost
+    {//GEN-HEADEREND:event_menuCadastriCategoriaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastriCategoriaFocusLost
+
+    private void btnRacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRacaActionPerformed
+    {//GEN-HEADEREND:event_btnRacaActionPerformed
+        try {
             //Verifica se o formulario ja existe
-            if(frmRaca == null){
+            if (frmRaca == null) {
                 //Cria o form
                 frmRaca = new FrmRacaListagem();
                 //Adiciona o formulario dentro do DESKTOP
                 this.jDesktopPane1.add(frmRaca);
                 //diz que a janela interna é maximizável     
-                frmRaca.setMaximizable(true);     
+                frmRaca.setMaximizable(true);
                 //set o tamanho máximo dela, que depende da janela pai     
-                frmRaca.setMaximum(true);     
+                frmRaca.setMaximum(true);
             }
-            
+
             //Verifica se o formulario nao esta visivel
-            if(!frmRaca.isVisible()){
+            if (!frmRaca.isVisible()) {
                 //Mostra o formulário
                 frmRaca.setVisible(true);
             }
         } catch (PropertyVetoException ex) {
             Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_menuCadastroRacaActionPerformed
+
+
+    }//GEN-LAST:event_btnRacaActionPerformed
+
+    private void btnItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItem2ActionPerformed
+//        IfrPais ifrPais = new IfrPais();
+//        //ifrEstado.setSize(jdpPrincipal.getWidth() /2, jdpPrincipal.getHeight()/2);
+//        ifrPais.setSize(523, 370);
+//
+//        jDesktopPane1.add(ifrPais);
+//        ifrPais.setVisible(true);
+
+    }//GEN-LAST:event_btnItem2ActionPerformed
+
+    private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
+        if (frmCategoria == null) {
+            //Cria o form
+            frmCategoria = new FrmCategoriaListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmCategoria);
+            //diz que a janela interna é maximizável
+            frmCategoria.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmCategoria.isVisible()) {
+            //Mostra o formulário
+            frmCategoria.setVisible(true);
+        }
+
+    }//GEN-LAST:event_btnCategoriaActionPerformed
+
+    private void btnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemActionPerformed
+//        IfrCandidatoVaga ifrCandidatoVaga = new IfrCandidatoVaga();
+//        //ifrVaga.setSize(jdpPrincipal.getWidth() /2, jdpPrincipal.getHeight()/2);
+//        ifrCandidatoVaga.setSize(650, 450);
+//
+//        jDesktopPane1.add(ifrCandidatoVaga);
+//        ifrCandidatoVaga.setVisible(true);
+    }//GEN-LAST:event_btnItemActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -180,82 +378,32 @@ public class FrmPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        
-         final FrmPrincipal frm = new FrmPrincipal();
-         frm.setVisible(true);
-        
-//        try {
-//            
-//            Socket clientSocket = new Socket("127.0.0.1", 6789);
-//            ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());    
-//            ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
-//                
-//            LicencaProtocol objLicenca = new LicencaProtocol();
-//            objLicenca.setStatus(LicencaProtocol.StatusType.SOLICITA_LICENCA);
-//            objLicenca.setDataHora(new Date());
-//            
-//            //Solicita licenca
-//            outToServer.writeObject(objLicenca);
-//                
-//            //Retorno do servidor
-//            objLicenca = (LicencaProtocol)inFromServer.readObject();
-//            
-//            //Valida o STATUS do retorno
-//            if(objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_FORNECIDA){
-//                //A licenca foi fornecida pelo servidor
-//                java.awt.EventQueue.invokeLater(new Runnable() {
-//                    //Abre o formulário principal
-//                    public void run() {
-//                        final FrmPrincipal frm = new FrmPrincipal();
-//                        //frm.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-//                        frm.addWindowListener(new WindowAdapter() {
-//                            //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
-//                            public void windowClosing(WindowEvent ev) {
-////                                try {
-////                                    //Libera a licenca
-////                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
-////                                    //Envia a solicitacao para o servidor
-////                                    outToServer.writeObject(objLicenca);
-////                                    
-////                                    objLicenca = (LicencaProtocol)inFromServer.readObject();
-////                                    
-////                                    System.out.println("");
-////                                    //Fecha conexao
-////                                    //clientSocket.close();
-////                                } catch (IOException ex) {
-////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                } catch (ClassNotFoundException ex) {
-////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                }
-//                            }
-//                        });
-//                        frm.setVisible(true);
-//                    }
-//                });
-//            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SEM_LICENCA){
-//                JOptionPane.showMessageDialog(null, "Não existe licenças disponíveis para iniciar o sistema!", "Sem licença", JOptionPane.ERROR_MESSAGE);
-//            }else if(objLicenca.getStatus() == LicencaProtocol.StatusType.SISTEMA_BLOQUEADO){
-//                JOptionPane.showMessageDialog(null, "O sistema está bloqueado, entre em contato com a Software House", "Aviso", JOptionPane.ERROR_MESSAGE);
-//            }else{
-//                JOptionPane.showMessageDialog(null, "Erro.....", "ERRO", JOptionPane.ERROR_MESSAGE);
-//            }
-//        } catch (ConnectException e){
-//            JOptionPane.showMessageDialog(null, "Não foi possível conectar no servidor de Licença", "Erro", JOptionPane.ERROR_MESSAGE);
-//        } catch (IOException | ClassNotFoundException e) {
-//            JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-//        }        
-        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmPrincipal().setVisible(true);
+            }
+        });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCategoria;
+    private javax.swing.JButton btnItem;
+    private javax.swing.JButton btnItem2;
+    private javax.swing.JButton btnRaca;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JMenuItem menuCadastriCategoria;
     private javax.swing.JMenuItem menuCadastroRaca;
     // End of variables declaration//GEN-END:variables

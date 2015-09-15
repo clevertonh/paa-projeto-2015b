@@ -80,6 +80,9 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         jTableRaca = new javax.swing.JTable();
         jBFechar = new javax.swing.JButton();
 
+        setResizable(true);
+        setPreferredSize(new java.awt.Dimension(728, 421));
+
         btnBUscar.setText("Buscar");
         btnBUscar.setName("btnBUscar"); // NOI18N
         btnBUscar.addActionListener(new java.awt.event.ActionListener() {
