@@ -8,6 +8,9 @@ package com.minhafazenda.view;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
+import com.minhafazenda.controller.UsuarioController;
+import com.minhafazenda.model.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,12 +18,18 @@ import javax.swing.UIManager;
  */
 public class Login extends javax.swing.JFrame {
 
+    private UsuarioController objController;
+    private Usuario ObjUsuario;
+
     /**
      * Creates new form Login
      */
     public Login() {
 
         initComponents();
+
+        //Inicia o objeto de controller
+        objController = new UsuarioController();
         // aplica skin = LookAndFeel a todas as janelas
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -31,6 +40,20 @@ public class Login extends javax.swing.JFrame {
         //Posicionar tela no centro da tela
         this.setLocation(((Toolkit.getDefaultToolkit().getScreenSize().width / 2) - (this.getWidth() / 2)),
                 ((Toolkit.getDefaultToolkit().getScreenSize().height / 2) - (this.getHeight() / 2)));
+    }
+
+    public void pesquisar() {
+        //Efetua a busca pela descricão no conttroler
+//       objController.findByUsuario(txtUsuario.getText(), new String(jPSenha.getPassword()));
+    
+        if (objController.findByUsuario(txtUsuario.getText(), new String(jPSenha.getPassword())) != null) {
+            // abrir tela da aplicação
+            FrmPrincipal janela = new FrmPrincipal();
+            janela.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuário e senha não conferem!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**
@@ -44,8 +67,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        jPSenha = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -63,9 +86,14 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Senha");
 
-        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jPSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPSenhaActionPerformed(evt);
+            }
+        });
+        jPSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jPasswordField1KeyPressed(evt);
+                jPSenhaKeyPressed(evt);
             }
         });
 
@@ -92,18 +120,18 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEntrar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(jPSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(txtUsuario)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEntrar)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,11 +139,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
@@ -130,33 +158,30 @@ public class Login extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // validar no banco
-        //deu certo
-        // abrir tela da aplicação
-        FrmPrincipal janela = new FrmPrincipal();
-        janela.setVisible(true);
-        this.dispose();
+        pesquisar();
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed
 
-    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+    private void jPSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPSenhaKeyPressed
         //Verifica se foi pressionado a tecla ENTER
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             // validar no banco
-            //deu certo
-            // abrir tela da aplicação
-            FrmPrincipal janela = new FrmPrincipal();
-            janela.setVisible(true);
-            this.dispose();
+            pesquisar();
         }
-    }//GEN-LAST:event_jPasswordField1KeyPressed
+
+    }//GEN-LAST:event_jPSenhaKeyPressed
+
+    private void jPSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,7 +224,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField jPSenha;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,12 +31,12 @@
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="jMenuCadastros">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastros"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCadastrosActionPerformed"/>
           </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuCadastriCategoria">
@@ -55,6 +55,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCadastroRacaActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="item"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -116,7 +121,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="499" max="32767" attributes="0"/>
+                  <EmptySpace pref="511" max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" pref="218" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -154,7 +159,7 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="btnCategoria" pref="180" max="32767" attributes="0"/>
                                   <Component id="btnItem" max="32767" attributes="0"/>
-                                  <Component id="btnItem2" max="32767" attributes="0"/>
+                                  <Component id="btnSair" max="32767" attributes="0"/>
                                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -175,7 +180,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnItem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnItem2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSair" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -198,12 +203,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnItemActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnItem2">
+            <Component class="javax.swing.JButton" name="btnSair">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Item"/>
+                <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnItem2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">

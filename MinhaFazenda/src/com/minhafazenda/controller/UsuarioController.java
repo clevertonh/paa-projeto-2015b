@@ -15,18 +15,19 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author cleverton
  */
-public final class UsuariioController extends AbstractTableModel {
+public final class UsuarioController extends AbstractTableModel {
 
     //Cria o objeto do Model
     private final UsuarioModel objModel;
     //Table model
-    private ArrayList<Usuario> lstUsuario = null;    
+    private ArrayList<Usuario> lstUsuario = null;   
+    private Usuario usuariot = null;
     private String[] column = {"Código", "Descrição"};
 
     /*
      * Método construtor da classe
      */
-    public UsuariioController() {
+    public UsuarioController() {
         //Inicia o objeto model
         this.objModel = new UsuarioModel();
         //Inicia a lista da lstColunas para o TableMOdel
@@ -100,6 +101,18 @@ public final class UsuariioController extends AbstractTableModel {
         this.lstUsuario = objModel.findByDescricao(usuario);
         return this.lstUsuario;
     }
+    
+    public ArrayList<Usuario> findByUsuario(String usuario, String senha) {        
+        this.lstUsuario = objModel.findByValidarUsuario(usuario, senha);
+        //Valida se a lista de usuário é maior que zero.
+        if(this.lstUsuario.size()>0){
+         return this.lstUsuario;   
+        }else{
+            return null;
+        }
+        
+    }
+    
 
     //Métodos implementados pela classe AbstractTableModel
     @Override

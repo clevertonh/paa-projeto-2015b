@@ -154,5 +154,24 @@ public class UsuarioModel {
         objSession.close();
         //Retorna lista de Usuarios
         return lstUsuario;  
+    }
+    
+    public ArrayList<Usuario> findByValidarUsuario(String descricao, String senha) {  
+        //Cria lista de objetos
+        ArrayList<Usuario> lstUsuario = null;  
+        //Abre um sessão
+        Session objSession = this.objSessionFactory.openSession();    
+
+        try {  
+            Query objQuery = objSession.createQuery("from Usuario where usuario = '" + descricao + "' and senha = '"+ senha+"'");
+            lstUsuario = (ArrayList<Usuario>)objQuery.list();  
+        } catch (ObjectNotFoundException e) {  
+            return null;  
+        }
+        //Fecha a sessão
+        objSession.close();
+        //Retorna lista de Usuarios
+        return lstUsuario;  
     } 
+
 }
