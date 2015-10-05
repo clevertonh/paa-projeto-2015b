@@ -85,7 +85,7 @@ public final class RacaController extends AbstractTableModel {
     }
 
     public Boolean delete(Raca obj) {
-        String msg = objModel.insert(obj);
+        String msg = objModel.delete(obj);
         if (!msg.equals("")) {
             JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -99,6 +99,10 @@ public final class RacaController extends AbstractTableModel {
         return this.lstRaca;
     }
 
+      public Raca findById(int id){
+        return objModel.findById(id);
+    }
+    
     public ArrayList<Raca> findByAll(String condicao) {
         this.lstRaca = objModel.findByAll(condicao);
         return this.lstRaca;

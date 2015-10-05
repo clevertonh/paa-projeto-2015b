@@ -7,107 +7,49 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.controller.RacaController;
 import com.minhafazenda.model.Raca;
-import com.minhafazenda.util.MinhaFazendaHibernateUtil;
-import javax.swing.JOptionPane;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
 /**
  *
  * @author cleverton
  */
 public class FrmRacaCadastro extends javax.swing.JDialog {
-
-    private RacaController objController; 
     
+    private final RacaController objController;
     private Raca objRaca;
-    private Boolean editando;
-
-    public Raca getObjRaca() {
-        return objRaca;
-    }
-
-    public void setObjRaca(Raca objRaca) {
-        this.objRaca = objRaca;
-    }
-
-    public Boolean getEditando() {
-        return editando;
-    }
-
-    public void setEditando(Boolean editando) {
-        this.editando = editando;
-    }
-    
-    public void remover(){
-        //Recebe o Session Factory do HIbernate
-        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
-        //Abre um sessão
-        Session objSession = objSessionFactory.openSession();    
-        //Inicia uma transação dentro da sessão aberta
-        Transaction objTransaction = objSession.beginTransaction();
-        
-        try {    
-            //REMOVE o objeto categoria em edição, assim o hibernate persiste no bancoapagando o registro.
-            objSession.delete(this.objRaca);
-            //Realiza um commit do delete
-            objTransaction.commit();
-        } catch (Exception e) {
-            //Caso ocorrer algum erro, mostra uma mensagem
-            JOptionPane.showConfirmDialog(rootPane, e.getMessage());
-            //Realiza o Rollback, cancelando o delete no banco de dados.
-            objTransaction.rollback();
-        }
-        //Fecha a sessão
-        objSession.close();
-    }
-    
-    public void salvar(){
-        //Recebe o Session Factory do HIbernate
-        SessionFactory objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();    
-        //Abre um sessão
-        Session objSession = objSessionFactory.openSession();    
-        //Inicia uma transação dentro da sessão aberta
-        Transaction objTransaction = objSession.beginTransaction();
-        
-        if(this.editando){
-            try {    
-                //ATUALIZA o objeto categoria em edição, assim o hibernate persiste no bancoapagando o registro.
-                objSession.merge(this.objRaca);
-                //Realiza um commit do delete
-                objTransaction.commit();
-            } catch (Exception e) {
-                //Caso ocorrer algum erro, mostra uma mensagem
-                JOptionPane.showConfirmDialog(rootPane, e.getMessage());
-                //Realiza o Rollback, cancelando o delete no banco de dados.
-                objTransaction.rollback();
-            }
-        }else{
-            try {    
-                //ADICIONA o objeto categoria, assim o hibernate persiste no bancoapagando o registro.
-                objSession.save(this.objRaca);
-                //Realiza um commit do delete
-                objTransaction.commit();
-            } catch (Exception e) {
-                //Caso ocorrer algum erro, mostra uma mensagem
-                JOptionPane.showConfirmDialog(rootPane, e.getMessage());
-                //Realiza o Rollback, cancelando o delete no banco de dados.
-                objTransaction.rollback();
-            }
-        }
-        //Fecha a sessão
-        objSession.close();
-    }
-    
+    private boolean edicao;
     
     /**
      * Creates new form FrmCategoriaCadastro
      */
-    public FrmRacaCadastro() {
+    public FrmRacaCadastro() {   
         initComponents();
-        
+        //Cria o objeto de controller
         this.objController = new RacaController();
+    }
+    
+    public void fNovoRegistro(){
+        //
+        this.objRaca = new Raca();
+        //Por padrão oculta o botão excluir
+        btnExcluir.setEnabled(false);
+        //POr padrão limpa o campo texto
+        txtDescricao.setText("");
+        //Adiciona o status de edição
+        this.edicao = false;
+        //Seta o focu no campo de descrição ao abrir o formulário
+        txtDescricao.requestFocus();
+    }
+    
+    public void fCarregaCadastro(int id){
+        //Se for passado um código por parâmetro, pesquisa no banco
+        this.objRaca = this.objController.findById(id);
+        //Carrega na tela a descrição da categoria
+        txtDescricao.setText(this.objRaca.getDescricao());
+        //Adiciona o status de edição
+        this.edicao = true;    
+        //MOstra o botão excluir
+        btnExcluir.setEnabled(true);
+        //Seta o focu no campo de descrição ao abrir o formulário
+        txtDescricao.requestFocus();
     }
 
     /**
@@ -151,6 +93,11 @@ public class FrmRacaCadastro extends javax.swing.JDialog {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +115,9 @@ public class FrmRacaCadastro extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,22 +165,37 @@ public class FrmRacaCadastro extends javax.swing.JDialog {
     }//GEN-LAST:event_txtDescricaoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        //Cria objeto Categoria
-        Raca obj = new Raca();
-        //Adiciona os atributos
-        obj.setDescricao(txtDescricao.getText());
-        //Chama o méotod INSERT do conttroler
-        if(objController.insert(obj)){
-            //Limpa o campo de descrição da Categoria
-            txtDescricao.setText("");
-            //Fecha o formulário
-            this.setVisible(false);
+         //Adiciona os atributos
+        objRaca.setDescricao(txtDescricao.getText());
+        //Verifica se deve adicionar ou atualizar um registro
+        if(this.edicao){
+            //Chama o méotod INSERT do conttroler
+            if(objController.update(objRaca)){
+                //Limpa o campo de descrição da Categoria
+                txtDescricao.setText("");
+                //Fecha o formulário
+                this.setVisible(false);
+            }
+        }else{
+            //Chama o méotod INSERT do conttroler
+            if(objController.insert(objRaca)){
+                //Limpa o campo de descrição da Categoria
+                txtDescricao.setText("");
+                //Fecha o formulário
+                this.setVisible(false);
+            }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        objController.delete(objRaca);
+        //Fecha o formulário
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

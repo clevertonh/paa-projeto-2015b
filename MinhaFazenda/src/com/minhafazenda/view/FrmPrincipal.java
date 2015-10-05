@@ -293,34 +293,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnRacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRacaActionPerformed
     {//GEN-HEADEREND:event_btnRacaActionPerformed
-        try {
-            //Verifica se o formulario ja existe
-            if (frmRaca == null) {
-                //Cria o form
-                frmRaca = new FrmRacaListagem();
-                //Adiciona o formulario dentro do DESKTOP
-                this.jDesktopPane1.add(frmRaca);
-                //diz que a janela interna é maximizável     
-                frmRaca.setMaximizable(true);
-                //set o tamanho máximo dela, que depende da janela pai     
-                frmRaca.setMaximum(true);
-            }
-
-            //Verifica se o formulario nao esta visivel
-            if (!frmRaca.isVisible()) {
-                //Mostra o formulário
-                frmRaca.setVisible(true);
-            }
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if (frmRaca == null) {
+            //Cria o form
+            frmRaca = new FrmRacaListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmRaca);
+            //diz que a janela interna é maximizável
+            frmRaca.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
         }
-
+        if (!frmRaca.isVisible()) {
+            //Mostra o formulário
+            frmRaca.setVisible(true);
+        }
 
     }//GEN-LAST:event_btnRacaActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
