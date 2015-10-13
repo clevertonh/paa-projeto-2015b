@@ -36,7 +36,7 @@ public class UsuarioModel {
         Transaction objTransaction = objSession.beginTransaction();
         
         try {    
-            //ADICIONA o objeto categoria, assim o hibernate persiste no bancoapagando o registro.
+            //ADICIONA o objeto, assim o hibernate persiste no bancoapagando o registro.
             objSession.save(obj);
             //Realiza um commit do INSERT
             objTransaction.commit();
@@ -60,7 +60,7 @@ public class UsuarioModel {
         Transaction objTransaction = objSession.beginTransaction();
         
         try {    
-            //ATUALIZA o objeto categoria, assim o hibernate persiste no bancoapagando o registro.
+            //ATUALIZA o objeto, assim o hibernate persiste no bancoapagando o registro.
             objSession.merge(obj);
             //Realiza um commit do UPDATE
             objTransaction.commit();
@@ -119,7 +119,7 @@ public class UsuarioModel {
         
         //Fecha a sessão
         objSession.close();
-        //Retorna lista de categoria
+        //Retorna lista
         return lstUsuario;  
     }
     
@@ -145,7 +145,7 @@ public class UsuarioModel {
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            Query objQuery = objSession.createQuery("from Usuario where descricao like '%" + descricao + "%'");
+            Query objQuery = objSession.createQuery("from Usuario where usuario like '%" + descricao + "%'");
             lstUsuario = (ArrayList<Usuario>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  

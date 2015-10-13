@@ -5,66 +5,64 @@
  */
 package com.minhafazenda.view;
 
-import com.minhafazenda.controller.CategoriaController;
-import com.minhafazenda.controller.RacaController;
+import com.minhafazenda.controller.UsuarioController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 
-
 /**
  *
  * @author cleverton
  */
-public class FrmRacaListagem extends javax.swing.JInternalFrame {
+public class FrmUsuarioListagem extends javax.swing.JInternalFrame {
 
-    private FrmRacaCadastro frm;
-    private final RacaController objController;
+    private FrmUsuarioCadastro frm;
+    private final UsuarioController objController;
 
     /**
-     * Creates new form FrmCategoriaListagem
+     * Creates new form FrmUsuarioListagem
      */
-    public FrmRacaListagem() {
+    public FrmUsuarioListagem() {
         //
         initComponents();
         //Define o título para a janela
-        this.setTitle("SGF - Relação de Raças");
+        this.setTitle("SGF - Relação de Usuários");
         //Inicia o objeto de controller
-        objController = new RacaController();
-        //Carrega a lista de categorias no controller
+        objController = new UsuarioController();
+        //Carrega a lista no controller
         objController.findByAll();
         //Seta o controller no JTABLE
-        jTableRaca.setModel(objController);
+        jTableUsuario.setModel(objController);
         //
-        jTableRaca.setFillsViewportHeight(true);
-        
-        //LIbera a seleção das linhas da jTAble
-        jTableRaca.setRowSelectionAllowed(true);
-        //Aceita somente uma linha selecionada por vez
-        jTableRaca.setSelectionModel(new ForcedListSelectionModel());
-        
-        //Configuração da Jtable
-        TableColumnModel objColumn = jTableRaca.getColumnModel();
-        objColumn.getColumn(0).setMaxWidth(100);        
-    }
+        jTableUsuario.setFillsViewportHeight(true);
 
+        //LIbera a seleção das linhas da jTAble
+        jTableUsuario.setRowSelectionAllowed(true);
+        //Aceita somente uma linha selecionada por vez
+        jTableUsuario.setSelectionModel(new ForcedListSelectionModel());
+
+        //Configuração da Jtable
+        TableColumnModel objColumn = jTableUsuario.getColumnModel();
+        objColumn.getColumn(0).setMaxWidth(100);
+    }
 
     public void pesquisar() {
         //Efetua a busca pela descricão no conttroler
-        objController.findByAll(txtBusca.getText());
+        objController.findByUsuario(txtBusca.getText());
         //
-        jTableRaca.setFillsViewportHeight(true);
+        jTableUsuario.setFillsViewportHeight(true);
     }
-    
-    public void fAbreCadastro(int id){
+
+    public void fAbreCadastro(int id) {
         if (frm == null) {
-            frm = new FrmRacaCadastro();
+            frm = new FrmUsuarioCadastro();
             frm.setModal(true);
         }
-        
-        if(id > 0)
+
+        if (id > 0) {
             frm.fCarregaCadastro(id);
+        }
 
         if (frm.isVisible()) {
             frm.setVisible(false);
@@ -72,7 +70,7 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
             frm.setLocationRelativeTo(null);
             frm.setVisible(true);
         }
-        
+
         pesquisar();
     }
 
@@ -90,7 +88,7 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         txtBusca = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableRaca = new javax.swing.JTable();
+        jTableUsuario = new javax.swing.JTable();
         btnFechar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
 
@@ -123,7 +121,7 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
             }
         });
 
-        jTableRaca.setModel(new javax.swing.table.DefaultTableModel(
+        jTableUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -134,14 +132,14 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableRaca.setToolTipText("");
-        jTableRaca.setRowSelectionAllowed(false);
-        jTableRaca.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableUsuario.setToolTipText("");
+        jTableUsuario.setRowSelectionAllowed(false);
+        jTableUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableRacaMouseClicked(evt);
+                jTableUsuarioMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTableRaca);
+        jScrollPane2.setViewportView(jTableUsuario);
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,8 +199,8 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         jPanel1.getAccessibleContext().setAccessibleName("Relação de Categorias");
         jPanel1.getAccessibleContext().setAccessibleDescription("Relação de Categorias");
 
-        getAccessibleContext().setAccessibleName("Cadastro de Raças");
-        getAccessibleContext().setAccessibleDescription("Cadastro de Raças");
+        getAccessibleContext().setAccessibleName("Cadastro de Categorias");
+        getAccessibleContext().setAccessibleDescription("Cadastro de Categorias");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,10 +211,10 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         if (frm == null) {
-            frm = new FrmRacaCadastro();
+            frm = new FrmUsuarioCadastro();
             frm.setModal(true);
         }
-        
+
         frm.fNovoRegistro();
 
         if (frm.isVisible()) {
@@ -225,7 +223,7 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
             frm.setLocationRelativeTo(null);
             frm.setVisible(true);
         }
-        
+
         pesquisar();
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -234,9 +232,9 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void txtBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyPressed
-        
+
         //Verifica se foi pressionado a tecla ENTER
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //Realiza pesquisa
             pesquisar();
             //Seleciona o texto do campo, para que o usuário já possa realizar outra pesquisa
@@ -244,16 +242,16 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtBuscaKeyPressed
 
-    private void jTableRacaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRacaMouseClicked
-        
-        if(evt.getClickCount() == 2){
-            fAbreCadastro((int) jTableRaca.getValueAt(jTableRaca.getSelectedRow(), 0));
+    private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
+
+        if (evt.getClickCount() == 2) {
+            fAbreCadastro((int) jTableUsuario.getValueAt(jTableUsuario.getSelectedRow(), 0));
         }
-    }//GEN-LAST:event_jTableRacaMouseClicked
+    }//GEN-LAST:event_jTableUsuarioMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (jTableRaca.getSelectedRow() >= 0) {
-            fAbreCadastro((int) jTableRaca.getValueAt(jTableRaca.getSelectedRow(), 0));
+        if (jTableUsuario.getSelectedRow() >= 0) {
+            fAbreCadastro((int) jTableUsuario.getValueAt(jTableUsuario.getSelectedRow(), 0));
         }else{
             JOptionPane.showMessageDialog(null, "Selecione um registro para edição!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
@@ -266,7 +264,7 @@ public class FrmRacaListagem extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableRaca;
+    private javax.swing.JTable jTableUsuario;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

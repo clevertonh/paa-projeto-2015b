@@ -45,13 +45,13 @@ public class Login extends javax.swing.JFrame {
     public void pesquisar() {
         //Efetua a busca pela descricão no conttroler
 //       objController.findByUsuario(txtUsuario.getText(), new String(jPSenha.getPassword()));
-    
+
         if (objController.findByUsuario(txtUsuario.getText(), new String(jPSenha.getPassword())) != null) {
             // abrir tela da aplicação
             FrmPrincipal janela = new FrmPrincipal();
             janela.setVisible(true);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Usuário e senha não conferem!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -163,7 +163,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
+//        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed

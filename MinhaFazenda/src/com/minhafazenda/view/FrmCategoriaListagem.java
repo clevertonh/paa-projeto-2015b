@@ -8,6 +8,7 @@ package com.minhafazenda.view;
 import com.minhafazenda.controller.CategoriaController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 
 
@@ -249,7 +250,11 @@ public class FrmCategoriaListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableCategoriaMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        fAbreCadastro((int) jTableCategoria.getValueAt(jTableCategoria.getSelectedRow(), 0));
+         if (jTableCategoria.getSelectedRow() >= 0) {
+            fAbreCadastro((int) jTableCategoria.getValueAt(jTableCategoria.getSelectedRow(), 0));
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um registro para edição!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

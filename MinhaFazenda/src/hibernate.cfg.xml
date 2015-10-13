@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fazenda?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">admin</property>
-    <mapping resource="com/minhafazenda/model/Usuario.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Estado.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/GrauSangue.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/PropriedadeRural.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Pais.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Fotos.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Categoria.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Cidade.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/ProducaoLeite.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/VacinaAnimal.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Vacina.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Raca.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/Animal.hbm.xml"/>
-    <mapping resource="com/minhafazenda/model/UsuarioTipo.hbm.xml"/>
-  </session-factory>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fazenda?zeroDateTimeBehavior=convertToNull</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">admin</property>
+<!--        <property name="hibernate.hbm2ddl.auto" value="create"/>
+          
+         Permite operacoes ddls pelo jpa 
+        <property name="hibernate.hbm2ddl.auto" value="update" />
+ 
+         configuracao do Envers 
+        <property name="post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener, org.hibernate.envers.event.EnversListener" />
+        <property name="post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener, org.hibernate.envers.event.EnversListener" />
+        -->
+        <mapping resource="com/minhafazenda/model/Usuario.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Estado.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/GrauSangue.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/PropriedadeRural.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Pais.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Fotos.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Categoria.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Cidade.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/ProducaoLeite.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/VacinaAnimal.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Vacina.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Raca.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/Animal.hbm.xml"/>
+        <mapping resource="com/minhafazenda/model/UsuarioTipo.hbm.xml"/>
+<!--        <listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>   
+        <listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>   
+        <listener class="org.hibernate.envers.event.AuditEventListener" type="post-delete"/>   
+        <listener class="org.hibernate.envers.event.AuditEventListener" type="pre-collection-update"/>   
+        <listener class="org.hibernate.envers.event.AuditEventListener" type="pre-collection-remove"/>   
+        <listener class="org.hibernate.envers.event.AuditEventListener" type="post-collection-recreate"/>-->
+        
+    </session-factory>
 </hibernate-configuration>

@@ -7,9 +7,6 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.library.common.Licenca;
 import java.awt.Component;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -21,7 +18,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private FrmCategoriaListagem frmCategoria;
     private FrmRacaListagem frmRaca;
-  
+    private FrmUsuarioListagem frmUsuario;
+
     private Licenca objLicenca;
 
     /**
@@ -71,9 +69,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnRaca = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
-        menuCadastriCategoria = new javax.swing.JMenuItem();
+        menuCadastroCategoria = new javax.swing.JMenuItem();
         menuCadastroRaca = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuCadastroUsuario = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -104,7 +104,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnItem.setText("Item");
+        btnItem.setText("Usuários");
         btnItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnItemActionPerformed(evt);
@@ -185,20 +185,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        menuCadastriCategoria.setText("Categoria");
-        menuCadastriCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+        menuCadastroCategoria.setText("Categorias");
+        menuCadastroCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                menuCadastriCategoriaFocusLost(evt);
+                menuCadastroCategoriaFocusLost(evt);
             }
         });
-        menuCadastriCategoria.addActionListener(new java.awt.event.ActionListener() {
+        menuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCadastriCategoriaActionPerformed(evt);
+                menuCadastroCategoriaActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(menuCadastriCategoria);
+        jMenuCadastros.add(menuCadastroCategoria);
 
-        menuCadastroRaca.setText("Raça");
+        menuCadastroRaca.setText("Raças");
         menuCadastroRaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroRacaActionPerformed(evt);
@@ -206,10 +206,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(menuCadastroRaca);
 
-        jMenuItem1.setText("item");
-        jMenuCadastros.add(jMenuItem1);
+        menuCadastroUsuario.setText("Usuários");
+        menuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroUsuarioActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuCadastroUsuario);
 
         jMenuBar1.add(jMenuCadastros);
+
+        jMenu1.setText("jMenu1");
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
         jMenuBar1.getAccessibleContext().setAccessibleName("Gerenciador");
@@ -237,32 +249,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void menuCadastroRacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroRacaActionPerformed
     {//GEN-HEADEREND:event_menuCadastroRacaActionPerformed
-        try {
-            //Verifica se o formulario ja existe
-            if (frmRaca == null) {
-                //Cria o form
-                frmRaca = new FrmRacaListagem();
-                //Adiciona o formulario dentro do DESKTOP
-                this.jDesktopPane1.add(frmRaca);
-                //diz que a janela interna é maximizável     
-                frmRaca.setMaximizable(true);
-                //set o tamanho máximo dela, que depende da janela pai     
-                frmRaca.setMaximum(true);
-            }
-
-            //Verifica se o formulario nao esta visivel
-            if (!frmRaca.isVisible()) {
-                //Mostra o formulário
-                frmRaca.setVisible(true);
-            }
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        if (frmRaca == null) {
+            //Cria o form
+            frmRaca = new FrmRacaListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmRaca);
+            //diz que a janela interna é maximizável
+            frmRaca.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
         }
-
+        if (!frmRaca.isVisible()) {
+            //Mostra o formulário
+            frmRaca.setVisible(true);
+        }
     }//GEN-LAST:event_menuCadastroRacaActionPerformed
 
-    private void menuCadastriCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastriCategoriaActionPerformed
-    {//GEN-HEADEREND:event_menuCadastriCategoriaActionPerformed
+    private void menuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroCategoriaActionPerformed
+    {//GEN-HEADEREND:event_menuCadastroCategoriaActionPerformed
         if (frmCategoria == null) {
             //Cria o form
             frmCategoria = new FrmCategoriaListagem();
@@ -279,17 +283,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_menuCadastriCategoriaActionPerformed
+    }//GEN-LAST:event_menuCadastroCategoriaActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowStateChanged
     {//GEN-HEADEREND:event_formWindowStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowStateChanged
 
-    private void menuCadastriCategoriaFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_menuCadastriCategoriaFocusLost
-    {//GEN-HEADEREND:event_menuCadastriCategoriaFocusLost
+    private void menuCadastroCategoriaFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_menuCadastroCategoriaFocusLost
+    {//GEN-HEADEREND:event_menuCadastroCategoriaFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuCadastriCategoriaFocusLost
+    }//GEN-LAST:event_menuCadastroCategoriaFocusLost
 
     private void btnRacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRacaActionPerformed
     {//GEN-HEADEREND:event_btnRacaActionPerformed
@@ -311,7 +315,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRacaActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        this.dispose();
+//        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
@@ -333,13 +338,38 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoriaActionPerformed
 
     private void btnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemActionPerformed
-//        IfrCandidatoVaga ifrCandidatoVaga = new IfrCandidatoVaga();
-//        //ifrVaga.setSize(jdpPrincipal.getWidth() /2, jdpPrincipal.getHeight()/2);
-//        ifrCandidatoVaga.setSize(650, 450);
-//
-//        jDesktopPane1.add(ifrCandidatoVaga);
-//        ifrCandidatoVaga.setVisible(true);
+        if (frmUsuario == null) {
+            //Cria o form
+            frmUsuario = new FrmUsuarioListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmUsuario);
+            //diz que a janela interna é maximizável
+            frmUsuario.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmUsuario.isVisible()) {
+            //Mostra o formulário
+            frmUsuario.setVisible(true);
+        }
     }//GEN-LAST:event_btnItemActionPerformed
+
+    private void menuCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroUsuarioActionPerformed
+        if (frmUsuario == null) {
+            //Cria o form
+            frmUsuario = new FrmUsuarioListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmUsuario);
+            //diz que a janela interna é maximizável
+            frmUsuario.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmUsuario.isVisible()) {
+            //Mostra o formulário
+            frmUsuario.setVisible(true);
+        }
+    }//GEN-LAST:event_menuCadastroUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,7 +407,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //        });
 //    }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCategoria;
     private javax.swing.JButton btnItem;
@@ -385,16 +414,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JMenuItem menuCadastriCategoria;
+    private javax.swing.JMenuItem menuCadastroCategoria;
     private javax.swing.JMenuItem menuCadastroRaca;
+    private javax.swing.JMenuItem menuCadastroUsuario;
     // End of variables declaration//GEN-END:variables
 }
