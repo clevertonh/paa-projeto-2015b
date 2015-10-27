@@ -7,6 +7,7 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.library.common.Licenca;
 import java.awt.Component;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -219,6 +220,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -370,6 +376,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
             frmUsuario.setVisible(true);
         }
     }//GEN-LAST:event_menuCadastroUsuarioActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+//        teste janelaTU = new teste();
+//        janelaTU.setVisible(true);
+//        this.dispose();
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

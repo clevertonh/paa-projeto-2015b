@@ -17,7 +17,7 @@ import org.hibernate.Transaction;
  *
  * @author cleverton
  */
-public class UsuarioModel {
+public class UsuarioTipoModel {
 
     //
     private final SessionFactory objSessionFactory;
@@ -25,12 +25,12 @@ public class UsuarioModel {
     //String para mensagem de erro
     String msg = "";
 
-    public UsuarioModel() {
+    public UsuarioTipoModel() {
         //Recebe o Session Factory do HIbernate
         this.objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory();
     }
 
-    public String insert(Usuario obj) {
+    public String insert(UsuarioTipo obj) {
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
         //Inicia uma transação dentro da sessão aberta
@@ -54,7 +54,7 @@ public class UsuarioModel {
         return this.msg;
     }
 
-    public String update(Usuario obj) {
+    public String update(UsuarioTipo obj) {
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
         //Inicia uma transação dentro da sessão aberta
@@ -78,7 +78,7 @@ public class UsuarioModel {
         return msg;
     }
 
-    public String delete(Usuario obj) {
+    public String delete(UsuarioTipo obj) {
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
         //Inicia uma transação dentro da sessão aberta
@@ -105,15 +105,15 @@ public class UsuarioModel {
         return msg;
     }
 
-    public ArrayList<Usuario> findByAll() {
+    public ArrayList<UsuarioTipo> findByAll() {
         //Cria lista de objetos
-        ArrayList<Usuario> lstUsuario = null;
+        ArrayList<UsuarioTipo> lstUsuario = null;
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
 
         try {
-            Query objQuery = objSession.createQuery("from Usuario");
-            lstUsuario = (ArrayList<Usuario>) objQuery.list();
+            Query objQuery = objSession.createQuery("from UsuarioTipo");
+            lstUsuario = (ArrayList<UsuarioTipo>) objQuery.list();
         } catch (ObjectNotFoundException e) {
             return null;
         }
@@ -123,14 +123,14 @@ public class UsuarioModel {
         return lstUsuario;
     }
 
-    public Usuario findById(int id) {
+    public UsuarioTipo findById(int id) {
         //Cria lista de objetos
-        Usuario objUsuario = null;
+        UsuarioTipo objUsuario = null;
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
 
         try {
-            objUsuario = (Usuario) objSession.load(Usuario.class, id);
+            objUsuario = (UsuarioTipo) objSession.load(UsuarioTipo.class, id);
         } catch (ObjectNotFoundException e) {
             return null;
         }
@@ -138,33 +138,15 @@ public class UsuarioModel {
         return objUsuario;
     }
 
-    public ArrayList<Usuario> findByDescricao(String descricao) {
+    public ArrayList<UsuarioTipo> findByDescricao(String descricao) {
         //Cria lista de objetos
-        ArrayList<Usuario> lstUsuario = null;
+        ArrayList<UsuarioTipo> lstUsuario = null;
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
 
         try {
             Query objQuery = objSession.createQuery("from Usuario where usuario like '%" + descricao + "%'");
-            lstUsuario = (ArrayList<Usuario>) objQuery.list();
-        } catch (ObjectNotFoundException e) {
-            return null;
-        }
-        //Fecha a sessão
-        objSession.close();
-        //Retorna lista de Usuarios
-        return lstUsuario;
-    }
-
-    public ArrayList<Usuario> findByValidarUsuario(String descricao, String senha) {
-        //Cria lista de objetos
-        ArrayList<Usuario> lstUsuario = null;
-        //Abre um sessão
-        Session objSession = this.objSessionFactory.openSession();
-
-        try {
-            Query objQuery = objSession.createQuery("from Usuario where usuario = '" + descricao + "' and senha = '" + senha + "'");
-            lstUsuario = (ArrayList<Usuario>) objQuery.list();
+            lstUsuario = (ArrayList<UsuarioTipo>) objQuery.list();
         } catch (ObjectNotFoundException e) {
             return null;
         }

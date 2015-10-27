@@ -7,6 +7,8 @@ package com.minhafazenda.controller;
 
 import com.minhafazenda.model.Usuario;
 import com.minhafazenda.model.UsuarioModel;
+import com.minhafazenda.model.UsuarioTipo;
+import com.minhafazenda.model.UsuarioTipoModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -20,9 +22,9 @@ public final class UsuarioController extends AbstractTableModel {
     //Cria o objeto do Model
     private final UsuarioModel objModel;
     //Table model
-    private ArrayList<Usuario> lstUsuario = null;   
+    private ArrayList<Usuario> lstUsuario = null;
     private Usuario usuariot = null;
-    private String[] column = {"Código", "Descrição"};
+    private String[] column = {"Código", "Descrição", "Tipo", "Descrição"};
 
     /*
      * Método construtor da classe
@@ -130,7 +132,8 @@ public final class UsuarioController extends AbstractTableModel {
         
         Object value = null;        
         
-        final Usuario c = (Usuario) lstUsuario.get(linhaIndex);        
+        final Usuario c = (Usuario) lstUsuario.get(linhaIndex);  
+        final UsuarioTipo ut = c.getUsuarioTipo();
         
         switch (colunaIndex) {            
             case 0:                
@@ -138,7 +141,16 @@ public final class UsuarioController extends AbstractTableModel {
                 break;            
             case 1:                
                 value = c.getUsuario();                
-                break;            
+                break;          
+            case 2:
+                value = ut.getId();
+                break; 
+            case 3:
+                String teste ="teste";
+                value = teste;
+                break; 
+            default:  
+                return null;  
         }
         
         return value;
