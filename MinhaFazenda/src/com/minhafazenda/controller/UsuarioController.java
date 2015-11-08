@@ -132,7 +132,7 @@ public final class UsuarioController extends AbstractTableModel {
         
         Object value = null;        
         
-        final Usuario c = (Usuario) lstUsuario.get(linhaIndex);  
+        final Usuario c = (Usuario)lstUsuario.get(linhaIndex);  
         final UsuarioTipo ut = c.getUsuarioTipo();
         
         switch (colunaIndex) {            
@@ -146,8 +146,10 @@ public final class UsuarioController extends AbstractTableModel {
                 value = ut.getId();
                 break; 
             case 3:
-                String teste ="teste";
-                value = teste;
+                //UsuarioTipo objTipo = new UsuarioTipoModel().findById(ut.getId());
+                //value = objTipo.getDescricao();
+                //Pode ser usado direto conforme linha abaixo
+                value = new UsuarioTipoModel().findById(ut.getId()).getDescricao();
                 break; 
             default:  
                 return null;  

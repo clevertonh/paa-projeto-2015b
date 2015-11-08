@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,11 +29,23 @@ public class Usuario implements java.io.Serializable {
     @Transient 
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
 
+@Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
+@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario_tipo", nullable = false)
     private UsuarioTipo usuarioTipo;
+@Column(name = "usuario", length = 45)
     private String usuario;
+@Column(name = "senha", length = 45)
     private String senha;
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
     private Set vacinaAnimals = new HashSet(0);
+@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuario_propriedade_rural", catalog = "fazenda", joinColumns = {
+        @JoinColumn(name = "id_usuario", nullable = false, updatable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "id_propriedade_rural", nullable = false, updatable = false)})
     private Set propriedadeRurals = new HashSet(0);
 
     public Usuario() {
@@ -52,10 +63,6 @@ public class Usuario implements java.io.Serializable {
         this.propriedadeRurals = propriedadeRurals;
     }
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-
-    @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;
     }
@@ -66,8 +73,6 @@ public class Usuario implements java.io.Serializable {
         changeSupport.firePropertyChange("id", oldId, id);
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario_tipo", nullable = false)
     public UsuarioTipo getUsuarioTipo() {
         return this.usuarioTipo;
     }
@@ -78,7 +83,6 @@ public class Usuario implements java.io.Serializable {
         changeSupport.firePropertyChange("usuarioTipo", oldUsuarioTipo, usuarioTipo);
     }
 
-    @Column(name = "usuario", length = 45)
     public String getUsuario() {
         return this.usuario;
     }
@@ -89,7 +93,6 @@ public class Usuario implements java.io.Serializable {
         changeSupport.firePropertyChange("usuario", oldUsuario, usuario);
     }
 
-    @Column(name = "senha", length = 45)
     public String getSenha() {
         return this.senha;
     }
@@ -100,7 +103,6 @@ public class Usuario implements java.io.Serializable {
         changeSupport.firePropertyChange("senha", oldSenha, senha);
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
     public Set getVacinaAnimals() {
         return this.vacinaAnimals;
     }
@@ -109,10 +111,6 @@ public class Usuario implements java.io.Serializable {
         this.vacinaAnimals = vacinaAnimals;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "usuario_propriedade_rural", catalog = "fazenda", joinColumns = {
-        @JoinColumn(name = "id_usuario", nullable = false, updatable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "id_propriedade_rural", nullable = false, updatable = false)})
     public Set getPropriedadeRurals() {
         return this.propriedadeRurals;
     }
