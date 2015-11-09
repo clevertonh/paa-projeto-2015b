@@ -12,6 +12,11 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,8 +24,62 @@ import java.util.ArrayList;
  */
 public class MinhaFazendaLicenca {
 
-    private static ArrayList<LicencaProtocol> lstLicencaUso;
+    private static List<LicencaProtocol> lstLicencaUso;
     private static int quantidadeLicenca;
+
+    private static void resumoLicenca(){
+        System.out.println(" ");
+        System.out.println("||================================================================================||"); 
+        System.out.println("|| " + lstLicencaUso.size() + " de " + quantidadeLicenca + " licenças usadas");
+        System.out.println("||================================================================================||"); 
+        System.out.println(" ");
+    }
+    
+    private static void monitor(){
+    
+        Thread objThread = new Thread(new Runnable() {
+            public void run() {
+                while(true){
+                    
+                    try {
+                        Thread.sleep(1000);
+
+                        Date dtAgora = new Date();
+        
+                        if(lstLicencaUso.size() > 0){
+                            
+                            for (int i=0; i<lstLicencaUso.size(); i++) {
+                                LicencaProtocol _lstLicencaUso = lstLicencaUso.get(i);
+                                Date dtDiferenca = new Date(dtAgora.getTime() - _lstLicencaUso.getDataHora().getTime());
+
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.setTime(dtDiferenca);
+                                //System.out.println("Tempo Seg: " + calendar.get(Calendar.SECOND));
+
+                                if(calendar.get(Calendar.SECOND) > 60){
+                                    //Removendo a licença
+                                    System.out.println(" ");
+                                    System.out.println("+ Removido a licença AUTOMATICAMENTE: " + _lstLicencaUso.getChave());
+                                    System.out.println(" ");
+                                    removeLicenca(_lstLicencaUso);
+                                    
+                                    resumoLicenca();
+                                }  
+                            }
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MinhaFazendaLicenca.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            }
+        });
+        
+        //Inicia thread
+        objThread.start();
+    
+    }
+    
     
     /**
      * Método de serviço
@@ -33,11 +92,21 @@ public class MinhaFazendaLicenca {
             //Inicia um servidor de SOCKET na porta em questão
             ServerSocket welcomeSocket = new ServerSocket(portaServico);
             //Mostra processo
-            System.out.println("Iniciado o servidor de licença na porta: " + portaServico);
+            System.out.println(" ");
+            System.out.println("||================================================================================||");
+            System.out.println("||                                                                                ||");
+            System.out.println("|| Iniciado o servidor de licença na porta: " + portaServico + "                                  ||");
+            System.out.println("||                                                                                ||");
+            System.out.println("||================================================================================||");            
+            System.out.println(" ");
+
+            monitor();
+            
             //Inicia um LOOP infiníto
-            while(true){            
+            while(true){        
+                //verificaLista();
+
                 //Aguardando conexão
-                System.out.println("Aguardando conexão");
                 Socket connectionSocket = welcomeSocket.accept();
                 //Cria objeto de STREAM de ENTRADA
                 ObjectInputStream inFromClient = new ObjectInputStream(connectionSocket.getInputStream());
@@ -51,35 +120,55 @@ public class MinhaFazendaLicenca {
                     //Verifica o status da solicitação
                     if(objRecebido.getStatus() == LicencaProtocol.StatusType.SOLICITA_LICENCA){
                         //Usuário solicitou uma licenca.
+                        System.out.println("+ Solicitado licença: " + objRecebido.getChave());
                         //Verifica se existe alguma licenca livre.
                         if(lstLicencaUso.size() < quantidadeLicenca){
                             //Existe licenca livre
-                            //Adiciona o usuario na lista
-                            lstLicencaUso.add(objRecebido);
+                            System.out.println("+ Licença fornecida para: " + objRecebido.getChave());
+                            System.out.println("+ IP: " + connectionSocket.getInetAddress().toString());
+                            System.out.println(" ");
                             //Altera o status do objeto
                             objRecebido.setStatus(LicencaProtocol.StatusType.LICENCA_FORNECIDA);
+                            //Adiciona o usuario na lista
+                            lstLicencaUso.add(objRecebido);
+                            //Mostra resumo
+                            resumoLicenca();
                         }else{
                             //Não existe uma licenca disponível
-                            
+                            System.out.println("+ Não existe nenhuma licença disponível");
+                            System.out.println(" ");
                             //Altera o status do objeto
                             objRecebido.setStatus(LicencaProtocol.StatusType.SEM_LICENCA);
                         }
-                        //
-                        System.out.println(lstLicencaUso.size());
+                        //Devolve
+                        outToClient.writeObject(objRecebido);
                         
                     }else if(objRecebido.getStatus() == LicencaProtocol.StatusType.LIBERAR_LICENCA){
                         //Usuário solicitou a liberação de uma licença
-                        lstLicencaUso.remove(objRecebido);
-                        System.out.println(lstLicencaUso.size());
+                        //String chaveTempo = objRecebido.getChave();
+                        removeLicenca(objRecebido);
+                        System.out.println("+ Licença liberada");
+                        System.out.println("+ IP: " + connectionSocket.getInetAddress().toString());
+                        System.out.println(" ");
+                        //Mostra resumo
+                        resumoLicenca();
+                            
                     }else if(objRecebido.getStatus() == LicencaProtocol.StatusType.MANTEM_LICENCA){
+                        //
+                        removeLicenca(objRecebido);
+                        //
                         objRecebido.setStatus(LicencaProtocol.StatusType.LICENCA_RENOVADA);
-                        lstLicencaUso.remove(objRecebido);
+                        //
+                        lstLicencaUso.add(objRecebido);
+                        System.out.println("+ Licença renovada");
+                        System.out.println("+ Licença: " + objRecebido.getChave());
+                        System.out.println("+ " + objRecebido.getDataHora().toString());
+                        System.out.println(" ");
+                        
+                        //Devolve
+                        outToClient.writeObject(objRecebido);
                     }
                     
-                    System.out.println("Recebido solicitação do IP: " + connectionSocket.getInetAddress().toString());                
-
-                    //Devolve
-                    outToClient.writeObject(objRecebido);
                     connectionSocket.close();
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -91,12 +180,28 @@ public class MinhaFazendaLicenca {
         }
     }
     
+    private static void removeLicenca(LicencaProtocol obj){
+        
+        try {
+            for (int i=0; i<lstLicencaUso.size(); i++) {
+                LicencaProtocol val = lstLicencaUso.get(i);
+                if (val.getChave().equals(obj.getChave())) {
+                    lstLicencaUso.remove(i);
+                    break;
+                }
+            } 
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args){
         //Informa a quantidade de licenca para esse cliente
-        quantidadeLicenca = 30;
+        quantidadeLicenca = 3;
         //Inicia serviço
         run(6789);        
     }
