@@ -23,7 +23,6 @@ public final class UsuarioController extends AbstractTableModel {
     private final UsuarioModel objModel;
     //Table model
     private ArrayList<Usuario> lstUsuario = null;
-    private Usuario usuariot = null;
     private String[] column = {"Código", "Descrição", "Tipo", "Descrição"};
 
     /*

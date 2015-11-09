@@ -6,10 +6,19 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.library.common.Licenca;
+import com.minhafazenda.library.protocol.LicencaProtocol;
 import java.awt.Component;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -20,26 +29,75 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private FrmCategoriaListagem frmCategoria;
     private FrmRacaListagem frmRaca;
     private FrmUsuarioListagem frmUsuario;
+    
+    
+    private final Thread objThread;
+    private Socket clientSocket;
 
-    private Licenca objLicenca;
-
+    //public final LicencaProtocol objLicenca;
+    private Licenca objMantemLicenca;
+    private String chave;
+    
     /**
      * Creates new form FrmPrincipal
+     * @param chave
      */
-    public FrmPrincipal() {
+    public FrmPrincipal(final String chave) {
         initComponents();
 
+        this.chave = chave;
+        
         // aplica skin = LookAndFeel a todas as janelas
         try {
 
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             SwingUtilities.updateComponentTreeUI(this);
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
 
         this.setExtendedState(MAXIMIZED_BOTH);
 
+        
+        objThread = new Thread(new Runnable() {
+            public void run() {
+                while(true){
+                    try {
+                        Thread.sleep(1000);
+
+                        clientSocket = new Socket("127.0.0.1", 6789);
+                        ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());
+                        ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
+                    
+                        LicencaProtocol objLicenca = new LicencaProtocol();
+                        objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
+                        objLicenca.setDataHora(new Date());
+                        objLicenca.setChave(chave);
+
+
+                        //Solicita licenca
+                        outToServer.writeObject(objLicenca);
+                        //Retorno do servidor
+                        objLicenca = (LicencaProtocol)inFromServer.readObject();
+
+                        if(objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_RENOVADA)
+                            System.out.println("Licença: Renovada");
+                        else
+                            System.out.println("Licença: NÃO Renovada");
+
+                        objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
+
+                        clientSocket.close();
+
+                    } catch (InterruptedException | IOException | ClassNotFoundException ex) {
+                        Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        
+        //Inicia thread
+        objThread.start();
     }
 
     public void novaJanela(Component janela) {
@@ -64,7 +122,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnCategoria = new javax.swing.JButton();
         btnItem = new javax.swing.JButton();
-        btnSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         btnRaca = new javax.swing.JButton();
@@ -112,13 +169,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnSair.setText("Sair");
-        btnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairActionPerformed(evt);
-            }
-        });
-
         jScrollPane1.setViewportView(jTextPane1);
 
         btnRaca.setText("Raças");
@@ -141,7 +191,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                             .addComponent(btnItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1))))
                 .addGap(60, 60, 60))
         );
@@ -156,9 +205,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnRaca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnItem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSair)
-                .addContainerGap())
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -320,11 +367,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRacaActionPerformed
 
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-//        this.dispose();
-        System.exit(0);
-    }//GEN-LAST:event_btnSairActionPerformed
-
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
         if (frmCategoria == null) {
             //Cria o form
@@ -424,7 +466,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCategoria;
     private javax.swing.JButton btnItem;
     private javax.swing.JButton btnRaca;
-    private javax.swing.JButton btnSair;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JMenu jMenu1;
