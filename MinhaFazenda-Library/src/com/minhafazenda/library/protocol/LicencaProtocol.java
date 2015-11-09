@@ -6,6 +6,8 @@
 package com.minhafazenda.library.protocol;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -13,6 +15,13 @@ import java.io.Serializable;
  */
 public class LicencaProtocol implements Serializable{
 
+    public boolean equals(LicencaProtocol obj) {
+        if(obj.getChave() == getChave())
+            return true;
+        else
+            return false;
+    }
+    
     public enum StatusType {
         SOLICITA_LICENCA    /* Usuário está solicitando uma licença para abrir o sistema */
         ,LICENCA_FORNECIDA  /* Uma licenca foi fornecida para o usuario */
@@ -23,10 +32,23 @@ public class LicencaProtocol implements Serializable{
         ,LICENCA_RENOVADA
     }    
     
-    private String ip;
-    private String host;
-    private Boolean liberadoAcesso;    
+    private Date dataHora;
     private StatusType status;
+    private String chave;
+    
+    /**
+     * @return the dataHora
+     */
+    public Date getDataHora() {
+        return dataHora;
+    }
+
+    /**
+     * @param dataHora the dataHora to set
+     */
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
+    }    
     
     /**
      * @return the status
@@ -41,47 +63,27 @@ public class LicencaProtocol implements Serializable{
     public void setStatus(StatusType status) {
         this.status = status;
     }
-    
+
     /**
-     * @return the ip
+     * @return the chave
      */
-    public String getIp() {
-        return ip;
+    public String getChave() {
+        return chave;
     }
 
     /**
-     * @param ip the ip to set
+     * @param chave the chave to set
      */
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    /**
-     * @return the host
-     */
-    public String getHost() {
-        return host;
-    }
-
-    /**
-     * @param host the host to set
-     */
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    /**
-     * @return the liberadoAcesso
-     */
-    public Boolean getLiberadoAcesso() {
-        return liberadoAcesso;
-    }
-
-    /**
-     * @param liberadoAcesso the liberadoAcesso to set
-     */
-    public void setLiberadoAcesso(Boolean liberadoAcesso) {
-        this.liberadoAcesso = liberadoAcesso;
+    public void setChave(String chave) {
+        this.chave = chave;
     }
     
+    //http://stackoverflow.com/questions/8520808/how-to-remove-specific-object-from-arraylist
+//    public boolean equals(Object obj) {
+//    if (obj == null) return false;
+//    if (obj == this) return true;
+//    if (!(obj instance of LicencaProtocol)) return false;
+//    ArrayTest o = (ArrayTest) obj;
+//    return o.i == this.i;
+//    }
 }

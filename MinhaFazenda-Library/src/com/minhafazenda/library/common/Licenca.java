@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minhafazenda.library.common;
 
 import com.minhafazenda.library.protocol.LicencaProtocol;
@@ -10,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,13 +22,14 @@ public class Licenca{
     
         objThread = new Thread(new Runnable() {
             public void run() {
+                System.out.println("Teste");
                 try {
                     //Inicia conexao
                     //Loop infinito para menter a execução do processo
                     while(true){
                         //Tratamento de erro
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(5);
                             
                             clientSocket = new Socket("127.0.0.1", 6789);
                             ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());
@@ -40,6 +37,7 @@ public class Licenca{
                     
                             LicencaProtocol objLicenca = new LicencaProtocol();
                             objLicenca.setStatus(LicencaProtocol.StatusType.MANTEM_LICENCA);
+                            objLicenca.setDataHora(new Date());
                     
                             
                             //Solicita licenca
@@ -75,10 +73,6 @@ public class Licenca{
     
     }
     
-    public void stop(){
-    
-        objThread.stop();
-    }
     
     public void run() {
 
