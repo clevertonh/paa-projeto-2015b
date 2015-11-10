@@ -29,6 +29,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private FrmCategoriaListagem frmCategoria;
     private FrmRacaListagem frmRaca;
     private FrmUsuarioListagem frmUsuario;
+    private FrmUsuarioTipoListagem frmUsuarioTipo;
     
     
     private final Thread objThread;
@@ -130,6 +131,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastroCategoria = new javax.swing.JMenuItem();
         menuCadastroRaca = new javax.swing.JMenuItem();
         menuCadastroUsuario = new javax.swing.JMenuItem();
+        menuCadastroUsuarioTipo = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -261,6 +263,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(menuCadastroUsuario);
+
+        menuCadastroUsuarioTipo.setText("Tipo de Usuário");
+        menuCadastroUsuarioTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroUsuarioTipoActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuCadastroUsuarioTipo);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -426,6 +436,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void menuCadastroUsuarioTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroUsuarioTipoActionPerformed
+        if (frmUsuarioTipo == null) {
+            //Cria o form
+            frmUsuarioTipo = new FrmUsuarioTipoListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmUsuarioTipo);
+            //diz que a janela interna é maximizável
+            frmUsuarioTipo.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmUsuarioTipo.isVisible()) {
+            //Mostra o formulário
+            frmUsuarioTipo.setVisible(true);
+        }
+    }//GEN-LAST:event_menuCadastroUsuarioTipoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -481,5 +508,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCadastroCategoria;
     private javax.swing.JMenuItem menuCadastroRaca;
     private javax.swing.JMenuItem menuCadastroUsuario;
+    private javax.swing.JMenuItem menuCadastroUsuarioTipo;
     // End of variables declaration//GEN-END:variables
 }

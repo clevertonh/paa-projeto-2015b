@@ -86,7 +86,7 @@ public class UsuarioTipoModel {
 
         try {
             //Cria QUERY para excluir o registro
-            Query query = objSession.createQuery("delete Usuario where id = :id");
+            Query query = objSession.createQuery("delete UsuarioTipo where id = :id");
             //Seta os parâmetros
             query.setParameter("id", obj.getId());
             //Executa a QUERY
@@ -145,7 +145,7 @@ public class UsuarioTipoModel {
         Session objSession = this.objSessionFactory.openSession();
 
         try {
-            Query objQuery = objSession.createQuery("from Usuario where usuario like '%" + descricao + "%'");
+            Query objQuery = objSession.createQuery("from UsuarioTipo where descricao like '%" + descricao + "%'");
             lstUsuario = (ArrayList<UsuarioTipo>) objQuery.list();
         } catch (ObjectNotFoundException e) {
             return null;
