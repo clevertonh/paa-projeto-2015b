@@ -76,9 +76,8 @@ public class Animal  implements java.io.Serializable {
        this.fotoses = fotoses;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-
-    
+     @Id 
+     @GeneratedValue(strategy=IDENTITY)
     @Column(name="id", unique=true, nullable=false)
     public Integer getId() {
         return this.id;

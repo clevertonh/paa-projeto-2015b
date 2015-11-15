@@ -10,6 +10,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -48,8 +50,8 @@ public class UsuarioTipo implements java.io.Serializable {
     }
 
     @Id
-
     @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = IDENTITY)
     public int getId() {
         return this.id;
     }
