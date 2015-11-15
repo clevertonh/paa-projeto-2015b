@@ -6,6 +6,7 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.controller.UsuarioController;
+import com.minhafazenda.model.Usuario;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;

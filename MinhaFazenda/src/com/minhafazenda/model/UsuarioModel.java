@@ -156,14 +156,32 @@ public class UsuarioModel {
         return lstUsuario;
     }
 
-    public ArrayList<Usuario> findByValidarUsuario(String descricao, String senha) {
+    public ArrayList<Usuario> findByValidarUsuario(String usuario, String senha) {
         //Cria lista de objetos
         ArrayList<Usuario> lstUsuario = null;
         //Abre um sessão
         Session objSession = this.objSessionFactory.openSession();
 
         try {
-            Query objQuery = objSession.createQuery("from Usuario where usuario = '" + descricao + "' and senha = '" + senha + "'");
+            Query objQuery = objSession.createQuery("from Usuario where usuario = '" + usuario + "' and senha = '" + senha + "'");
+            lstUsuario = (ArrayList<Usuario>) objQuery.list();
+        } catch (ObjectNotFoundException e) {
+            return null;
+        }
+        //Fecha a sessão
+        objSession.close();
+        //Retorna lista de Usuarios
+        return lstUsuario;
+    }
+    
+    public ArrayList<Usuario> findByBuscarTipoUsuario(Usuario usuario) {
+        //Cria lista de objetos
+        ArrayList<Usuario> lstUsuario = null;
+        //Abre um sessão
+        Session objSession = this.objSessionFactory.openSession();
+
+        try {
+            Query objQuery = objSession.createQuery("from usuario_tipo where id_usuario_tipo = '" + usuario.getUsuarioTipo());
             lstUsuario = (ArrayList<Usuario>) objQuery.list();
         } catch (ObjectNotFoundException e) {
             return null;

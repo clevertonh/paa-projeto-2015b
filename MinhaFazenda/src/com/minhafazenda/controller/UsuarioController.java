@@ -114,6 +114,11 @@ public final class UsuarioController extends AbstractTableModel {
         
     }
     
+    public ArrayList<Usuario> findByTipoUsuario(Usuario usuario) {        
+        this.lstUsuario = objModel.findByBuscarTipoUsuario(usuario);
+        return this.lstUsuario;
+    }
+    
 
     //Métodos implementados pela classe AbstractTableModel
     @Override

@@ -13,21 +13,21 @@ import com.minhafazenda.model.Usuario;
  * @author cleverton
  */
 public class FrmUsuarioCadastro extends javax.swing.JDialog {
-    
+
     private final UsuarioController objController;
     private Usuario objUsuario;
     private boolean edicao;
-    
+
     /**
      * Creates new form FrmCategoriaCadastro
      */
-    public FrmUsuarioCadastro() {   
+    public FrmUsuarioCadastro() {
         initComponents();
         //Cria o objeto de controller
         this.objController = new UsuarioController();
     }
-    
-    public void fNovoRegistro(){
+
+    public void fNovoRegistro() {
         //
         this.objUsuario = new Usuario();
         //Por padrão oculta o botão excluir
@@ -39,14 +39,16 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         //Seta o focu no campo de descrição ao abrir o formulário
         txtDescricao.requestFocus();
     }
-    
-    public void fCarregaCadastro(int id){
+
+    public void fCarregaCadastro(int id) {
         //Se for passado um código por parâmetro, pesquisa no banco
         this.objUsuario = this.objController.findById(id);
-        //Carrega na tela a descrição da categoria
+        //Carrega na tela a descrição 
         txtDescricao.setText(this.objUsuario.getUsuario());
+        //Carrega na tela o tipo de usário
+        txtCodTipoUsuario.setText(this.objUsuario.getUsuarioTipo().toString());
         //Adiciona o status de edição
-        this.edicao = true;    
+        this.edicao = true;
         //MOstra o botão excluir
         btnExcluir.setEnabled(true);
         //Seta o focu no campo de descrição ao abrir o formulário
@@ -70,8 +72,10 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtDescTipoUsuario = new javax.swing.JTextField();
+        txtCodTipoUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnPesquisar = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -80,7 +84,7 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         setTitle("Cadastro de Usuários");
         setName(""); // NOI18N
 
-        jLabel1.setText("Descrição");
+        jLabel1.setText("Descrição:");
 
         txtDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,9 +137,14 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
                 .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        jTextField1.setText("jTextField1");
+        jLabel2.setText("Tipo:");
 
-        jTextField2.setText("jTextField2");
+        btnPesquisar.setText("Selecione");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,15 +152,19 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtCodTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDescTipoUsuario)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
@@ -166,8 +179,10 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
                             .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtDescTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -185,17 +200,17 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         //Adiciona os atributos
         objUsuario.setUsuario(txtDescricao.getText());
         //Verifica se deve adicionar ou atualizar um registro
-        if(this.edicao){
+        if (this.edicao) {
             //Chama o méotod INSERT do conttroler
-            if(objController.update(objUsuario)){
+            if (objController.update(objUsuario)) {
                 //Limpa o campo de descrição da Categoria
                 txtDescricao.setText("");
                 //Fecha o formulário
                 this.setVisible(false);
             }
-        }else{
+        } else {
             //Chama o méotod INSERT do conttroler
-            if(objController.insert(objUsuario)){
+            if (objController.insert(objUsuario)) {
                 //Limpa o campo de descrição da Categoria
                 txtDescricao.setText("");
                 //Fecha o formulário
@@ -214,17 +229,23 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+       
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtCodTipoUsuario;
+    private javax.swing.JTextField txtDescTipoUsuario;
     private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 }
