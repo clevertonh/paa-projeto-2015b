@@ -4,9 +4,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 import com.minhafazenda.controller.UsuarioController;
-import com.minhafazenda.library.common.Licenca;
 import com.minhafazenda.library.protocol.LicencaProtocol;
-import com.minhafazenda.model.Usuario;
 import com.minhafazenda.util.Util;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -22,13 +20,15 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
+
+
 public class Login extends javax.swing.JFrame {
 
     private UsuarioController objController;
     private static String chave;
     //private Usuario ObjUsuario;
     
-    public Login() {
+    public Login()  {
 
         initComponents();
 
@@ -75,75 +75,9 @@ public class Login extends javax.swing.JFrame {
                         }
                     /*
                      * FIM - Antes de fechar o sistema libera a licença no servidor
-                     ****************************************************************/                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    System.out.println("TESTE SAKDASJ LAS JLKA");
-//                    int confirmed = JOptionPane.showConfirmDialog(null,"Voce deseja fechar o sistema?", "Fechar o sistema",JOptionPane.YES_NO_OPTION);
-//                    if (confirmed == JOptionPane.YES_OPTION) {
-//                        dispose();
-//                    }
-                    
+                     ****************************************************************/                                        
                 }
             });
-            
-//            
-//            frm.addWindowListener(new WindowAdapter() {
-//                //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
-//                public void windowClosing(WindowEvent ev) {
-//                    
-//                    System.out.println("TESTE SAKDASJ LAS JLKA");
-//                                
-////                                /****************************************************************
-////                                 * INICIO - Antes de fechar o sistema libera a licença no servidor
-////                                 */
-////                                    try {
-////                                    
-////                                        Socket clientSocket_ = new Socket("127.0.0.1", 6789);
-////                                        ObjectOutputStream outToServer_ =  new ObjectOutputStream(clientSocket_.getOutputStream());    
-////                                        
-////                                        //Libera a licenca
-////                                        objRetorno.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
-////                                        //Envia a solicitacao para o servidor
-////                                        outToServer_.writeObject(objRetorno);      
-////                                
-////                                    } catch (IOException ex) {
-////                                        Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                    }
-////                                /*
-////                                 * FIM - Antes de fechar o sistema libera a licença no servidor
-////                                 ****************************************************************/
-////                                
-//                                
-//                                
-////                                try {
-////                                    //Libera a licenca
-////                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
-////                                    //Envia a solicitacao para o servidor
-////                                    outToServer.writeObject(objLicenca);
-////                                    
-////                                    objLicenca = (LicencaProtocol)inFromServer.readObject();
-////                                    
-////                                    System.out.println("");
-////                                    //Fecha conexao
-////                                    //clientSocket.close();
-////                                } catch (IOException ex) {
-////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                } catch (ClassNotFoundException ex) {
-////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                }
-//                                
-//                                
-//                                
-//                                
-//                                
-//                                
-//                            }
-//                        });
             
             frm.setVisible(true);
             this.dispose();
@@ -308,18 +242,9 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-
-        
-        
-        
-        
-        
-        
-        
         try {
             
-              final LicencaProtocol objLicenca;
+            final LicencaProtocol objLicenca;
             
             final Socket clientSocket = new Socket("127.0.0.1", 6789);
             final ObjectOutputStream outToServer =  new ObjectOutputStream(clientSocket.getOutputStream());    
@@ -342,78 +267,11 @@ public class Login extends javax.swing.JFrame {
             //Valida o STATUS do retorno
             if(objRetorno.getStatus() == LicencaProtocol.StatusType.LICENCA_FORNECIDA){
                 //A licenca foi fornecida pelo servidor
-                
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-                        
-                
-                
-                
-                
-//                java.awt.EventQueue.invokeLater(new Runnable() {
-//                    //Abre o formulário principal
-//                    public void run() {
-//                        final FrmPrincipal frm = new FrmPrincipal();
-//                        //frm.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-//                        frm.addWindowListener(new WindowAdapter() {
-//                            //Quando o usuário for fechar o sistema, libera a LICENCA no servidor
-//                            public void windowClosing(WindowEvent ev) {
-//                                
-//                                /****************************************************************
-//                                 * INICIO - Antes de fechar o sistema libera a licença no servidor
-//                                 */
-//                                    try {
-//                                    
-//                                        Socket clientSocket_ = new Socket("127.0.0.1", 6789);
-//                                        ObjectOutputStream outToServer_ =  new ObjectOutputStream(clientSocket_.getOutputStream());    
-//                                        
-//                                        //Libera a licenca
-//                                        objRetorno.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
-//                                        //Envia a solicitacao para o servidor
-//                                        outToServer_.writeObject(objRetorno);      
-//                                
-//                                    } catch (IOException ex) {
-//                                        Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-//                                    }
-//                                /*
-//                                 * FIM - Antes de fechar o sistema libera a licença no servidor
-//                                 ****************************************************************/
-//                                
-//                                
-//                                
-////                                try {
-////                                    //Libera a licenca
-////                                    objLicenca.setStatus(LicencaProtocol.StatusType.LIBERAR_LICENCA);
-////                                    //Envia a solicitacao para o servidor
-////                                    outToServer.writeObject(objLicenca);
-////                                    
-////                                    objLicenca = (LicencaProtocol)inFromServer.readObject();
-////                                    
-////                                    System.out.println("");
-////                                    //Fecha conexao
-////                                    //clientSocket.close();
-////                                } catch (IOException ex) {
-////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                } catch (ClassNotFoundException ex) {
-////                                    Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-////                                }
-//                                
-//                                
-//                                
-//                                
-//                                
-//                                
-//                            }
-//                        });
-//                        frm.setVisible(true);
-//                    }
-//                });
-                
-                
-                
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new Login().setVisible(true);
+                    }
+                });
             }else if(objRetorno.getStatus() == LicencaProtocol.StatusType.SEM_LICENCA){
                 JOptionPane.showMessageDialog(null, "Não existe licenças disponíveis para iniciar o sistema!", "Sem licença", JOptionPane.ERROR_MESSAGE);
             }else if(objRetorno.getStatus() == LicencaProtocol.StatusType.SISTEMA_BLOQUEADO){
@@ -424,26 +282,6 @@ public class Login extends javax.swing.JFrame {
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

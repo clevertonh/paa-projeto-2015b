@@ -10,6 +10,8 @@ import com.minhafazenda.controller.UsuarioTipoController;
 import com.minhafazenda.model.Usuario;
 import com.minhafazenda.model.UsuarioTipo;
 import com.minhafazenda.util.ComboBoxItem;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +22,7 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
     private final UsuarioController objController;
     private Usuario objUsuario;
     private boolean edicao;
+    
 
     /**
      * Creates new form FrmCategoriaCadastro
