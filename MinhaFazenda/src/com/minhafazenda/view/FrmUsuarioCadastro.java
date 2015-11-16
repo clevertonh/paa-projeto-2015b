@@ -6,7 +6,10 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.controller.UsuarioController;
+import com.minhafazenda.controller.UsuarioTipoController;
 import com.minhafazenda.model.Usuario;
+import com.minhafazenda.model.UsuarioTipo;
+import com.minhafazenda.util.ComboBoxItem;
 
 /**
  *
@@ -25,6 +28,8 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         initComponents();
         //Cria o objeto de controller
         this.objController = new UsuarioController();
+        //Carrega comboBox com os dados
+        jComboBoxTipoUsuario.setModel(this.objController.carregaComboTipoUsuario());
     }
 
     public void fNovoRegistro() {
@@ -34,6 +39,7 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         btnExcluir.setEnabled(false);
         //POr padrão limpa o campo texto
         txtDescricao.setText("");
+        txtSenha.setText("");
         //Adiciona o status de edição
         this.edicao = false;
         //Seta o focu no campo de descrição ao abrir o formulário
@@ -45,8 +51,11 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         this.objUsuario = this.objController.findById(id);
         //Carrega na tela a descrição 
         txtDescricao.setText(this.objUsuario.getUsuario());
+        //Carrega senha
+        txtSenha.setText(this.objUsuario.getSenha());
         //Carrega na tela o tipo de usário
-        txtCodTipoUsuario.setText(this.objUsuario.getUsuarioTipo().toString());
+        //txtCodTipoUsuario.setText(this.objUsuario.getUsuarioTipo().toString());
+        jComboBoxTipoUsuario.getEditor().setItem(this.objUsuario.getUsuarioTipo().toString());
         //Adiciona o status de edição
         this.edicao = true;
         //MOstra o botão excluir
@@ -72,10 +81,10 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        txtDescTipoUsuario = new javax.swing.JTextField();
-        txtCodTipoUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btnPesquisar = new javax.swing.JButton();
+        jComboBoxTipoUsuario = new javax.swing.JComboBox();
+        txtSenha = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -139,12 +148,13 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
 
         jLabel2.setText("Tipo:");
 
-        btnPesquisar.setText("Selecione");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
+                jComboBoxTipoUsuarioActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Senha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,18 +162,16 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtCodTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescTipoUsuario)))
+                    .addComponent(txtSenha)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                    .addComponent(jComboBoxTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
@@ -179,11 +187,14 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
                             .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtDescTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBoxTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -199,6 +210,19 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         //Adiciona os atributos
         objUsuario.setUsuario(txtDescricao.getText());
+        //Senha
+        objUsuario.setSenha(txtSenha.getText());
+        //Recebe o valor selecionado
+        ComboBoxItem objItem = (ComboBoxItem)jComboBoxTipoUsuario.getSelectedItem();
+        //Solicita o OBJETO do tipo de usuário
+        UsuarioTipo objTipoTemp = new UsuarioTipoController().findById(objItem.getId());
+        
+        UsuarioTipo objTipo = new UsuarioTipo();
+        objTipo.setId(objTipoTemp.getId());
+        objTipo.setDescricao(objTipoTemp.getDescricao());
+        
+        objUsuario.setUsuarioTipo(objTipo);
+        
         //Verifica se deve adicionar ou atualizar um registro
         if (this.edicao) {
             //Chama o méotod INSERT do conttroler
@@ -229,23 +253,23 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-       
-    }//GEN-LAST:event_btnPesquisarActionPerformed
+    private void jComboBoxTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox jComboBoxTipoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtCodTipoUsuario;
-    private javax.swing.JTextField txtDescTipoUsuario;
     private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

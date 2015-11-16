@@ -9,7 +9,12 @@ import com.minhafazenda.model.Usuario;
 import com.minhafazenda.model.UsuarioModel;
 import com.minhafazenda.model.UsuarioTipo;
 import com.minhafazenda.model.UsuarioTipoModel;
+import com.minhafazenda.util.ComboBoxItem;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -23,7 +28,7 @@ public final class UsuarioController extends AbstractTableModel {
     private final UsuarioModel objModel;
     //Table model
     private ArrayList<Usuario> lstUsuario = null;
-    private String[] column = {"Código", "Descrição", "Tipo", "Descrição"};
+    private String[] column = {"Código", "Descrição", "Tipo"};
 
     /*
      * Método construtor da classe
@@ -147,9 +152,6 @@ public final class UsuarioController extends AbstractTableModel {
                 value = c.getUsuario();                
                 break;          
             case 2:
-                value = ut.getId();
-                break; 
-            case 3:
                 //UsuarioTipo objTipo = new UsuarioTipoModel().findById(ut.getId());
                 //value = objTipo.getDescricao();
                 //Pode ser usado direto conforme linha abaixo
@@ -161,4 +163,29 @@ public final class UsuarioController extends AbstractTableModel {
         
         return value;
     }
+    
+    public static ComboBoxModel carregaComboTipoUsuario(){  
+        List lstUsuarioTipo = null;
+        UsuarioTipo obj = new UsuarioTipo();
+        ComboBoxModel bRetorno;  
+        Vector v = new Vector();          
+        
+        UsuarioTipoController objTipo = new UsuarioTipoController();
+        lstUsuarioTipo = objTipo.findByAll();
+        
+        v.add(null);  
+        
+        for (Object item : lstUsuarioTipo) {  
+            //Lê cada item retornado pelo SELECT e adiciona o Nome do estado ao vector  
+            obj = (UsuarioTipo)item;  
+            v.add(new ComboBoxItem(obj.getId(),obj.getDescricao()));  
+            //v.add(item);
+        }  
+        
+        bRetorno = new DefaultComboBoxModel(v);  
+  
+        return bRetorno;  
+    } 
 }
+
+
