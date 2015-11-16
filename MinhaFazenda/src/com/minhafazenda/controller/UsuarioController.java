@@ -50,7 +50,7 @@ public final class UsuarioController extends AbstractTableModel {
         this.column = colunas;
     }
     
-    public Boolean insert(Usuario obj) throws IOException {
+    public Boolean insert(Usuario obj){
         if (obj.getUsuario().equals("")) {
             String tmpMsg = "A descrição não foi informada!";
             //LOG
@@ -75,13 +75,13 @@ public final class UsuarioController extends AbstractTableModel {
                 return false;
             } else {
                 //LOG
-                MasterLog.addInfo("Usuário '" + obj.getUsuario() + "' adicionado com sucesso",UsuarioController.class);
+                MasterLog.addInfo("Usuário '" + obj.getUsuario() + "' ADICIONADO com sucesso",UsuarioController.class);
                 return true;
             }
         }
     }
     
-    public Boolean update(Usuario obj) throws IOException {
+    public Boolean update(Usuario obj) {
         if (obj.getUsuario().equals("")) {
             String tmpMsg = "A descrição não foi informada!";
             //LOG
@@ -111,7 +111,7 @@ public final class UsuarioController extends AbstractTableModel {
         }
     }
     
-    public Boolean delete(Usuario obj) throws IOException {        
+    public Boolean delete(Usuario obj) {        
         String msg = objModel.delete(obj);
         if (!msg.equals("")) {
             //LOG
@@ -119,6 +119,7 @@ public final class UsuarioController extends AbstractTableModel {
             JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
+            MasterLog.addSevere("Usuário EXCLUIDO com sucesso ",UsuarioController.class);
             return true;
         }
     }

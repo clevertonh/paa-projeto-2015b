@@ -1,4 +1,2 @@
-Nov 16, 2015 9:32:40 PM com.minhafazenda.util.MasterLog addInfo
-INFORMAÇÕES: [com.minhafazenda.controller.UsuarioController] Tamanho máximo do campo foi atingido, verifique!
-Nov 16, 2015 9:32:45 PM com.minhafazenda.util.MasterLog addInfo
-INFORMAÇÕES: [com.minhafazenda.controller.UsuarioController] Usuário '1234567890' adicionado com sucesso
+Nov 16, 2015 9:54:12 PM com.minhafazenda.util.MasterLog addInfo
+INFORMAÇÕES: [com.minhafazenda.controller.UsuarioController] Usuário 'a2' ATUALIZADO com sucesso

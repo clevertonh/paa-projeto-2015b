@@ -19,45 +19,52 @@ public class MasterLog {
  
     private static Logger logger;
     
-    private static void criaLog() throws IOException{
+    private static void criaLog() {
     
         if(logger == null){
+            
             logger = Logger.getLogger("LogMinhaFazenda"); 
             
-            FileHandler fh = new FileHandler("LogMinhaFazenda.log");  
-
-            logger.addHandler(fh);
-            SimpleFormatter formatter = new SimpleFormatter();  
-            fh.setFormatter(formatter);  
+            FileHandler fh;  
+            try {
+                fh = new FileHandler("LogMinhaFazenda.log");
+                logger.addHandler(fh);
+                SimpleFormatter formatter = new SimpleFormatter();  
+                fh.setFormatter(formatter);  
+            } catch (IOException ex) {
+                Logger.getLogger(MasterLog.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(MasterLog.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
-    public static void addWarning(String msg) throws IOException{
+    public static void addWarning(String msg){
         criaLog();
         logger.log(Level.WARNING, "{0}", msg);
     }
     
-    public static void addWarning(String msg, Class cls) throws IOException{
+    public static void addWarning(String msg, Class cls){
         criaLog();
         logger.log(Level.WARNING, "[{0}] {1}", new Object[]{cls.getName(), msg});
     }    
     
-    public static void addInfo(String msg) throws IOException{
+    public static void addInfo(String msg){
         criaLog();
         logger.log(Level.INFO, "{0}", msg);
     }
     
-    public static void addInfo(String msg, Class cls) throws IOException{
+    public static void addInfo(String msg, Class cls){
         criaLog();
         logger.log(Level.INFO, "[{0}] {1}", new Object[]{cls.getName(), msg});
     }
     
-    public static void addSevere(String msg) throws IOException{
+    public static void addSevere(String msg){
         criaLog();
         logger.severe(msg);
     }
     
-    public static void addSevere(String msg, Class cls) throws IOException{
+    public static void addSevere(String msg, Class cls){
         criaLog();
         logger.log(Level.SEVERE, "[{0}] {1}", new Object[]{cls.getName(), msg});
     }

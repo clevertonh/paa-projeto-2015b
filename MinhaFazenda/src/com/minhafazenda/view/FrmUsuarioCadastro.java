@@ -10,6 +10,8 @@ import com.minhafazenda.controller.UsuarioTipoController;
 import com.minhafazenda.model.Usuario;
 import com.minhafazenda.model.UsuarioTipo;
 import com.minhafazenda.util.ComboBoxItem;
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -228,7 +230,6 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         
         //Verifica se deve adicionar ou atualizar um registro
         if (this.edicao) {
-            //Chama o méotod INSERT do conttroler
             if (objController.update(objUsuario)) {
                 //Limpa o campo de descrição da Categoria
                 txtDescricao.setText("");
