@@ -10,9 +10,13 @@ import com.minhafazenda.model.UsuarioModel;
 import com.minhafazenda.model.UsuarioTipo;
 import com.minhafazenda.model.UsuarioTipoModel;
 import com.minhafazenda.util.ComboBoxItem;
+import com.minhafazenda.util.MasterLog;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -33,11 +37,9 @@ public final class UsuarioController extends AbstractTableModel {
     /*
      * Método construtor da classe
      */
-    public UsuarioController() {
+    public UsuarioController(){
         //Inicia o objeto model
         this.objModel = new UsuarioModel();
-        //Inicia a lista da lstColunas para o TableMOdel
-        //setColunas(new String[]{"id", "descricao"});  
     }
     
     public String getColumnName(int columnIndex) {
@@ -48,19 +50,32 @@ public final class UsuarioController extends AbstractTableModel {
         this.column = colunas;
     }
     
-    public Boolean insert(Usuario obj) {
+    public Boolean insert(Usuario obj){
         if (obj.getUsuario().equals("")) {
-            JOptionPane.showMessageDialog(null, "A descrição não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
+            String tmpMsg = "A descrição não foi informada!";
+            //LOG
+            MasterLog.addWarning(tmpMsg,UsuarioController.class);
+            //Mensagem
+            JOptionPane.showMessageDialog(null, tmpMsg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (obj.getUsuario().length() > 45) {
-            JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
+            String tmpMsg = "Tamanho máximo do campo foi atingido, verifique!";
+            //LOG
+            MasterLog.addWarning(tmpMsg,UsuarioController.class);
+            //Mensagem
+            JOptionPane.showMessageDialog(null, tmpMsg, "Verifique", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {
             String msg = objModel.insert(obj);
             if (!msg.equals("")) {
+                //LOG
+                MasterLog.addSevere(msg,UsuarioController.class);
+                //Erro
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
             } else {
+                //LOG
+                MasterLog.addInfo("Usuário '" + obj.getUsuario() + "' ADICIONADO com sucesso",UsuarioController.class);
                 return true;
             }
         }
@@ -68,17 +83,29 @@ public final class UsuarioController extends AbstractTableModel {
     
     public Boolean update(Usuario obj) {
         if (obj.getUsuario().equals("")) {
-            JOptionPane.showMessageDialog(null, "A descrição não foi informada!", "Erro", JOptionPane.ERROR_MESSAGE);
+            String tmpMsg = "A descrição não foi informada!";
+            //LOG
+            MasterLog.addWarning(tmpMsg,UsuarioController.class);
+            //Mensagem
+            JOptionPane.showMessageDialog(null, tmpMsg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (obj.getUsuario().length() > 45) {
-            JOptionPane.showMessageDialog(null, "Tamanho máximo do campo foi atingido, verifique!", "Verifique", JOptionPane.INFORMATION_MESSAGE);
+            String tmpMsg = "Tamanho máximo do campo foi atingido, verifique!";
+            //LOG
+            MasterLog.addWarning(tmpMsg,UsuarioController.class);
+            JOptionPane.showMessageDialog(null, tmpMsg, "Verifique", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {
             String msg = objModel.update(obj);
             if (!msg.equals("")) {
+                //LOG
+                MasterLog.addSevere(msg,UsuarioController.class);
+                //Erro
                 JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
                 return false;
             } else {
+                //LOG
+                MasterLog.addInfo("Usuário '" + obj.getUsuario() + "' ATUALIZADO com sucesso",UsuarioController.class);
                 return true;
             }
         }
@@ -87,9 +114,12 @@ public final class UsuarioController extends AbstractTableModel {
     public Boolean delete(Usuario obj) {        
         String msg = objModel.delete(obj);
         if (!msg.equals("")) {
+            //LOG
+            MasterLog.addSevere(msg,UsuarioController.class);
             JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
+            MasterLog.addSevere("Usuário EXCLUIDO com sucesso ",UsuarioController.class);
             return true;
         }
     }
@@ -124,7 +154,6 @@ public final class UsuarioController extends AbstractTableModel {
         return this.lstUsuario;
     }
     
-
     //Métodos implementados pela classe AbstractTableModel
     @Override
     public int getRowCount() {
