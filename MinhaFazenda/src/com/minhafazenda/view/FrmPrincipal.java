@@ -15,7 +15,6 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -30,6 +29,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private FrmRacaListagem frmRaca;
     private FrmUsuarioListagem frmUsuario;
     private FrmUsuarioTipoListagem frmUsuarioTipo;
+    private FrmVacinaListagem frmVacina;
     
     
     private final Thread objThread;
@@ -132,6 +132,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastroRaca = new javax.swing.JMenuItem();
         menuCadastroUsuario = new javax.swing.JMenuItem();
         menuCadastroUsuarioTipo = new javax.swing.JMenuItem();
+        menuCadastroCategoria1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -271,6 +272,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(menuCadastroUsuarioTipo);
+
+        menuCadastroCategoria1.setText("Vacinas");
+        menuCadastroCategoria1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                menuCadastroCategoria1FocusLost(evt);
+            }
+        });
+        menuCadastroCategoria1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroCategoria1ActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuCadastroCategoria1);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -453,6 +467,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuCadastroUsuarioTipoActionPerformed
 
+    private void menuCadastroCategoria1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_menuCadastroCategoria1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroCategoria1FocusLost
+
+    private void menuCadastroCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroCategoria1ActionPerformed
+        if (frmVacina == null) {
+            //Cria o form
+            frmVacina = new FrmVacinaListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmVacina);
+            //diz que a janela interna é maximizável
+            frmVacina.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmVacina.isVisible()) {
+            //Mostra o formulário
+            frmVacina.setVisible(true);
+        }
+
+    }//GEN-LAST:event_menuCadastroCategoria1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -506,6 +542,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JMenuItem menuCadastroCategoria;
+    private javax.swing.JMenuItem menuCadastroCategoria1;
     private javax.swing.JMenuItem menuCadastroRaca;
     private javax.swing.JMenuItem menuCadastroUsuario;
     private javax.swing.JMenuItem menuCadastroUsuarioTipo;
