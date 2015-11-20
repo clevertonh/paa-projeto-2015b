@@ -5,13 +5,11 @@
  */
 package com.minhafazenda.view;
 
-import com.minhafazenda.controller.CategoriaController;
 import com.minhafazenda.controller.UsuarioTipoController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
-
 
 /**
  *
@@ -38,15 +36,15 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
         jTableUsuarioTipo.setModel(objController);
         //
         jTableUsuarioTipo.setFillsViewportHeight(true);
-        
+
         //LIbera a seleção das linhas da jTAble
         jTableUsuarioTipo.setRowSelectionAllowed(true);
         //Aceita somente uma linha selecionada por vez
         jTableUsuarioTipo.setSelectionModel(new ForcedListSelectionModel());
-        
+
         //Configuração da Jtable
         TableColumnModel objColumn = jTableUsuarioTipo.getColumnModel();
-        objColumn.getColumn(0).setMaxWidth(100);        
+        objColumn.getColumn(0).setMaxWidth(100);
     }
 
     public void pesquisar() {
@@ -55,15 +53,16 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
         //
         jTableUsuarioTipo.setFillsViewportHeight(true);
     }
-    
-    public void fAbreCadastro(int id){
+
+    public void fAbreCadastro(int id) {
         if (frm == null) {
             frm = new FrmUsuarioTipoCadastro();
             frm.setModal(true);
         }
-        
-        if(id > 0)
+
+        if (id > 0) {
             frm.fCarregaCadastro(id);
+        }
 
         if (frm.isVisible()) {
             frm.setVisible(false);
@@ -71,7 +70,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
             frm.setLocationRelativeTo(null);
             frm.setVisible(true);
         }
-        
+
         pesquisar();
     }
 
@@ -111,6 +110,9 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
         txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBuscaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
             }
         });
 
@@ -215,7 +217,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
             frm = new FrmUsuarioTipoCadastro();
             frm.setModal(true);
         }
-        
+
         frm.fNovoRegistro();
 
         if (frm.isVisible()) {
@@ -224,7 +226,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
             frm.setLocationRelativeTo(null);
             frm.setVisible(true);
         }
-        
+
         pesquisar();
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -233,9 +235,9 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void txtBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyPressed
-        
+
         //Verifica se foi pressionado a tecla ENTER
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //Realiza pesquisa
             pesquisar();
             //Seleciona o texto do campo, para que o usuário já possa realizar outra pesquisa
@@ -244,19 +246,23 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscaKeyPressed
 
     private void jTableUsuarioTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioTipoMouseClicked
-        
-        if(evt.getClickCount() == 2){
+
+        if (evt.getClickCount() == 2) {
             fAbreCadastro((int) jTableUsuarioTipo.getValueAt(jTableUsuarioTipo.getSelectedRow(), 0));
         }
     }//GEN-LAST:event_jTableUsuarioTipoMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-         if (jTableUsuarioTipo.getSelectedRow() >= 0) {
+        if (jTableUsuarioTipo.getSelectedRow() >= 0) {
             fAbreCadastro((int) jTableUsuarioTipo.getValueAt(jTableUsuarioTipo.getSelectedRow(), 0));
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Selecione um registro para edição!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        pesquisar();
+    }//GEN-LAST:event_txtBuscaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;

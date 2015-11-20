@@ -7,6 +7,10 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.controller.VacinaController;
 import com.minhafazenda.model.Vacina;
+import java.awt.Color;
+import static java.awt.Color.red;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -81,12 +85,13 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        txtIndicacoes = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtModoUso = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtDiasValidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtIndicacoes = new javax.swing.JTextArea();
 
         jMenu1.setText("jMenu1");
 
@@ -148,12 +153,6 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
                 .addContainerGap(179, Short.MAX_VALUE))
         );
 
-        txtIndicacoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIndicacoesActionPerformed(evt);
-            }
-        });
-
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Modo de Uso:");
 
@@ -173,30 +172,29 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
 
         jLabel4.setText("Dias de Validade:");
 
+        txtIndicacoes.setColumns(20);
+        txtIndicacoes.setRows(5);
+        jScrollPane1.setViewportView(txtIndicacoes);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtModoUso, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
-                            .addComponent(txtDescricao)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIndicacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDiasValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDiasValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1)
+                        .addComponent(txtModoUso, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                        .addComponent(txtDescricao)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -205,23 +203,23 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtModoUso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtModoUso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtIndicacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtDiasValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDiasValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -239,30 +237,38 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
         objVacina.setDescricao(txtDescricao.getText());
         objVacina.setModoUso(txtModoUso.getText());
         objVacina.setIndicacoes(txtIndicacoes.getText());
-        objVacina.setDiasValidade(Integer.parseInt(txtDiasValidade.getText()));
-        //Verifica se deve adicionar ou atualizar um registro
-        if (this.edicao) {
-            //Chama o méotod INSERT do conttroler
-            if (objController.update(objVacina)) {
-                //Limpa os campos
-                txtDiasValidade.setText("");
-                txtModoUso.setText("");
-                txtIndicacoes.setText("");
-                txtDescricao.setText("");
-                //Fecha o formulário
-                this.setVisible(false);
+
+        try {
+            int aux = Integer.parseInt(txtDiasValidade.getText());
+            objVacina.setDiasValidade(aux);
+            //Verifica se deve adicionar ou atualizar um registro
+            if (this.edicao) {
+                //Chama o méotod INSERT do conttroler
+                if (objController.update(objVacina)) {
+                    //Limpa os campos
+                    txtDiasValidade.setText("");
+                    txtModoUso.setText("");
+                    txtIndicacoes.setText("");
+                    txtDescricao.setText("");
+                    //Fecha o formulário
+                    this.setVisible(false);
+                }
+            } else {
+                //Chama o méotod INSERT do conttroler
+                if (objController.insert(objVacina)) {
+                    //Limpa os campos
+                    txtDiasValidade.setText("");
+                    txtModoUso.setText("");
+                    txtIndicacoes.setText("");
+                    txtDescricao.setText("");
+                    //Fecha o formulário
+                    this.setVisible(false);
+                }
             }
-        } else {
-            //Chama o méotod INSERT do conttroler
-            if (objController.insert(objVacina)) {
-                //Limpa os campos
-                txtDiasValidade.setText("");
-                txtModoUso.setText("");
-                txtIndicacoes.setText("");
-                txtDescricao.setText("");
-                //Fecha o formulário
-                this.setVisible(false);
-            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Valor informado para campo 'Dias de Validade' inválido!", "Atenção", JOptionPane.WARNING_MESSAGE);
+
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -278,14 +284,10 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
         txtDiasValidade.setText("");
         txtModoUso.setText("");
         txtIndicacoes.setText("");
-        
+
         //Fecha o formulário
         this.setVisible(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void txtIndicacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIndicacoesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIndicacoesActionPerformed
 
     private void txtModoUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModoUsoActionPerformed
         // TODO add your handling code here:
@@ -308,9 +310,10 @@ public class FrmVacinaCadastro extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtDiasValidade;
-    private javax.swing.JTextField txtIndicacoes;
+    private javax.swing.JTextArea txtIndicacoes;
     private javax.swing.JTextField txtModoUso;
     // End of variables declaration//GEN-END:variables
 }

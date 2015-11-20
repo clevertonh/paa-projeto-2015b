@@ -111,6 +111,9 @@ public class FrmVacinaListagem extends javax.swing.JInternalFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBuscaKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscaKeyReleased(evt);
+            }
         });
 
         btnNovo.setText("Novo");
@@ -262,6 +265,10 @@ public class FrmVacinaListagem extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void txtBuscaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyReleased
+        pesquisar();
+    }//GEN-LAST:event_txtBuscaKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
