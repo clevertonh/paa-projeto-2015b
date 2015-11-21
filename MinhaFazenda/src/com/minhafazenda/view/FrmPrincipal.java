@@ -30,6 +30,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private FrmUsuarioListagem frmUsuario;
     private FrmUsuarioTipoListagem frmUsuarioTipo;
     private FrmVacinaListagem frmVacina;
+    private FrmGrauSangueListagem frmGrauSangue;
 
     private final Thread objThread;
     private Socket clientSocket;
@@ -127,6 +128,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnARaca = new javax.swing.JButton();
         btnATipoUsuario = new javax.swing.JButton();
         btnAVacina = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         menuCadastroCategoria = new javax.swing.JMenuItem();
@@ -134,6 +136,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastroUsuario = new javax.swing.JMenuItem();
         menuCadastroUsuarioTipo = new javax.swing.JMenuItem();
         menuCadastroCategoria1 = new javax.swing.JMenuItem();
+        menuCadastroGrauSangue = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -196,6 +199,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Grau de Sangue");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -203,6 +213,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAVacina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnATipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnARaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -229,7 +240,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnATipoUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAVacina)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -246,7 +259,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -306,6 +319,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(menuCadastroCategoria1);
+
+        menuCadastroGrauSangue.setText("Grau de Sangue");
+        menuCadastroGrauSangue.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                menuCadastroGrauSangueFocusLost(evt);
+            }
+        });
+        menuCadastroGrauSangue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroGrauSangueActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuCadastroGrauSangue);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -545,6 +571,46 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAVacinaActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (frmGrauSangue == null) {
+            //Cria o form
+            frmGrauSangue = new FrmGrauSangueListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmGrauSangue);
+            //diz que a janela interna é maximizável
+            frmGrauSangue.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmGrauSangue.isVisible()) {
+            //Mostra o formulário
+            frmGrauSangue.setVisible(true);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void menuCadastroGrauSangueFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_menuCadastroGrauSangueFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroGrauSangueFocusLost
+
+    private void menuCadastroGrauSangueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroGrauSangueActionPerformed
+       if (frmGrauSangue == null) {
+            //Cria o form
+            frmGrauSangue = new FrmGrauSangueListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmGrauSangue);
+            //diz que a janela interna é maximizável
+            frmGrauSangue.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmGrauSangue.isVisible()) {
+            //Mostra o formulário
+            frmGrauSangue.setVisible(true);
+        }
+
+    }//GEN-LAST:event_menuCadastroGrauSangueActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -587,6 +653,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnATipoUsuario;
     private javax.swing.JButton btnAUsuario;
     private javax.swing.JButton btnAVacina;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JMenu jMenu1;
@@ -601,6 +668,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JMenuItem menuCadastroCategoria;
     private javax.swing.JMenuItem menuCadastroCategoria1;
+    private javax.swing.JMenuItem menuCadastroGrauSangue;
     private javax.swing.JMenuItem menuCadastroRaca;
     private javax.swing.JMenuItem menuCadastroUsuario;
     private javax.swing.JMenuItem menuCadastroUsuarioTipo;
