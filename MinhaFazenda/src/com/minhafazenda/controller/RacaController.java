@@ -18,7 +18,6 @@ import javax.swing.table.AbstractTableModel;
 public final class RacaController extends AbstractTableModel {
 
     //Cria o objeto do Model
-
     private final RacaModel objModel;
     //Table model
     private ArrayList<Raca> lstRaca = null;
@@ -99,7 +98,7 @@ public final class RacaController extends AbstractTableModel {
         return this.lstRaca;
     }
 
-      public Raca findById(int id){
+    public Raca findById(int id){
         return objModel.findById(id);
     }
     
@@ -140,4 +139,5 @@ public final class RacaController extends AbstractTableModel {
 
         return value;
     }
+
 }

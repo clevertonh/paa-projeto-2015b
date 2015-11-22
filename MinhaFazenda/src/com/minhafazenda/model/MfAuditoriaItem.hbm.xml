@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2015 11:05:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.minhafazenda.model.MfAuditoriaItem" table="mf_auditoria_item" catalog="fazenda" optimistic-lock="version">
+        <id name="idAuditoriaItem" type="java.lang.Long">
+            <column name="id_auditoria_item" />
+            <generator class="identity" />
+        </id>
+        <property name="idAuditoria" type="long">
+            <column name="id_auditoria" not-null="true" />
+        </property>
+        <property name="campo" type="string">
+            <column name="campo" not-null="true" />
+        </property>
+        <property name="valorAntigo" type="string">
+            <column name="valor_antigo" />
+        </property>
+        <property name="valorNovo" type="string">
+            <column name="valor_novo" />
+        </property>
+    </class>
+</hibernate-mapping>

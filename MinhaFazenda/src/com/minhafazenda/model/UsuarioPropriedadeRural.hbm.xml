@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2015 11:05:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.minhafazenda.model.UsuarioPropriedadeRural" table="usuario_propriedade_rural" catalog="fazenda" optimistic-lock="version">
+        <composite-id name="id" class="com.minhafazenda.model.UsuarioPropriedadeRuralId">
+            <key-property name="idUsuario" type="int">
+                <column name="id_usuario" />
+            </key-property>
+            <key-property name="idPropriedadeRural" type="int">
+                <column name="id_propriedade_rural" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="propriedadeRural" class="com.minhafazenda.model.PropriedadeRural" update="false" insert="false" fetch="select">
+            <column name="id_propriedade_rural" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.minhafazenda.model.Usuario" update="false" insert="false" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
+        <property name="idUsuarioAlterou" type="java.lang.Integer">
+            <column name="id_usuario_alterou" />
+        </property>
+    </class>
+</hibernate-mapping>

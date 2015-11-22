@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/08/2015 19:49:14 by Hibernate Tools 4.3.1 -->
+<!-- Generated 22/11/2015 11:05:40 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.minhafazenda.model.PropriedadeRural" table="propriedade_rural" catalog="fazenda" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -23,13 +23,14 @@
         <property name="cep" type="string">
             <column name="cep" length="9" />
         </property>
-        <set name="usuarios" table="usuario_propriedade_rural" inverse="false" lazy="true" fetch="select">
+        <property name="idUsuarioAlterou" type="int">
+            <column name="id_usuario_alterou" not-null="true" />
+        </property>
+        <set name="usuarioPropriedadeRurals" table="usuario_propriedade_rural" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_propriedade_rural" not-null="true" />
             </key>
-            <many-to-many entity-name="com.minhafazenda.model.Usuario">
-                <column name="id_usuario" not-null="true" />
-            </many-to-many>
+            <one-to-many class="com.minhafazenda.model.UsuarioPropriedadeRural" />
         </set>
         <set name="animals" table="animal" inverse="true" lazy="true" fetch="select">
             <key>

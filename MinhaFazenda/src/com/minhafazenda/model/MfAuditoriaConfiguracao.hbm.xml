@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2015 11:05:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.minhafazenda.model.MfAuditoriaConfiguracao" table="mf_auditoria_configuracao" catalog="fazenda" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="tabela" type="string">
+            <column name="tabela" />
+        </property>
+        <property name="triggerDelete" type="string">
+            <column name="trigger_delete" />
+        </property>
+        <property name="triggerInsert" type="string">
+            <column name="trigger_insert" />
+        </property>
+        <property name="triggerUpdate" type="string">
+            <column name="trigger_update" />
+        </property>
+        <property name="viewAuditoria" type="string">
+            <column name="view_auditoria" />
+        </property>
+        <property name="viewAuditoriaItem" type="string">
+            <column name="view_auditoria_item" />
+        </property>
+    </class>
+</hibernate-mapping>

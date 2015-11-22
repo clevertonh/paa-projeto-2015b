@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/11/2015 11:05:40 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.minhafazenda.model.MfAuditoria" table="mf_auditoria" catalog="fazenda" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="usuario" type="string">
+            <column name="usuario" />
+        </property>
+        <property name="tabela" type="string">
+            <column name="tabela" />
+        </property>
+        <property name="chavePrimaria1" type="string">
+            <column name="chave_primaria_1" />
+        </property>
+        <property name="chavePrimaria2" type="string">
+            <column name="chave_primaria_2" />
+        </property>
+        <property name="acao" type="string">
+            <column name="acao" length="6">
+                <comment>Values: insert|update|delete</comment>
+            </column>
+        </property>
+        <property name="dataHora" type="timestamp">
+            <column name="data_hora" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

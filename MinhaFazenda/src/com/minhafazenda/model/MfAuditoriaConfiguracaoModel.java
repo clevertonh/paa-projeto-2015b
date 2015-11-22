@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.minhafazenda.model;
 
 import com.minhafazenda.util.MinhaFazendaHibernateUtil;
@@ -12,17 +17,17 @@ import org.hibernate.Transaction;
  *
  * @author cleverton
  */
-public class AnimalModel {
+public class MfAuditoriaConfiguracaoModel {
 
     private final SessionFactory objSessionFactory;
     
     String msg = "";
     
-    public AnimalModel(){    
+    public MfAuditoriaConfiguracaoModel(){    
         this.objSessionFactory = MinhaFazendaHibernateUtil.getSessionFactory(); 
     }
     
-    public String insert(Animal obj) {
+    public String insert(MfAuditoriaConfiguracao obj) {
         Session objSession = this.objSessionFactory.openSession();    
         Transaction objTransaction = objSession.beginTransaction();
         
@@ -38,7 +43,7 @@ public class AnimalModel {
         return this.msg;
     }
     
-    public String update(Animal obj) {
+    public String update(MfAuditoriaConfiguracao obj) {
         Session objSession = this.objSessionFactory.openSession();    
         Transaction objTransaction = objSession.beginTransaction();
         
@@ -54,12 +59,12 @@ public class AnimalModel {
         return msg;
     }
     
-    public String delete(Animal obj) {        
+    public String delete(MfAuditoriaConfiguracao obj) {        
         Session objSession = this.objSessionFactory.openSession();    
         Transaction objTransaction = objSession.beginTransaction();
         
         try {    
-            Query query = objSession.createQuery("delete animal where id = :id");
+            Query query = objSession.createQuery("delete MfAuditoriaConfiguracao where id = :id");
             query.setParameter("id", obj.getId());
             query.executeUpdate();
             objTransaction.commit();
@@ -70,47 +75,47 @@ public class AnimalModel {
         
         objSession.close();
         return msg;
-    }
-
-    public ArrayList<Animal> findByAll() {  
-        ArrayList<Animal> lst = null;  
+    }    
+    
+    public ArrayList<MfAuditoriaConfiguracao> findByAll() {  
+        ArrayList<MfAuditoriaConfiguracao> lst = null;  
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            Query objQuery = objSession.createQuery("from Animal");
-            lst = (ArrayList<Animal>)objQuery.list();  
+            Query objQuery = objSession.createQuery("from MfAuditoriaConfiguracao");
+            lst = (ArrayList<MfAuditoriaConfiguracao>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  
         }  
         
         objSession.close();
         return lst;  
-    }
+    }    
     
-    public Animal findById(int id) {  
-        Animal obj = null;  
+    public MfAuditoriaConfiguracao findById(int id) {  
+        MfAuditoriaConfiguracao obj = null;  
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            obj = (Animal)objSession.load(Animal.class, id);
+            obj = (MfAuditoriaConfiguracao)objSession.load(MfAuditoriaConfiguracao.class, id);
         } catch (ObjectNotFoundException e) {  
             return null;  
         }  
         return obj;
-    }    
+    }        
     
-    public ArrayList<Animal> findByDescricao(String descricao) {  
-        ArrayList<Animal> lst = null;  
+    public ArrayList<MfAuditoriaConfiguracao> findByDescricao(String descricao) {  
+        ArrayList<MfAuditoriaConfiguracao> lst = null;  
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            Query objQuery = objSession.createQuery("from Animal where descricao like '%" + descricao + "%'");
-            lst = (ArrayList<Animal>)objQuery.list();  
+            Query objQuery = objSession.createQuery("from MfAuditoriaConfiguracao where tabela like '%" + descricao + "%'");
+            lst = (ArrayList<MfAuditoriaConfiguracao>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  
         }  
         
         objSession.close();
         return lst;  
-    }
+    }    
 }

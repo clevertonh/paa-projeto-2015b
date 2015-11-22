@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/08/2015 19:49:14 by Hibernate Tools 4.3.1 -->
+<!-- Generated 22/11/2015 11:05:40 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.minhafazenda.model.GrauSangue" table="grau_sangue" catalog="fazenda" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -10,6 +10,9 @@
         </id>
         <property name="descricao" type="string">
             <column name="descricao" length="50" not-null="true" />
+        </property>
+        <property name="idUsuarioAlterou" type="java.lang.Integer">
+            <column name="id_usuario_alterou" />
         </property>
         <set name="animals" table="animal" inverse="true" lazy="true" fetch="select">
             <key>
