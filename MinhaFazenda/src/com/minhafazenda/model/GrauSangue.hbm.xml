@@ -6,7 +6,7 @@
     <class name="com.minhafazenda.model.GrauSangue" table="grau_sangue" catalog="fazenda" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
         <property name="descricao" type="string">
             <column name="descricao" length="50" not-null="true" />

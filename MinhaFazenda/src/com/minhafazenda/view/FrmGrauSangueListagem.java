@@ -5,7 +5,7 @@
  */
 package com.minhafazenda.view;
 
-import com.minhafazenda.controller.UsuarioTipoController;
+import com.minhafazenda.controller.GrauSangueController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -15,35 +15,35 @@ import javax.swing.table.TableColumnModel;
  *
  * @author cleverton
  */
-public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
+public class FrmGrauSangueListagem extends javax.swing.JInternalFrame {
 
-    private FrmUsuarioTipoCadastro frm;
-    private final UsuarioTipoController objController;
+    private FrmGrauSangueCadastro frm;
+    private final GrauSangueController objController;
 
     /**
      * Creates new form FrmCategoriaListagem
      */
-    public FrmUsuarioTipoListagem() {
+    public FrmGrauSangueListagem() {
         //
         initComponents();
         //Define o título para a janela
-        this.setTitle("SGF - Tipo de Usuário");
+        this.setTitle("SGF - Relação de G.S.");
         //Inicia o objeto de controller
-        objController = new UsuarioTipoController();
-        //Carrega a lista no controller
+        objController = new GrauSangueController();
+        //Carrega a lista de categorias no controller
         objController.findByAll();
         //Seta o controller no JTABLE
-        jTableUsuarioTipo.setModel(objController);
+        jTableGrauSangue.setModel(objController);
         //
-        jTableUsuarioTipo.setFillsViewportHeight(true);
+        jTableGrauSangue.setFillsViewportHeight(true);
 
         //LIbera a seleção das linhas da jTAble
-        jTableUsuarioTipo.setRowSelectionAllowed(true);
+        jTableGrauSangue.setRowSelectionAllowed(true);
         //Aceita somente uma linha selecionada por vez
-        jTableUsuarioTipo.setSelectionModel(new ForcedListSelectionModel());
+        jTableGrauSangue.setSelectionModel(new ForcedListSelectionModel());
 
         //Configuração da Jtable
-        TableColumnModel objColumn = jTableUsuarioTipo.getColumnModel();
+        TableColumnModel objColumn = jTableGrauSangue.getColumnModel();
         objColumn.getColumn(0).setMaxWidth(100);
     }
 
@@ -51,12 +51,12 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
         //Efetua a busca pela descricão no conttroler
         objController.findByDescricao(txtBusca.getText());
         //
-        jTableUsuarioTipo.setFillsViewportHeight(true);
+        jTableGrauSangue.setFillsViewportHeight(true);
     }
 
     public void fAbreCadastro(int id) {
         if (frm == null) {
-            frm = new FrmUsuarioTipoCadastro();
+            frm = new FrmGrauSangueCadastro();
             frm.setModal(true);
         }
 
@@ -88,7 +88,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
         txtBusca = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableUsuarioTipo = new javax.swing.JTable();
+        jTableGrauSangue = new javax.swing.JTable();
         btnFechar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
 
@@ -124,7 +124,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
             }
         });
 
-        jTableUsuarioTipo.setModel(new javax.swing.table.DefaultTableModel(
+        jTableGrauSangue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -135,14 +135,14 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableUsuarioTipo.setToolTipText("");
-        jTableUsuarioTipo.setRowSelectionAllowed(false);
-        jTableUsuarioTipo.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableGrauSangue.setToolTipText("");
+        jTableGrauSangue.setRowSelectionAllowed(false);
+        jTableGrauSangue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableUsuarioTipoMouseClicked(evt);
+                jTableGrauSangueMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTableUsuarioTipo);
+        jScrollPane2.setViewportView(jTableGrauSangue);
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +214,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         if (frm == null) {
-            frm = new FrmUsuarioTipoCadastro();
+            frm = new FrmGrauSangueCadastro();
             frm.setModal(true);
         }
 
@@ -245,16 +245,16 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtBuscaKeyPressed
 
-    private void jTableUsuarioTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioTipoMouseClicked
+    private void jTableGrauSangueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGrauSangueMouseClicked
 
         if (evt.getClickCount() == 2) {
-            fAbreCadastro((int) jTableUsuarioTipo.getValueAt(jTableUsuarioTipo.getSelectedRow(), 0));
+            fAbreCadastro((int) jTableGrauSangue.getValueAt(jTableGrauSangue.getSelectedRow(), 0));
         }
-    }//GEN-LAST:event_jTableUsuarioTipoMouseClicked
+    }//GEN-LAST:event_jTableGrauSangueMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        if (jTableUsuarioTipo.getSelectedRow() >= 0) {
-            fAbreCadastro((int) jTableUsuarioTipo.getValueAt(jTableUsuarioTipo.getSelectedRow(), 0));
+        if (jTableGrauSangue.getSelectedRow() >= 0) {
+            fAbreCadastro((int) jTableGrauSangue.getValueAt(jTableGrauSangue.getSelectedRow(), 0));
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um registro para edição!", "Atenção", JOptionPane.WARNING_MESSAGE);
         }
@@ -271,7 +271,7 @@ public class FrmUsuarioTipoListagem extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableUsuarioTipo;
+    private javax.swing.JTable jTableGrauSangue;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }
