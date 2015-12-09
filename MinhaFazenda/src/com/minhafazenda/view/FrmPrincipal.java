@@ -31,6 +31,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private FrmUsuarioTipoListagem frmUsuarioTipo;
     private FrmVacinaListagem frmVacina;
     private FrmGrauSangueListagem frmGrauSangue;
+    
+    private FrmAuditoriaListagem frmAuditoria;
 
     private final Thread objThread;
     private Socket clientSocket;
@@ -138,7 +140,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastroCategoria1 = new javax.swing.JMenuItem();
         menuCadastroGrauSangue = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuAuditoria = new javax.swing.JMenuItem();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -337,13 +339,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Diversos");
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuAuditoria.setText("Auditoria");
+        menuAuditoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuAuditoriaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(menuAuditoria);
 
         jMenuBar1.add(jMenu1);
 
@@ -490,12 +492,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuCadastroUsuarioActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-//        teste janelaTU = new teste();
-//        janelaTU.setVisible(true);
-//        this.dispose();
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void menuAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAuditoriaActionPerformed
+        if(frmAuditoria == null){
+            frmAuditoria = new FrmAuditoriaListagem();
+            this.jDesktopPane1.add(frmAuditoria);
+            frmAuditoria.setMaximizable(true);
+        }
+        
+        if(!frmAuditoria.isVisible()){
+            frmAuditoria.setVisible(true);
+        }
+    }//GEN-LAST:event_menuAuditoriaActionPerformed
 
     private void menuCadastroUsuarioTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroUsuarioTipoActionPerformed
         if (frmUsuarioTipo == null) {
@@ -662,10 +669,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JMenuItem menuAuditoria;
     private javax.swing.JMenuItem menuCadastroCategoria;
     private javax.swing.JMenuItem menuCadastroCategoria1;
     private javax.swing.JMenuItem menuCadastroGrauSangue;

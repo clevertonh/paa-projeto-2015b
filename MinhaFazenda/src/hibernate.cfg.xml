@@ -7,14 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fazenda?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">teste123</property>
-    <property name="hibernate.connection.password">admin</property>
-    <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
-    <!--         Permite operacoes ddls pelo jpa 
-        <property name="hibernate.hbm2ddl.auto" value="update" />
- 
-         configuracao do Envers 
-        <property name="post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener, org.hibernate.envers.event.EnversListener" />
-        <property name="post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener, org.hibernate.envers.event.EnversListener" />-->
+    <property name="hibernate.connection.database">fazenda</property>
     <mapping resource="com/minhafazenda/model/Usuario.hbm.xml"/>
     <mapping resource="com/minhafazenda/model/Estado.hbm.xml"/>
     <mapping resource="com/minhafazenda/model/GrauSangue.hbm.xml"/>

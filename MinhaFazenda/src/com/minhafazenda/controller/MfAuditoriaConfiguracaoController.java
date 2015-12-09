@@ -7,7 +7,13 @@ package com.minhafazenda.controller;
 
 import com.minhafazenda.model.MfAuditoriaConfiguracao;
 import com.minhafazenda.model.MfAuditoriaConfiguracaoModel;
+import com.minhafazenda.model.MfAuditoriaView;
+import com.minhafazenda.util.ComboBoxItemString;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -24,6 +30,7 @@ public class MfAuditoriaConfiguracaoController extends AbstractTableModel {
 
     public MfAuditoriaConfiguracaoController() {
         this.objModel = new MfAuditoriaConfiguracaoModel();
+        setColunas(new String[]{"id", "tabela", "trigger_delete", "trigger_insert","trigger_update", "view_auditoria", "view_auditoria_item"});
     }    
     
     public String getColumnName(int columnIndex) {
@@ -81,6 +88,38 @@ public class MfAuditoriaConfiguracaoController extends AbstractTableModel {
         this.lst = objModel.findByDescricao(descricao);
         return this.lst;
     }    
+    
+    public ArrayList<String> findByAllTabela(){
+        return objModel.findByAllTabela();
+    }
+    
+    public void criaProcedureViewAuditoria(String nomeTabela){
+        objModel.criaProcedureViewAuditoria(nomeTabela);
+    }
+    
+    public List<MfAuditoriaView> findAUditoria(String nomeTabela){
+        return objModel.findAUditoria(nomeTabela);
+    }
+    
+    public static ComboBoxModel carregaComboTabela(){  
+        ArrayList<String> lst = null;
+        String obj = new String();
+        ComboBoxModel bRetorno;  
+        Vector v = new Vector();          
+        
+        lst = new MfAuditoriaConfiguracaoController().findByAllTabela();
+        
+        v.add(null);  
+        
+        for (Object item : lst) {  
+            obj = (String)item;  
+            v.add(new ComboBoxItemString(obj,obj));  
+        }  
+        
+        bRetorno = new DefaultComboBoxModel(v);  
+  
+        return bRetorno;  
+    }     
 
     //Métodos implementados pela classe AbstractTableModel
     @Override

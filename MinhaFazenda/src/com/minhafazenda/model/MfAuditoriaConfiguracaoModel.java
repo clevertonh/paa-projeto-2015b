@@ -6,12 +6,27 @@
 package com.minhafazenda.model;
 
 import com.minhafazenda.util.MinhaFazendaHibernateUtil;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.jdbc.Work;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.DateType;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.StringType;
 
 /**
  *
@@ -106,10 +121,16 @@ public class MfAuditoriaConfiguracaoModel {
     
     public ArrayList<MfAuditoriaConfiguracao> findByDescricao(String descricao) {  
         ArrayList<MfAuditoriaConfiguracao> lst = null;  
-        Session objSession = this.objSessionFactory.openSession();    
+        Session objSession = this.objSessionFactory.openSession(); 
 
         try {  
-            Query objQuery = objSession.createQuery("from MfAuditoriaConfiguracao where tabela like '%" + descricao + "%'");
+            Query objQuery = objSession.createQuery("from MfAuditoriaConfiguracao where tabela like '%" + descricao + "%' OR "
+                    + " trigger_delete like '%" + descricao + "%' OR "
+                    + " trigger_insert like '%" + descricao + "%' OR "
+                    + " trigger_update like '%" + descricao + "%' OR "
+                    + " view_auditoria like '%" + descricao + "%' OR "
+                    + " view_auditoria_item like '%" + descricao + "%'");
+       
             lst = (ArrayList<MfAuditoriaConfiguracao>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  
@@ -117,5 +138,93 @@ public class MfAuditoriaConfiguracaoModel {
         
         objSession.close();
         return lst;  
+    }
+    
+    public ArrayList<String> findByAllTabela(){
+        ArrayList<String> lst = null;
+    
+        Session objSession = this.objSessionFactory.openSession();
+        
+        Query query = objSession.createSQLQuery("   SELECT \n" +
+                                                "	TABLE_NAME\n" +
+                                                "   FROM \n" +
+                                                "	information_schema.tables\n" +
+                                                "   WHERE \n" +
+                                                "	TABLE_SCHEMA = 'fazenda'\n" +
+                                                "	AND TABLE_TYPE = 'BASE TABLE' \n" +
+                                                "	AND TABLE_NAME NOT IN (SELECT tabela FROM fazenda.mf_auditoria_configuracao) \n" +
+                                                "   ORDER BY \n" +
+                                                "	TABLE_NAME");
+        lst = (ArrayList<String>)query.list();
+        
+        return lst;
+    }
+    
+   
+    //http://www.mkyong.com/hibernate/how-to-call-store-procedure-in-hibernate/
+    public void criaProcedureViewAuditoria(String nomeTabela){
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        
+        String DBURL = configuration.getProperty("hibernate.connection.url");
+        String DBDRIVER = configuration.getProperty("hibernate.connection.driver_class");
+        String usuario = configuration.getProperty("hibernate.connection.username");
+        String senha = configuration.getProperty("hibernate.connection.password");
+        String database = configuration.getProperty("hibernate.connection.database");
+        
+        DBURL += "&user=" + usuario + "&password=" + senha;
+        Statement stmt = null;
+        
+        try {
+            try {
+                Class.forName(DBDRIVER).newInstance();
+                
+                Connection connection = DriverManager.getConnection(DBURL);
+                stmt = connection.createStatement();    
+            } catch (InstantiationException | IllegalAccessException | SQLException ex) {
+                Logger.getLogger(MfAuditoriaConfiguracaoModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MfAuditoriaConfiguracaoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Session objSession = this.objSessionFactory.openSession();
+        
+        Query query = objSession.createSQLQuery("CALL mf_auditoria_gerar_script(:nome_banco, :nome_tabela, @errors)")
+                                .setParameter("nome_banco",database)
+                                .setParameter("nome_tabela",nomeTabela);
+
+        for (Object obj : query.list()) {
+            try {
+                stmt.execute(obj.toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(MfAuditoriaConfiguracaoModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }  
+        
+    }
+    
+    public List<MfAuditoriaView> findAUditoria(String nomeTabela) {
+        Session objSession = this.objSessionFactory.openSession();
+        Query query = objSession.createSQLQuery("SELECT id, usuario, chave_primaria_1, chave_primaria_2, acao, data_hora  FROM " + nomeTabela + "_AUDITORIA_VIEW")
+                .addScalar("id", new IntegerType())
+                .addScalar("usuario", new StringType())
+                .addScalar("chave_primaria_1", new StringType())
+                .addScalar("chave_primaria_2", new StringType())
+                .addScalar("acao", new StringType())
+                .addScalar("data_hora", new DateType())
+                .setResultTransformer(Transformers.aliasToBean(MfAuditoriaView.class));
+
+//        List<MfAuditoriaView> list = query.list();
+//        for (MfAuditoriaView list_ : list) {
+//            System.out.print(list_.getAcao());
+//            System.out.print(list_.getChave_primaria_1());
+//            System.out.println(list_.getId());
+//            
+//        }
+        
+        return query.list();
     }    
+    
+    
 }

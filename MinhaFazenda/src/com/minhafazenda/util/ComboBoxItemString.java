@@ -9,17 +9,17 @@ package com.minhafazenda.util;
  *
  * @author cleverton
  */
-public class ComboBoxItem {
-    private final int id;
+public class ComboBoxItemString {
+    private final String id;
     private final String descricao;
 
-    public ComboBoxItem(int id, String description)
+    public ComboBoxItemString(String id, String description)
     {
         this.id = id;
         this.descricao = description;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }

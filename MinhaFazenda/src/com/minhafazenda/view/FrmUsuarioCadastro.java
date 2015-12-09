@@ -10,10 +10,7 @@ import com.minhafazenda.controller.UsuarioTipoController;
 import com.minhafazenda.model.Usuario;
 import com.minhafazenda.model.UsuarioTipo;
 import com.minhafazenda.util.ComboBoxItem;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -59,7 +56,6 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         //Carrega senha
         txtSenha.setText(this.objUsuario.getSenha());
         //Carrega na tela o tipo de usário
-        //txtCodTipoUsuario.setText(this.objUsuario.getUsuarioTipo().toString());
         jComboBoxTipoUsuario.getEditor().setItem(this.objUsuario.getUsuarioTipo().toString());
         //Adiciona o status de edição
         this.edicao = true;

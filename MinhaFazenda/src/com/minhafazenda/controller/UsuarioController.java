@@ -205,10 +205,8 @@ public final class UsuarioController extends AbstractTableModel {
         v.add(null);  
         
         for (Object item : lstUsuarioTipo) {  
-            //Lê cada item retornado pelo SELECT e adiciona o Nome do estado ao vector  
             obj = (UsuarioTipo)item;  
             v.add(new ComboBoxItem(obj.getId(),obj.getDescricao()));  
-            //v.add(item);
         }  
         
         bRetorno = new DefaultComboBoxModel(v);  
