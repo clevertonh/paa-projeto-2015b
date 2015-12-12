@@ -59,7 +59,7 @@ public class GrauSangueModel {
         Transaction objTransaction = objSession.beginTransaction();
         
         try {    
-            Query query = objSession.createQuery("delete grau_sangue where id = :id");
+            Query query = objSession.createQuery("delete GrauSangue where id = :id");
             query.setParameter("id", obj.getId());
             query.executeUpdate();
             objTransaction.commit();

@@ -35,6 +35,7 @@ public final class RacaController extends AbstractTableModel {
 
     }
 
+
     public String getColumnName(int columnIndex) {
         return column[columnIndex];
     }

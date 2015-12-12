@@ -7,10 +7,7 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.controller.VacinaController;
 import com.minhafazenda.model.Vacina;
-import java.awt.Color;
-import static java.awt.Color.red;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
 
 /**
  *

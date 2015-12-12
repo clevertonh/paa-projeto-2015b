@@ -1,2 +1,4 @@
-Nov 16, 2015 9:54:12 PM com.minhafazenda.util.MasterLog addInfo
-INFORMAÇÕES: [com.minhafazenda.controller.UsuarioController] Usuário 'a2' ATUALIZADO com sucesso
+nov 23, 2015 7:34:34 PM com.minhafazenda.util.MasterLog addInfo
+INFORMAÇÕES: [com.minhafazenda.controller.UsuarioController] Usuário 'asdsa d adsad asd a' ATUALIZADO com sucesso
+nov 23, 2015 7:34:38 PM com.minhafazenda.util.MasterLog addSevere
+GRAVE: [com.minhafazenda.controller.UsuarioController] Usuário EXCLUIDO com sucesso 
