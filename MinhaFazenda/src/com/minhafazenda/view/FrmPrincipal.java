@@ -34,7 +34,8 @@ public class FrmPrincipal extends javax.swing.JFrame
     private FrmGrauSangueListagem frmGrauSangue;
     private FrmAnimalListagem frmAnimal;
     private IfrAnimal ifrmAnimal;
-
+    private FrmPropriedadeRuralListagem frmPropriedadeRural;
+    
     private final Thread objThread;
     private Socket clientSocket;
 
@@ -151,6 +152,7 @@ public class FrmPrincipal extends javax.swing.JFrame
         btnAGrauSangue = new javax.swing.JButton();
         btnAAnimal = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnAPropriedadeRural = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         menuCadastroCategoria = new javax.swing.JMenuItem();
@@ -262,6 +264,15 @@ public class FrmPrincipal extends javax.swing.JFrame
             }
         });
 
+        btnAPropriedadeRural.setText("Propriedade Rural");
+        btnAPropriedadeRural.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAPropriedadeRuralActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -269,6 +280,7 @@ public class FrmPrincipal extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAPropriedadeRural, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAGrauSangue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -302,8 +314,11 @@ public class FrmPrincipal extends javax.swing.JFrame
                 .addComponent(btnAGrauSangue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAAnimal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAPropriedadeRural)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -320,7 +335,7 @@ public class FrmPrincipal extends javax.swing.JFrame
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -839,6 +854,26 @@ public class FrmPrincipal extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnAPropriedadeRuralActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAPropriedadeRuralActionPerformed
+    {//GEN-HEADEREND:event_btnAPropriedadeRuralActionPerformed
+       if (frmPropriedadeRural == null)
+        {
+            //Cria o form
+            frmPropriedadeRural = new FrmPropriedadeRuralListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmPropriedadeRural);
+            //diz que a janela interna é maximizável
+            frmPropriedadeRural.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmPropriedadeRural.isVisible())
+        {
+            //Mostra o formulário
+            frmPropriedadeRural.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAPropriedadeRuralActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -879,6 +914,7 @@ public class FrmPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnAAnimal;
     private javax.swing.JButton btnACategoria;
     private javax.swing.JButton btnAGrauSangue;
+    private javax.swing.JButton btnAPropriedadeRural;
     private javax.swing.JButton btnARaca;
     private javax.swing.JButton btnATipoUsuario;
     private javax.swing.JButton btnAUsuario;
