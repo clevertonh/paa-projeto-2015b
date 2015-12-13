@@ -24,7 +24,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author Rodrigo de Oliveira
  */
-public class FrmPrincipal extends javax.swing.JFrame {
+public class FrmPrincipal extends javax.swing.JFrame
+{
 
     private FrmCategoriaListagem frmCategoria;
     private FrmRacaListagem frmRaca;
@@ -32,6 +33,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private FrmUsuarioTipoListagem frmUsuarioTipo;
     private FrmVacinaListagem frmVacina;
     private FrmGrauSangueListagem frmGrauSangue;
+    private FrmAnimalListagem frmAnimal;
+    private IfrAnimal ifrmAnimal;
+    private FrmPropriedadeRuralListagem frmPropriedadeRural;
+    
     
     private FrmAuditoriaListagem frmAuditoria;
 
@@ -47,26 +52,33 @@ public class FrmPrincipal extends javax.swing.JFrame {
      *
      * @param chave
      */
-    public FrmPrincipal(final String chave) {
+    public FrmPrincipal(final String chave)
+    {
         initComponents();
 
         this.chave = chave;
 
         // aplica skin = LookAndFeel a todas as janelas
-        try {
+        try
+        {
 
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             SwingUtilities.updateComponentTreeUI(this);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
+        {
         }
         
         this.setExtendedState(MAXIMIZED_BOTH);
 
-        objThread = new Thread(new Runnable() {
-            public void run() {
-                while (true) {
-                    try {
+        objThread = new Thread(new Runnable()
+        {
+            public void run()
+            {
+                while (true)
+                {
+                    try
+                    {
                         Thread.sleep(1000);
 
                         clientSocket = new Socket("127.0.0.1", 6789);
@@ -83,9 +95,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         //Retorno do servidor
                         objLicenca = (LicencaProtocol) inFromServer.readObject();
 
-                        if (objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_RENOVADA) {
+                        if (objLicenca.getStatus() == LicencaProtocol.StatusType.LICENCA_RENOVADA)
+                        {
                             System.out.println("Licença: Renovada");
-                        } else {
+                        } else
+                        {
                             System.out.println("Licença: NÃO Renovada");
                         }
 
@@ -93,7 +107,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
                         clientSocket.close();
 
-                    } catch (InterruptedException | IOException | ClassNotFoundException ex) {
+                    } catch (InterruptedException | IOException | ClassNotFoundException ex)
+                    {
                         Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -104,7 +119,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         objThread.start();
     }
 
-    public void novaJanela(Component janela) {
+    FrmPrincipal()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void novaJanela(Component janela)
+    {
         jDesktopPane1.add(janela);
 
     }
@@ -116,7 +137,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
@@ -131,7 +153,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnARaca = new javax.swing.JButton();
         btnATipoUsuario = new javax.swing.JButton();
         btnAVacina = new javax.swing.JButton();
+        btnAGrauSangue = new javax.swing.JButton();
+        btnAAnimal = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnAPropriedadeRural = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         menuCadastroCategoria = new javax.swing.JMenuItem();
@@ -140,6 +165,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastroUsuarioTipo = new javax.swing.JMenuItem();
         menuCadastroCategoria1 = new javax.swing.JMenuItem();
         menuCadastroGrauSangue = new javax.swing.JMenuItem();
+        menuCadastroAnimal = new javax.swing.JMenuItem();
+        menuCadastroAnimalTeste = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         menuAuditoria = new javax.swing.JMenuItem();
 
@@ -155,8 +182,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle("SGF - Sistema Gerenciador de Fazendas");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusCycleRoot(false);
-        addWindowStateListener(new java.awt.event.WindowStateListener() {
-            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+        addWindowStateListener(new java.awt.event.WindowStateListener()
+        {
+            public void windowStateChanged(java.awt.event.WindowEvent evt)
+            {
                 formWindowStateChanged(evt);
             }
         });
@@ -166,15 +195,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atalhos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         btnACategoria.setText("Categorias");
-        btnACategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnACategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnACategoriaActionPerformed(evt);
             }
         });
 
         btnAUsuario.setText("Usuários");
-        btnAUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAUsuario.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAUsuarioActionPerformed(evt);
             }
         });
@@ -182,30 +215,65 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextPane1);
 
         btnARaca.setText("Raças");
-        btnARaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnARaca.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnARacaActionPerformed(evt);
             }
         });
 
         btnATipoUsuario.setText("Tipo de Usuário");
-        btnATipoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnATipoUsuario.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnATipoUsuarioActionPerformed(evt);
             }
         });
 
         btnAVacina.setText("Vacina");
-        btnAVacina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAVacina.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAVacinaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Grau de Sangue");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAGrauSangue.setText("Grau de Sangue");
+        btnAGrauSangue.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAGrauSangueActionPerformed(evt);
+            }
+        });
+
+        btnAAnimal.setText("Animal");
+        btnAAnimal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAAnimalActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Animal Teste");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnAPropriedadeRural.setText("Propriedade Rural");
+        btnAPropriedadeRural.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAPropriedadeRuralActionPerformed(evt);
             }
         });
 
@@ -216,7 +284,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAPropriedadeRural, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAAnimal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAGrauSangue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAVacina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnATipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnARaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,8 +315,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAVacina)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAGrauSangue)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAAnimal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAPropriedadeRural)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -253,7 +330,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(511, Short.MAX_VALUE)
+                .addContainerGap(472, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -262,79 +339,133 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuCadastros.setText("Cadastros");
-        jMenuCadastros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuCadastros.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jMenuCadastrosActionPerformed(evt);
             }
         });
 
         menuCadastroCategoria.setText("Categorias");
-        menuCadastroCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        menuCadastroCategoria.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 menuCadastroCategoriaFocusLost(evt);
             }
         });
-        menuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuCadastroCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuCadastroCategoriaActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroCategoria);
 
         menuCadastroRaca.setText("Raças");
-        menuCadastroRaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuCadastroRaca.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuCadastroRacaActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroRaca);
 
         menuCadastroUsuario.setText("Usuários");
-        menuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuCadastroUsuario.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuCadastroUsuarioActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroUsuario);
 
         menuCadastroUsuarioTipo.setText("Tipo de Usuário");
-        menuCadastroUsuarioTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuCadastroUsuarioTipo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuCadastroUsuarioTipoActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroUsuarioTipo);
 
         menuCadastroCategoria1.setText("Vacinas");
-        menuCadastroCategoria1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        menuCadastroCategoria1.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 menuCadastroCategoria1FocusLost(evt);
             }
         });
-        menuCadastroCategoria1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuCadastroCategoria1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuCadastroCategoria1ActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroCategoria1);
 
         menuCadastroGrauSangue.setText("Grau de Sangue");
-        menuCadastroGrauSangue.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+        menuCadastroGrauSangue.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 menuCadastroGrauSangueFocusLost(evt);
             }
         });
-        menuCadastroGrauSangue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuCadastroGrauSangue.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuCadastroGrauSangueActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroGrauSangue);
+
+        menuCadastroAnimal.setText("Animais");
+        menuCadastroAnimal.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                menuCadastroAnimalFocusLost(evt);
+            }
+        });
+        menuCadastroAnimal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                menuCadastroAnimalActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuCadastroAnimal);
+
+        menuCadastroAnimalTeste.setText("AnimaisTeste");
+        menuCadastroAnimalTeste.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                menuCadastroAnimalTesteFocusLost(evt);
+            }
+        });
+        menuCadastroAnimalTeste.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                menuCadastroAnimalTesteActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuCadastroAnimalTeste);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -376,7 +507,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void menuCadastroRacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroRacaActionPerformed
     {//GEN-HEADEREND:event_menuCadastroRacaActionPerformed
-        if (frmRaca == null) {
+        if (frmRaca == null)
+        {
             //Cria o form
             frmRaca = new FrmRacaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -386,7 +518,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmRaca.isVisible()) {
+        if (!frmRaca.isVisible())
+        {
             //Mostra o formulário
             frmRaca.setVisible(true);
         }
@@ -394,7 +527,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void menuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroCategoriaActionPerformed
     {//GEN-HEADEREND:event_menuCadastroCategoriaActionPerformed
-        if (frmCategoria == null) {
+        if (frmCategoria == null)
+        {
             //Cria o form
             frmCategoria = new FrmCategoriaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -404,7 +538,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmCategoria.isVisible()) {
+        if (!frmCategoria.isVisible())
+        {
             //Mostra o formulário
             frmCategoria.setVisible(true);
         }
@@ -424,7 +559,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnARacaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnARacaActionPerformed
     {//GEN-HEADEREND:event_btnARacaActionPerformed
-        if (frmRaca == null) {
+        if (frmRaca == null)
+        {
             //Cria o form
             frmRaca = new FrmRacaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -434,7 +570,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmRaca.isVisible()) {
+        if (!frmRaca.isVisible())
+        {
             //Mostra o formulário
             frmRaca.setVisible(true);
         }
@@ -442,7 +579,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnARacaActionPerformed
 
     private void btnACategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnACategoriaActionPerformed
-        if (frmCategoria == null) {
+        if (frmCategoria == null)
+        {
             //Cria o form
             frmCategoria = new FrmCategoriaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -452,7 +590,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmCategoria.isVisible()) {
+        if (!frmCategoria.isVisible())
+        {
             //Mostra o formulário
             frmCategoria.setVisible(true);
         }
@@ -460,7 +599,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnACategoriaActionPerformed
 
     private void btnAUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAUsuarioActionPerformed
-        if (frmUsuario == null) {
+        if (frmUsuario == null)
+        {
             //Cria o form
             frmUsuario = new FrmUsuarioListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -470,14 +610,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmUsuario.isVisible()) {
+        if (!frmUsuario.isVisible())
+        {
             //Mostra o formulário
             frmUsuario.setVisible(true);
         }
     }//GEN-LAST:event_btnAUsuarioActionPerformed
 
     private void menuCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroUsuarioActionPerformed
-        if (frmUsuario == null) {
+        if (frmUsuario == null)
+        {
             //Cria o form
             frmUsuario = new FrmUsuarioListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -487,7 +629,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmUsuario.isVisible()) {
+        if (!frmUsuario.isVisible())
+        {
             //Mostra o formulário
             frmUsuario.setVisible(true);
         }
@@ -506,7 +649,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAuditoriaActionPerformed
 
     private void menuCadastroUsuarioTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroUsuarioTipoActionPerformed
-        if (frmUsuarioTipo == null) {
+        if (frmUsuarioTipo == null)
+        {
             //Cria o form
             frmUsuarioTipo = new FrmUsuarioTipoListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -516,7 +660,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmUsuarioTipo.isVisible()) {
+        if (!frmUsuarioTipo.isVisible())
+        {
             //Mostra o formulário
             frmUsuarioTipo.setVisible(true);
         }
@@ -527,7 +672,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCadastroCategoria1FocusLost
 
     private void menuCadastroCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroCategoria1ActionPerformed
-        if (frmVacina == null) {
+        if (frmVacina == null)
+        {
             //Cria o form
             frmVacina = new FrmVacinaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -537,7 +683,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmVacina.isVisible()) {
+        if (!frmVacina.isVisible())
+        {
             //Mostra o formulário
             frmVacina.setVisible(true);
         }
@@ -545,7 +692,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCadastroCategoria1ActionPerformed
 
     private void btnATipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnATipoUsuarioActionPerformed
-        if (frmUsuarioTipo == null) {
+        if (frmUsuarioTipo == null)
+        {
             //Cria o form
             frmUsuarioTipo = new FrmUsuarioTipoListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -555,14 +703,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmUsuarioTipo.isVisible()) {
+        if (!frmUsuarioTipo.isVisible())
+        {
             //Mostra o formulário
             frmUsuarioTipo.setVisible(true);
         }
     }//GEN-LAST:event_btnATipoUsuarioActionPerformed
 
     private void btnAVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAVacinaActionPerformed
-        if (frmVacina == null) {
+        if (frmVacina == null)
+        {
             //Cria o form
             frmVacina = new FrmVacinaListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -572,15 +722,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmVacina.isVisible()) {
+        if (!frmVacina.isVisible())
+        {
             //Mostra o formulário
             frmVacina.setVisible(true);
         }
 
     }//GEN-LAST:event_btnAVacinaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (frmGrauSangue == null) {
+    private void btnAGrauSangueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAGrauSangueActionPerformed
+        if (frmGrauSangue == null)
+        {
             //Cria o form
             frmGrauSangue = new FrmGrauSangueListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -590,19 +742,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmGrauSangue.isVisible()) {
+        if (!frmGrauSangue.isVisible())
+        {
             //Mostra o formulário
             frmGrauSangue.setVisible(true);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAGrauSangueActionPerformed
 
     private void menuCadastroGrauSangueFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_menuCadastroGrauSangueFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_menuCadastroGrauSangueFocusLost
 
     private void menuCadastroGrauSangueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroGrauSangueActionPerformed
-       if (frmGrauSangue == null) {
+        if (frmGrauSangue == null)
+        {
             //Cria o form
             frmGrauSangue = new FrmGrauSangueListagem();
             //Adiciona o formulario dentro do DESKTOP
@@ -612,12 +766,120 @@ public class FrmPrincipal extends javax.swing.JFrame {
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmGrauSangue.isVisible()) {
+        if (!frmGrauSangue.isVisible())
+        {
             //Mostra o formulário
             frmGrauSangue.setVisible(true);
         }
 
     }//GEN-LAST:event_menuCadastroGrauSangueActionPerformed
+
+    private void btnAAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAAnimalActionPerformed
+        if (frmAnimal == null)
+        {
+            //Cria o form
+            frmAnimal = new FrmAnimalListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmAnimal);
+            //diz que a janela interna é maximizável
+            frmAnimal.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmAnimal.isVisible())
+        {
+            //Mostra o formulário
+            frmAnimal.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAAnimalActionPerformed
+
+    private void menuCadastroAnimalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_menuCadastroAnimalFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroAnimalFocusLost
+
+    private void menuCadastroAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroAnimalActionPerformed
+        if (frmAnimal == null)
+        {
+            //Cria o form
+            frmAnimal = new FrmAnimalListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmAnimal);
+            //diz que a janela interna é maximizável
+            frmAnimal.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmAnimal.isVisible())
+        {
+            //Mostra o formulário
+            frmAnimal.setVisible(true);
+        }
+    }//GEN-LAST:event_menuCadastroAnimalActionPerformed
+
+    private void menuCadastroAnimalTesteFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_menuCadastroAnimalTesteFocusLost
+    {//GEN-HEADEREND:event_menuCadastroAnimalTesteFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroAnimalTesteFocusLost
+
+    private void menuCadastroAnimalTesteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroAnimalTesteActionPerformed
+    {//GEN-HEADEREND:event_menuCadastroAnimalTesteActionPerformed
+        if (ifrmAnimal == null)
+        {
+            //Cria o form
+            ifrmAnimal = new IfrAnimal();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(ifrmAnimal);
+            //diz que a janela interna é maximizável
+            ifrmAnimal.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!ifrmAnimal.isVisible())
+        {
+            //Mostra o formulário
+            ifrmAnimal.setVisible(true);
+        }
+    }//GEN-LAST:event_menuCadastroAnimalTesteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+       if (ifrmAnimal == null)
+        {
+            //Cria o form
+            ifrmAnimal = new IfrAnimal();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(ifrmAnimal);
+            //diz que a janela interna é maximizável
+            ifrmAnimal.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!ifrmAnimal.isVisible())
+        {
+            //Mostra o formulário
+            ifrmAnimal.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAPropriedadeRuralActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAPropriedadeRuralActionPerformed
+    {//GEN-HEADEREND:event_btnAPropriedadeRuralActionPerformed
+       if (frmPropriedadeRural == null)
+        {
+            //Cria o form
+            frmPropriedadeRural = new FrmPropriedadeRuralListagem();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(frmPropriedadeRural);
+            //diz que a janela interna é maximizável
+            frmPropriedadeRural.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!frmPropriedadeRural.isVisible())
+        {
+            //Mostra o formulário
+            frmPropriedadeRural.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAPropriedadeRuralActionPerformed
 
     /**
      * @param args the command line arguments
@@ -656,7 +918,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAAnimal;
     private javax.swing.JButton btnACategoria;
+    private javax.swing.JButton btnAGrauSangue;
+    private javax.swing.JButton btnAPropriedadeRural;
     private javax.swing.JButton btnARaca;
     private javax.swing.JButton btnATipoUsuario;
     private javax.swing.JButton btnAUsuario;
@@ -673,7 +938,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JMenuItem menuAuditoria;
     private javax.swing.JMenuItem menuCadastroCategoria;
     private javax.swing.JMenuItem menuCadastroCategoria1;
     private javax.swing.JMenuItem menuCadastroGrauSangue;
@@ -682,3 +946,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCadastroUsuarioTipo;
     // End of variables declaration//GEN-END:variables
 }
+    private javax.swing.JMenuItem menuCadastroAnimal;
+    private javax.swing.JMenuItem menuCadastroAnimalTeste;
+    private javax.swing.JMenuItem menuAuditoria;

@@ -90,6 +90,24 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCadastroGrauSangueActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuCadastroAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Animais"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="menuCadastroAnimalFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCadastroAnimalActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuCadastroAnimalTeste">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="AnimaisTeste"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="menuCadastroAnimalTesteFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCadastroAnimalTesteActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -165,7 +183,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="511" max="32767" attributes="0"/>
+                  <EmptySpace pref="472" max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" pref="218" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -176,7 +194,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="252" max="32767" attributes="0"/>
+                  <EmptySpace pref="197" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -197,7 +215,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnAPropriedadeRural" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="btnAAnimal" max="32767" attributes="0"/>
+                          <Component id="btnAGrauSangue" max="32767" attributes="0"/>
                           <Component id="btnAVacina" max="32767" attributes="0"/>
                           <Component id="btnATipoUsuario" max="32767" attributes="0"/>
                           <Component id="btnARaca" alignment="0" max="32767" attributes="0"/>
@@ -230,8 +251,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAVacina" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAGrauSangue" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAAnimal" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAPropriedadeRural" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -288,12 +315,36 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAVacinaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnAGrauSangue">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Grau de Sangue"/>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAGrauSangueActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnAAnimal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Animal"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAAnimalActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Animal Teste"/>
+              </Properties>
+              <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnAPropriedadeRural">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Propriedade Rural"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAPropriedadeRuralActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
