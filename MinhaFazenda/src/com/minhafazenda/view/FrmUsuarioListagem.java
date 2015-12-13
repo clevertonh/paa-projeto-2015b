@@ -8,6 +8,7 @@ package com.minhafazenda.view;
 import com.minhafazenda.controller.UsuarioController;
 import com.minhafazenda.model.Usuario;
 import com.minhafazenda.util.ForcedListSelectionModel;
+import com.minhafazenda.util.UsuarioLogado;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
@@ -46,6 +47,14 @@ public class FrmUsuarioListagem extends javax.swing.JInternalFrame {
         //Configuração da Jtable
         TableColumnModel objColumn = jTableUsuario.getColumnModel();
         objColumn.getColumn(0).setMaxWidth(100);
+        
+        if(UsuarioLogado.getAdministrador() == 1){
+            btnAlterar.enable(true);
+            btnNovo.enable(true);
+        }else{
+            btnAlterar.enable(false);
+            btnNovo.enable(false);
+        }
     }
 
     public void pesquisar() {
@@ -246,7 +255,9 @@ public class FrmUsuarioListagem extends javax.swing.JInternalFrame {
     private void jTableUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsuarioMouseClicked
 
         if (evt.getClickCount() == 2) {
-            fAbreCadastro((int) jTableUsuario.getValueAt(jTableUsuario.getSelectedRow(), 0));
+            if(UsuarioLogado.getAdministrador() == 1){
+                fAbreCadastro((int) jTableUsuario.getValueAt(jTableUsuario.getSelectedRow(), 0));
+            }
         }
     }//GEN-LAST:event_jTableUsuarioMouseClicked
 
