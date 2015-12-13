@@ -5,9 +5,11 @@
  */
 package com.minhafazenda.view;
 
+import com.minhafazenda.view.relatorio.RelProducaoLeite;
+import com.minhafazenda.view.relatorio.RelProducaoLeiteHoje;
+import com.minhafazenda.view.relatorio.RelVencimentoVacina;
 import com.minhafazenda.library.common.Licenca;
 import com.minhafazenda.library.protocol.LicencaProtocol;
-import com.minhafazenda.util.UsuarioLogado;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -36,9 +38,10 @@ public class FrmPrincipal extends javax.swing.JFrame
     private FrmAnimalListagem frmAnimal;
     private IfrAnimal ifrmAnimal;
     private FrmPropriedadeRuralListagem frmPropriedadeRural;
-    
-    
     private FrmAuditoriaListagem frmAuditoria;
+    private RelProducaoLeite relProducaoLeite;
+    private RelProducaoLeiteHoje relProducaoLeiteHoje;
+    private RelVencimentoVacina relVencimentoVacina;
 
     private final Thread objThread;
     private Socket clientSocket;
@@ -137,8 +140,7 @@ public class FrmPrincipal extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
@@ -164,11 +166,12 @@ public class FrmPrincipal extends javax.swing.JFrame
         menuCadastroUsuario = new javax.swing.JMenuItem();
         menuCadastroUsuarioTipo = new javax.swing.JMenuItem();
         menuCadastroCategoria1 = new javax.swing.JMenuItem();
-        menuCadastroGrauSangue = new javax.swing.JMenuItem();
-        menuCadastroAnimal = new javax.swing.JMenuItem();
-        menuCadastroAnimalTeste = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         menuAuditoria = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -182,10 +185,8 @@ public class FrmPrincipal extends javax.swing.JFrame
         setTitle("SGF - Sistema Gerenciador de Fazendas");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusCycleRoot(false);
-        addWindowStateListener(new java.awt.event.WindowStateListener()
-        {
-            public void windowStateChanged(java.awt.event.WindowEvent evt)
-            {
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
                 formWindowStateChanged(evt);
             }
         });
@@ -195,19 +196,15 @@ public class FrmPrincipal extends javax.swing.JFrame
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atalhos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         btnACategoria.setText("Categorias");
-        btnACategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnACategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnACategoriaActionPerformed(evt);
             }
         });
 
         btnAUsuario.setText("Usuários");
-        btnAUsuario.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAUsuarioActionPerformed(evt);
             }
         });
@@ -215,64 +212,50 @@ public class FrmPrincipal extends javax.swing.JFrame
         jScrollPane1.setViewportView(jTextPane1);
 
         btnARaca.setText("Raças");
-        btnARaca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnARaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnARacaActionPerformed(evt);
             }
         });
 
         btnATipoUsuario.setText("Tipo de Usuário");
-        btnATipoUsuario.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnATipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnATipoUsuarioActionPerformed(evt);
             }
         });
 
         btnAVacina.setText("Vacina");
-        btnAVacina.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAVacina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAVacinaActionPerformed(evt);
             }
         });
 
         btnAGrauSangue.setText("Grau de Sangue");
-        btnAGrauSangue.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAGrauSangue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAGrauSangueActionPerformed(evt);
             }
         });
 
         btnAAnimal.setText("Animal");
-        btnAAnimal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAAnimalActionPerformed(evt);
             }
         });
 
         jButton1.setText("Animal Teste");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
         btnAPropriedadeRural.setText("Propriedade Rural");
-        btnAPropriedadeRural.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAPropriedadeRural.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAPropriedadeRuralActionPerformed(evt);
             }
         });
@@ -344,128 +327,61 @@ public class FrmPrincipal extends javax.swing.JFrame
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuCadastros.setText("Cadastros");
-        jMenuCadastros.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jMenuCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuCadastrosActionPerformed(evt);
             }
         });
 
         menuCadastroCategoria.setText("Categorias");
-        menuCadastroCategoria.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
+        menuCadastroCategoria.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
                 menuCadastroCategoriaFocusLost(evt);
             }
         });
-        menuCadastroCategoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroCategoriaActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroCategoria);
 
         menuCadastroRaca.setText("Raças");
-        menuCadastroRaca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCadastroRaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroRacaActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroRaca);
 
         menuCadastroUsuario.setText("Usuários");
-        menuCadastroUsuario.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroUsuarioActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroUsuario);
 
         menuCadastroUsuarioTipo.setText("Tipo de Usuário");
-        menuCadastroUsuarioTipo.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCadastroUsuarioTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroUsuarioTipoActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroUsuarioTipo);
 
         menuCadastroCategoria1.setText("Vacinas");
-        menuCadastroCategoria1.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
+        menuCadastroCategoria1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
                 menuCadastroCategoria1FocusLost(evt);
             }
         });
-        menuCadastroCategoria1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCadastroCategoria1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroCategoria1ActionPerformed(evt);
             }
         });
         jMenuCadastros.add(menuCadastroCategoria1);
-
-        menuCadastroGrauSangue.setText("Grau de Sangue");
-        menuCadastroGrauSangue.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
-                menuCadastroGrauSangueFocusLost(evt);
-            }
-        });
-        menuCadastroGrauSangue.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuCadastroGrauSangueActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(menuCadastroGrauSangue);
-
-        menuCadastroAnimal.setText("Animais");
-        menuCadastroAnimal.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
-                menuCadastroAnimalFocusLost(evt);
-            }
-        });
-        menuCadastroAnimal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuCadastroAnimalActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(menuCadastroAnimal);
-
-        menuCadastroAnimalTeste.setText("AnimaisTeste");
-        menuCadastroAnimalTeste.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusLost(java.awt.event.FocusEvent evt)
-            {
-                menuCadastroAnimalTesteFocusLost(evt);
-            }
-        });
-        menuCadastroAnimalTeste.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuCadastroAnimalTesteActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(menuCadastroAnimalTeste);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -480,6 +396,34 @@ public class FrmPrincipal extends javax.swing.JFrame
         jMenu1.add(menuAuditoria);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Relatórios");
+
+        jMenuItem1.setText("Produção de leite");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Produção de leite hoje");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Vencimento de vacina");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
         jMenuBar1.getAccessibleContext().setAccessibleName("Gerenciador");
@@ -750,30 +694,6 @@ public class FrmPrincipal extends javax.swing.JFrame
 
     }//GEN-LAST:event_btnAGrauSangueActionPerformed
 
-    private void menuCadastroGrauSangueFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_menuCadastroGrauSangueFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuCadastroGrauSangueFocusLost
-
-    private void menuCadastroGrauSangueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroGrauSangueActionPerformed
-        if (frmGrauSangue == null)
-        {
-            //Cria o form
-            frmGrauSangue = new FrmGrauSangueListagem();
-            //Adiciona o formulario dentro do DESKTOP
-            this.jDesktopPane1.add(frmGrauSangue);
-            //diz que a janela interna é maximizável
-            frmGrauSangue.setMaximizable(true);
-            //set o tamanho máximo dela, que depende da janela pai
-            //frmCategoria.setMaximum(true);
-        }
-        if (!frmGrauSangue.isVisible())
-        {
-            //Mostra o formulário
-            frmGrauSangue.setVisible(true);
-        }
-
-    }//GEN-LAST:event_menuCadastroGrauSangueActionPerformed
-
     private void btnAAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAAnimalActionPerformed
         if (frmAnimal == null)
         {
@@ -792,54 +712,6 @@ public class FrmPrincipal extends javax.swing.JFrame
             frmAnimal.setVisible(true);
         }
     }//GEN-LAST:event_btnAAnimalActionPerformed
-
-    private void menuCadastroAnimalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_menuCadastroAnimalFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuCadastroAnimalFocusLost
-
-    private void menuCadastroAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroAnimalActionPerformed
-        if (frmAnimal == null)
-        {
-            //Cria o form
-            frmAnimal = new FrmAnimalListagem();
-            //Adiciona o formulario dentro do DESKTOP
-            this.jDesktopPane1.add(frmAnimal);
-            //diz que a janela interna é maximizável
-            frmAnimal.setMaximizable(true);
-            //set o tamanho máximo dela, que depende da janela pai
-            //frmCategoria.setMaximum(true);
-        }
-        if (!frmAnimal.isVisible())
-        {
-            //Mostra o formulário
-            frmAnimal.setVisible(true);
-        }
-    }//GEN-LAST:event_menuCadastroAnimalActionPerformed
-
-    private void menuCadastroAnimalTesteFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_menuCadastroAnimalTesteFocusLost
-    {//GEN-HEADEREND:event_menuCadastroAnimalTesteFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuCadastroAnimalTesteFocusLost
-
-    private void menuCadastroAnimalTesteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCadastroAnimalTesteActionPerformed
-    {//GEN-HEADEREND:event_menuCadastroAnimalTesteActionPerformed
-        if (ifrmAnimal == null)
-        {
-            //Cria o form
-            ifrmAnimal = new IfrAnimal();
-            //Adiciona o formulario dentro do DESKTOP
-            this.jDesktopPane1.add(ifrmAnimal);
-            //diz que a janela interna é maximizável
-            ifrmAnimal.setMaximizable(true);
-            //set o tamanho máximo dela, que depende da janela pai
-            //frmCategoria.setMaximum(true);
-        }
-        if (!ifrmAnimal.isVisible())
-        {
-            //Mostra o formulário
-            ifrmAnimal.setVisible(true);
-        }
-    }//GEN-LAST:event_menuCadastroAnimalTesteActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
@@ -880,6 +752,62 @@ public class FrmPrincipal extends javax.swing.JFrame
             frmPropriedadeRural.setVisible(true);
         }
     }//GEN-LAST:event_btnAPropriedadeRuralActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (relProducaoLeite == null)
+        {
+            //Cria o form
+            relProducaoLeite = new RelProducaoLeite();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(relProducaoLeite);
+            //diz que a janela interna é maximizável
+            relProducaoLeite.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!relProducaoLeite.isVisible())
+        {
+            //Mostra o formulário
+            relProducaoLeite.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if (relProducaoLeiteHoje == null)
+        {
+            //Cria o form
+            relProducaoLeiteHoje = new RelProducaoLeiteHoje();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(relProducaoLeiteHoje);
+            //diz que a janela interna é maximizável
+            relProducaoLeiteHoje.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!relProducaoLeiteHoje.isVisible())
+        {
+            //Mostra o formulário
+            relProducaoLeiteHoje.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if (relVencimentoVacina == null){
+            //Cria o form
+            relVencimentoVacina = new RelVencimentoVacina();
+            //Adiciona o formulario dentro do DESKTOP
+            this.jDesktopPane1.add(relVencimentoVacina);
+            //diz que a janela interna é maximizável
+            relVencimentoVacina.setMaximizable(true);
+            //set o tamanho máximo dela, que depende da janela pai
+            //frmCategoria.setMaximum(true);
+        }
+        if (!relVencimentoVacina.isVisible())
+        {
+            //Mostra o formulário
+            relVencimentoVacina.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -930,22 +858,23 @@ public class FrmPrincipal extends javax.swing.JFrame
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JMenuItem menuAuditoria;
     private javax.swing.JMenuItem menuCadastroCategoria;
     private javax.swing.JMenuItem menuCadastroCategoria1;
-    private javax.swing.JMenuItem menuCadastroGrauSangue;
     private javax.swing.JMenuItem menuCadastroRaca;
     private javax.swing.JMenuItem menuCadastroUsuario;
     private javax.swing.JMenuItem menuCadastroUsuarioTipo;
     // End of variables declaration//GEN-END:variables
 }
-    private javax.swing.JMenuItem menuCadastroAnimal;
-    private javax.swing.JMenuItem menuCadastroAnimalTeste;
-    private javax.swing.JMenuItem menuAuditoria;

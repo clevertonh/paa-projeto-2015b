@@ -1,5 +1,5 @@
 package com.minhafazenda.model;
-// Generated 22/11/2015 11:05:37 by Hibernate Tools 4.3.1
+// Generated 13/12/2015 15:29:49 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
