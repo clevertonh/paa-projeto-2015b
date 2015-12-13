@@ -146,7 +146,6 @@ public final class UsuarioController extends AbstractTableModel {
         }else{
             return null;
         }
-        
     }
     
     public ArrayList<Usuario> findByTipoUsuario(Usuario usuario) {        

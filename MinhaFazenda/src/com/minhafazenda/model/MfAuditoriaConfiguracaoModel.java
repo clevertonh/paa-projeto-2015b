@@ -5,6 +5,7 @@
  */
 package com.minhafazenda.model;
 
+import com.minhafazenda.controller.MfAuditoriaConfiguracaoController;
 import com.minhafazenda.util.MinhaFazendaHibernateUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -73,6 +74,24 @@ public class MfAuditoriaConfiguracaoModel {
         objSession.close();
         return msg;
     }
+    
+    public String deleteByTabela(String tabela) {        
+        Session objSession = this.objSessionFactory.openSession();    
+        Transaction objTransaction = objSession.beginTransaction();
+        
+        try {    
+            Query query = objSession.createQuery("delete MfAuditoriaConfiguracao where tabela = :tabela");
+            query.setParameter("tabela",tabela);
+            query.executeUpdate();
+            objTransaction.commit();
+        } catch (Exception e) {
+            msg = e.getMessage();
+            objTransaction.rollback();
+        }
+        
+        objSession.close();
+        return msg;
+    } 
     
     public String delete(MfAuditoriaConfiguracao obj) {        
         Session objSession = this.objSessionFactory.openSession();    
@@ -153,6 +172,7 @@ public class MfAuditoriaConfiguracaoModel {
                                                 "	TABLE_SCHEMA = 'fazenda'\n" +
                                                 "	AND TABLE_TYPE = 'BASE TABLE' \n" +
                                                 "	AND TABLE_NAME NOT IN (SELECT tabela FROM fazenda.mf_auditoria_configuracao) \n" +
+                                                "       AND TABLE_NAME NOT IN ('mf_auditoria_configuracao','mf_auditoria','mf_auditoria_item')" +
                                                 "   ORDER BY \n" +
                                                 "	TABLE_NAME");
         lst = (ArrayList<String>)query.list();
@@ -160,8 +180,6 @@ public class MfAuditoriaConfiguracaoModel {
         return lst;
     }
     
-   
-    //http://www.mkyong.com/hibernate/how-to-call-store-procedure-in-hibernate/
     public void criaProcedureViewAuditoria(String nomeTabela){
         Configuration configuration = new Configuration();
         configuration.configure();
@@ -204,6 +222,19 @@ public class MfAuditoriaConfiguracaoModel {
         
     }
     
+    public void desativaAuditoria(String nomeTabela){
+        Session objSession = this.objSessionFactory.openSession();
+        
+        Query query = objSession.createSQLQuery("CALL mf_auditoria_remover(:nome_banco, :nome_tabela)")
+                                .setParameter("nome_banco","fazenda")
+                                .setParameter("nome_tabela",nomeTabela);
+        
+        for (Object obj : query.list()) {
+            objSession.createSQLQuery(obj.toString()).executeUpdate();            
+        }      
+    }
+    
+    
     public List<MfAuditoriaView> findAUditoria(String nomeTabela) {
         Session objSession = this.objSessionFactory.openSession();
         Query query = objSession.createSQLQuery("SELECT id, usuario, chave_primaria_1, chave_primaria_2, acao, data_hora  FROM " + nomeTabela + "_AUDITORIA_VIEW")
@@ -214,14 +245,6 @@ public class MfAuditoriaConfiguracaoModel {
                 .addScalar("acao", new StringType())
                 .addScalar("data_hora", new DateType())
                 .setResultTransformer(Transformers.aliasToBean(MfAuditoriaView.class));
-
-//        List<MfAuditoriaView> list = query.list();
-//        for (MfAuditoriaView list_ : list) {
-//            System.out.print(list_.getAcao());
-//            System.out.print(list_.getChave_primaria_1());
-//            System.out.println(list_.getId());
-//            
-//        }
         
         return query.list();
     }    

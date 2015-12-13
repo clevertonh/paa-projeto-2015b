@@ -5,6 +5,7 @@
  */
 package com.minhafazenda.view;
 
+import com.minhafazenda.controller.MfAuditoriaConfiguracaoController;
 import com.minhafazenda.controller.MfAuditoriaConfiguracaoViewController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;
@@ -17,7 +18,8 @@ import javax.swing.table.TableColumnModel;
 public class FrmAuditoriaListagemView extends javax.swing.JDialog {
 
     private FrmAuditoriaCadastro frm;
-    private final MfAuditoriaConfiguracaoViewController objController;
+    private final MfAuditoriaConfiguracaoViewController objControllerView;
+    private final MfAuditoriaConfiguracaoController objController;
     private String nomeTabela;
 
     /**
@@ -31,11 +33,12 @@ public class FrmAuditoriaListagemView extends javax.swing.JDialog {
         //Define o título para a janela
         this.setTitle("SGF - Auditoria da tabela: " + nomeTabela);
         //Inicia o objeto de controller
-        objController = new MfAuditoriaConfiguracaoViewController();
+        objControllerView = new MfAuditoriaConfiguracaoViewController();
+        objController = new MfAuditoriaConfiguracaoController();
         //Carrega a lista de categorias no controller
-        objController.findByAll(nomeTabela);
+        objControllerView.findByAll(nomeTabela);
         //Seta o controller no JTABLE
-        jTableAuditoria.setModel(objController);
+        jTableAuditoria.setModel(objControllerView);
         //
         jTableAuditoria.setFillsViewportHeight(true);
 
@@ -51,7 +54,7 @@ public class FrmAuditoriaListagemView extends javax.swing.JDialog {
 
     public void pesquisar() {
         //Efetua a busca pela descricão no conttroler
-        objController.findByDescricao(this.nomeTabela, txtBusca.getText());
+        objControllerView.findByDescricao(this.nomeTabela, txtBusca.getText());
         //
         jTableAuditoria.setFillsViewportHeight(true);
     }
@@ -73,7 +76,6 @@ public class FrmAuditoriaListagemView extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAuditoria = new javax.swing.JTable();
         btnFechar = new javax.swing.JButton();
-        btnBuscar1 = new javax.swing.JButton();
 
         setName("Relação de Categorias"); // NOI18N
 
@@ -122,14 +124,6 @@ public class FrmAuditoriaListagemView extends javax.swing.JDialog {
             }
         });
 
-        btnBuscar1.setText("Desativar");
-        btnBuscar1.setName("btnBuscar"); // NOI18N
-        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscar1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,16 +131,14 @@ public class FrmAuditoriaListagemView extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(txtBusca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -155,8 +147,7 @@ public class FrmAuditoriaListagemView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnBuscar1))
+                    .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,13 +205,8 @@ if (evt.getClickCount() == 2) {
         pesquisar();
     }//GEN-LAST:event_txtBuscaKeyReleased
 
-    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscar1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnFechar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

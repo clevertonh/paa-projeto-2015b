@@ -73,7 +73,18 @@ public class MfAuditoriaConfiguracaoController extends AbstractTableModel {
         } else {
             return true;
         }
-    }    
+    }  
+    
+    
+    public Boolean deleteByTabela(String tabela) { 
+        String msg = objModel.deleteByTabela(tabela);
+        if (!msg.equals("")) {
+            JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            return true;
+        }
+    }
     
     public ArrayList<MfAuditoriaConfiguracao> findByAll() {
         this.lst = objModel.findByAll();
@@ -92,6 +103,11 @@ public class MfAuditoriaConfiguracaoController extends AbstractTableModel {
     public ArrayList<String> findByAllTabela(){
         return objModel.findByAllTabela();
     }
+    
+    public void desativaAuditoria(String nomeTabela){
+        objModel.desativaAuditoria(nomeTabela);
+    }
+    
     
     public void criaProcedureViewAuditoria(String nomeTabela){
         objModel.criaProcedureViewAuditoria(nomeTabela);

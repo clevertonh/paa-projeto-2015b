@@ -7,6 +7,7 @@ package com.minhafazenda.view;
 
 import com.minhafazenda.library.common.Licenca;
 import com.minhafazenda.library.protocol.LicencaProtocol;
+import com.minhafazenda.util.UsuarioLogado;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -59,7 +60,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             SwingUtilities.updateComponentTreeUI(this);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
-
+        
         this.setExtendedState(MAXIMIZED_BOTH);
 
         objThread = new Thread(new Runnable() {

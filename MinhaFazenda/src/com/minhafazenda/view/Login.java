@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 import com.minhafazenda.controller.UsuarioController;
 import com.minhafazenda.library.protocol.LicencaProtocol;
+import com.minhafazenda.model.Usuario;
+import com.minhafazenda.util.UsuarioLogado;
 import com.minhafazenda.util.Util;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -14,6 +16,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,8 +52,13 @@ public class Login extends javax.swing.JFrame {
     }
 
     public void pesquisar() {
+        ArrayList<Usuario> objUsuario = objController.findByUsuario(txtUsuario.getText(), new String(jPSenha.getPassword()));
+        
         //Efetua a busca pela descricão no conttroler
-        if (objController.findByUsuario(txtUsuario.getText(), new String(jPSenha.getPassword())) != null) {
+        if (objUsuario != null) {
+            //Adiciona informações para o usuário
+            UsuarioLogado.setId(objUsuario.get(0).getId());
+            
             // abrir tela da aplicação
             FrmPrincipal frm = new FrmPrincipal(getChave());
             
