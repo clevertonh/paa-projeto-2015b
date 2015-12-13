@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.minhafazendalicenca;
 
 import com.minhafazenda.library.protocol.LicencaProtocol;
@@ -201,7 +196,7 @@ public class MinhaFazendaLicenca {
      */
     public static void main(String[] args){
         //Informa a quantidade de licenca para esse cliente
-        quantidadeLicenca = 3;
+        quantidadeLicenca = 30;
         //Inicia serviço
         run(6789);        
     }
