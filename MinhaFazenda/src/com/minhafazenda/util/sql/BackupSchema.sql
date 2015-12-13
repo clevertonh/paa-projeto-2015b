@@ -561,6 +561,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `senha` varchar(45) DEFAULT NULL,
   `id_usuario_tipo` int(11) NOT NULL,
   `id_usuario_alterou` int(11) NOT NULL,
+  `administrador` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_usuario_usuario_tipo1_idx` (`id_usuario_tipo`),
   CONSTRAINT `fk_usuario_usuario_tipo1` FOREIGN KEY (`id_usuario_tipo`) REFERENCES `usuario_tipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -630,6 +631,62 @@ CREATE TABLE IF NOT EXISTS `vacina_animal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportação de dados foi desmarcado.
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `view_producao_leite` (
+	`id` INT(11) NOT NULL,
+	`data_hora` DATETIME NULL,
+	`animal_nome` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_raca` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_categoria` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`animal_grau_sangue` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`quantidade_ml` INT(11) NULL
+) ENGINE=MyISAM;
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite_hoje
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `view_producao_leite_hoje` (
+	`id` INT(11) NOT NULL,
+	`data_hora` DATETIME NULL,
+	`animal_nome` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_raca` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_categoria` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`animal_grau_sangue` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`quantidade_ml` INT(11) NULL
+) ENGINE=MyISAM;
+
+
+-- Copiando estrutura para view fazenda.view_vacina_vencimento
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `view_vacina_vencimento` (
+	`vacina_descricao` VARCHAR(45) NULL COLLATE 'utf8_general_ci',
+	`vacina_modo_usaro` TEXT NULL COLLATE 'utf8_general_ci',
+	`vacina_data_vencimento` DATE NULL,
+	`vacina_dose` INT(11) NULL,
+	`animal_nome` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_raca` VARCHAR(100) NULL COLLATE 'utf8_general_ci'
+) ENGINE=MyISAM;
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `view_producao_leite`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_producao_leite` AS select `pl`.`id` AS `id`,`pl`.`data_hora` AS `data_hora`,`ani`.`nome` AS `animal_nome`,`ra`.`descricao` AS `animal_raca`,`ca`.`descricao` AS `animal_categoria`,`gs`.`descricao` AS `animal_grau_sangue`,`pl`.`quantidade_ml` AS `quantidade_ml` from ((((`producao_leite` `pl` left join `animal` `ani` on((`pl`.`id_animal` = `ani`.`id`))) left join `raca` `ra` on((`ani`.`raca_id` = `ra`.`id`))) left join `categoria` `ca` on((`ani`.`categoria_id` = `ca`.`id`))) left join `grau_sangue` `gs` on((`ani`.`grau_sangue_id` = `gs`.`id`)));
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite_hoje
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `view_producao_leite_hoje`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_producao_leite_hoje` AS select `pl`.`id` AS `id`,`pl`.`data_hora` AS `data_hora`,`ani`.`nome` AS `animal_nome`,`ra`.`descricao` AS `animal_raca`,`ca`.`descricao` AS `animal_categoria`,`gs`.`descricao` AS `animal_grau_sangue`,`pl`.`quantidade_ml` AS `quantidade_ml` from ((((`producao_leite` `pl` left join `animal` `ani` on((`pl`.`id_animal` = `ani`.`id`))) left join `raca` `ra` on((`ani`.`raca_id` = `ra`.`id`))) left join `categoria` `ca` on((`ani`.`categoria_id` = `ca`.`id`))) left join `grau_sangue` `gs` on((`ani`.`grau_sangue_id` = `gs`.`id`))) where ((`pl`.`data_hora` >= curdate()) and (`pl`.`data_hora` <= curdate()));
+
+
+-- Copiando estrutura para view fazenda.view_vacina_vencimento
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `view_vacina_vencimento`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_vacina_vencimento` AS select `v`.`descricao` AS `vacina_descricao`,`v`.`modo_uso` AS `vacina_modo_usaro`,`va`.`data_vencimento` AS `vacina_data_vencimento`,`va`.`dose` AS `vacina_dose`,`ani`.`nome` AS `animal_nome`,`ra`.`descricao` AS `animal_raca` from (((`vacina_animal` `va` left join `vacina` `v` on((`va`.`id_vacina` = `v`.`id`))) left join `animal` `ani` on((`va`.`id_animal` = `ani`.`id`))) left join `raca` `ra` on((`ani`.`raca_id` = `ra`.`id`))) where ((`va`.`data_vencimento` >= curdate()) and (`va`.`data_vencimento` <= (curdate() + interval 1 month)));
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

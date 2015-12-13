@@ -18,6 +18,7 @@ public class Usuario  implements java.io.Serializable {
      private int idUsuarioAlterou;
      private Set vacinaAnimals = new HashSet(0);
      private Set usuarioPropriedadeRurals = new HashSet(0);
+     private Integer administrador;
 
     public Usuario() {
     }
@@ -84,6 +85,20 @@ public class Usuario  implements java.io.Serializable {
     
     public void setUsuarioPropriedadeRurals(Set usuarioPropriedadeRurals) {
         this.usuarioPropriedadeRurals = usuarioPropriedadeRurals;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public Integer getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(Integer administrador) {
+        this.administrador = administrador;
     }
 
 

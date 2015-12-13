@@ -11,6 +11,7 @@ package com.minhafazenda.util;
  */
 public class UsuarioLogado {
     private static Integer id;
+    private static Integer administrador;
 
     /**
      * @return the id
@@ -24,6 +25,20 @@ public class UsuarioLogado {
      */
     public static void setId(Integer id) {
         UsuarioLogado.id = id;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public static Integer getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param aAdministrador the administrador to set
+     */
+    public static void setAdministrador(Integer aAdministrador) {
+        administrador = aAdministrador;
     }
     
     

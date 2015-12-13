@@ -67,7 +67,7 @@ INSERT INTO `categoria` (`id`, `descricao`, `id_usuario_alterou`) VALUES
 	(3, 'Categoria 2', NULL),
 	(4, 'Categoria 3', NULL),
 	(5, 'teste12323cleverton', NULL),
-	(6, 'adasdas', NULL),
+	(6, 'adasdas12345678765432', NULL),
 	(7, 'aaaaaaaaaaaaaaaaaaaabbbbbbbbbbb', NULL),
 	(8, 'sdsfs fsdf saaaa', NULL),
 	(9, 'aasadadasdaaaa', NULL),
@@ -243,11 +243,13 @@ CREATE TABLE IF NOT EXISTS `mf_auditoria_configuracao` (
   `view_auditoria` varchar(255) DEFAULT '0',
   `view_auditoria_item` varchar(255) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela fazenda.mf_auditoria_configuracao: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela fazenda.mf_auditoria_configuracao: ~1 rows (aproximadamente)
 DELETE FROM `mf_auditoria_configuracao`;
 /*!40000 ALTER TABLE `mf_auditoria_configuracao` DISABLE KEYS */;
+INSERT INTO `mf_auditoria_configuracao` (`id`, `tabela`, `trigger_delete`, `trigger_insert`, `trigger_update`, `view_auditoria`, `view_auditoria_item`) VALUES
+	(2, 'categoria', 'categoria_AUDITORIA_TRIGGER_DELETE', 'categoria_AUDITORIA_TRIGGER_INSERT', 'categoria_AUDITORIA_TRIGGER_UPDATE', 'categoria_AUDITORIA_VIEW', 'categoria_AUDITORIA_VIEW_item');
 /*!40000 ALTER TABLE `mf_auditoria_configuracao` ENABLE KEYS */;
 
 
@@ -730,26 +732,29 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `senha` varchar(45) DEFAULT NULL,
   `id_usuario_tipo` int(11) NOT NULL,
   `id_usuario_alterou` int(11) NOT NULL,
+  `administrador` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_usuario_usuario_tipo1_idx` (`id_usuario_tipo`),
   CONSTRAINT `fk_usuario_usuario_tipo1` FOREIGN KEY (`id_usuario_tipo`) REFERENCES `usuario_tipo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela fazenda.usuario: ~11 rows (aproximadamente)
 DELETE FROM `usuario`;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` (`id`, `usuario`, `senha`, `id_usuario_tipo`, `id_usuario_alterou`) VALUES
-	(1, 'a', 'a', 1, 0),
-	(2, 'sadsa as das', 'asd asdas sa', 1, 0),
-	(3, 'adsas asdaadsa sada', 'asdsa adssadsa', 1, 0),
-	(4, 'saasdsadas', 'asdas  sdadsa dsa', 7, 0),
-	(5, 'wqeqwewq', '2w2ewe', 1, 0),
-	(7, 'asdasdasdadass s sd', 'asdsadasdasdas', 3, 0),
-	(8, 'adasdsdsa', 'asdasdsadsa', 4, 0),
-	(9, 'ABC - asadsadadadasdas', 'asdadasdas', 3, 0),
-	(10, 'cleasaslckjasda', 'asdadsa', 2, 0),
-	(11, '1234567890', 'asdasdsa', 1, 0),
-	(12, 'asdsa d adsad asd a', 'ad asd asda sa', 3, 0);
+INSERT INTO `usuario` (`id`, `usuario`, `senha`, `id_usuario_tipo`, `id_usuario_alterou`, `administrador`) VALUES
+	(1, 'a', 'a', 1, 0, 1),
+	(2, 'sadsa as das', 'asd asdas sa', 1, 0, 0),
+	(3, 'adsas asdaadsa sada', 'asdsa adssadsa', 1, 0, 0),
+	(4, 'saasdsadas', 'asdas  sdadsa dsa', 7, 0, 0),
+	(5, 'wqeqwewq', '2w2ewe', 1, 0, 0),
+	(7, 'asdasdasdadass s sd', 'asdsadasdasdas', 3, 0, 0),
+	(8, 'adasdsdsa', 'asdasdsadsa', 4, 0, 0),
+	(9, 'ABC - asadsadadadasdas', 'asdadasdas', 3, 0, 0),
+	(10, 'cleasaslckjasda', 'asdadsa', 2, 0, 0),
+	(11, '1234567890', 'asdasdsa', 1, 0, 0),
+	(12, 'asdsa d adsad asd a', 'ad asd asda sa', 3, 0, 0),
+	(13, 'asdadas', 'adas', 1, 0, 0),
+	(14, 'sdadasdsa', 'asdadas', 2, 0, 0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 
@@ -801,11 +806,13 @@ CREATE TABLE IF NOT EXISTS `vacina` (
   `dias_validade` int(11) DEFAULT NULL,
   `id_usuario_alterou` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela fazenda.vacina: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela fazenda.vacina: ~1 rows (aproximadamente)
 DELETE FROM `vacina`;
 /*!40000 ALTER TABLE `vacina` DISABLE KEYS */;
+INSERT INTO `vacina` (`id`, `descricao`, `modo_uso`, `indicacoes`, `vacinacol`, `dias_validade`, `id_usuario_alterou`) VALUES
+	(1, 'sadas  d ads', 'lakj akdakl djaskld ja', 'akj aljdk aslajlas das', NULL, 10, NULL);
 /*!40000 ALTER TABLE `vacina` ENABLE KEYS */;
 
 
@@ -832,6 +839,62 @@ CREATE TABLE IF NOT EXISTS `vacina_animal` (
 DELETE FROM `vacina_animal`;
 /*!40000 ALTER TABLE `vacina_animal` DISABLE KEYS */;
 /*!40000 ALTER TABLE `vacina_animal` ENABLE KEYS */;
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `view_producao_leite` (
+	`id` INT(11) NOT NULL,
+	`data_hora` DATETIME NULL,
+	`animal_nome` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_raca` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_categoria` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`animal_grau_sangue` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`quantidade_ml` INT(11) NULL
+) ENGINE=MyISAM;
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite_hoje
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `view_producao_leite_hoje` (
+	`id` INT(11) NOT NULL,
+	`data_hora` DATETIME NULL,
+	`animal_nome` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_raca` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_categoria` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`animal_grau_sangue` VARCHAR(50) NULL COLLATE 'utf8_general_ci',
+	`quantidade_ml` INT(11) NULL
+) ENGINE=MyISAM;
+
+
+-- Copiando estrutura para view fazenda.view_vacina_vencimento
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `view_vacina_vencimento` (
+	`vacina_descricao` VARCHAR(45) NULL COLLATE 'utf8_general_ci',
+	`vacina_modo_usaro` TEXT NULL COLLATE 'utf8_general_ci',
+	`vacina_data_vencimento` DATE NULL,
+	`vacina_dose` INT(11) NULL,
+	`animal_nome` VARCHAR(100) NULL COLLATE 'utf8_general_ci',
+	`animal_raca` VARCHAR(100) NULL COLLATE 'utf8_general_ci'
+) ENGINE=MyISAM;
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `view_producao_leite`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_producao_leite` AS select `pl`.`id` AS `id`,`pl`.`data_hora` AS `data_hora`,`ani`.`nome` AS `animal_nome`,`ra`.`descricao` AS `animal_raca`,`ca`.`descricao` AS `animal_categoria`,`gs`.`descricao` AS `animal_grau_sangue`,`pl`.`quantidade_ml` AS `quantidade_ml` from ((((`producao_leite` `pl` left join `animal` `ani` on((`pl`.`id_animal` = `ani`.`id`))) left join `raca` `ra` on((`ani`.`raca_id` = `ra`.`id`))) left join `categoria` `ca` on((`ani`.`categoria_id` = `ca`.`id`))) left join `grau_sangue` `gs` on((`ani`.`grau_sangue_id` = `gs`.`id`)));
+
+
+-- Copiando estrutura para view fazenda.view_producao_leite_hoje
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `view_producao_leite_hoje`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_producao_leite_hoje` AS select `pl`.`id` AS `id`,`pl`.`data_hora` AS `data_hora`,`ani`.`nome` AS `animal_nome`,`ra`.`descricao` AS `animal_raca`,`ca`.`descricao` AS `animal_categoria`,`gs`.`descricao` AS `animal_grau_sangue`,`pl`.`quantidade_ml` AS `quantidade_ml` from ((((`producao_leite` `pl` left join `animal` `ani` on((`pl`.`id_animal` = `ani`.`id`))) left join `raca` `ra` on((`ani`.`raca_id` = `ra`.`id`))) left join `categoria` `ca` on((`ani`.`categoria_id` = `ca`.`id`))) left join `grau_sangue` `gs` on((`ani`.`grau_sangue_id` = `gs`.`id`))) where ((`pl`.`data_hora` >= curdate()) and (`pl`.`data_hora` <= curdate()));
+
+
+-- Copiando estrutura para view fazenda.view_vacina_vencimento
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `view_vacina_vencimento`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_vacina_vencimento` AS select `v`.`descricao` AS `vacina_descricao`,`v`.`modo_uso` AS `vacina_modo_usaro`,`va`.`data_vencimento` AS `vacina_data_vencimento`,`va`.`dose` AS `vacina_dose`,`ani`.`nome` AS `animal_nome`,`ra`.`descricao` AS `animal_raca` from (((`vacina_animal` `va` left join `vacina` `v` on((`va`.`id_vacina` = `v`.`id`))) left join `animal` `ani` on((`va`.`id_animal` = `ani`.`id`))) left join `raca` `ra` on((`ani`.`raca_id` = `ra`.`id`))) where ((`va`.`data_vencimento` >= curdate()) and (`va`.`data_vencimento` <= (curdate() + interval 1 month)));
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

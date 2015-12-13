@@ -10,6 +10,7 @@ import com.minhafazenda.view.relatorio.RelProducaoLeiteHoje;
 import com.minhafazenda.view.relatorio.RelVencimentoVacina;
 import com.minhafazenda.library.common.Licenca;
 import com.minhafazenda.library.protocol.LicencaProtocol;
+import com.minhafazenda.util.UsuarioLogado;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -120,6 +121,15 @@ public class FrmPrincipal extends javax.swing.JFrame
 
         //Inicia thread
         objThread.start();
+        
+        if(UsuarioLogado.getAdministrador() == 1){
+            //É administrador
+            jMenuDiversos.setVisible(true);
+            jMenuRelatorio.setVisible(true);
+        }else{
+            jMenuDiversos.setVisible(false);
+            jMenuRelatorio.setVisible(false);
+        }
     }
 
     FrmPrincipal()
@@ -166,9 +176,9 @@ public class FrmPrincipal extends javax.swing.JFrame
         menuCadastroUsuario = new javax.swing.JMenuItem();
         menuCadastroUsuarioTipo = new javax.swing.JMenuItem();
         menuCadastroCategoria1 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuDiversos = new javax.swing.JMenu();
         menuAuditoria = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuRelatorio = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -385,7 +395,7 @@ public class FrmPrincipal extends javax.swing.JFrame
 
         jMenuBar1.add(jMenuCadastros);
 
-        jMenu1.setText("Diversos");
+        jMenuDiversos.setText("Diversos");
 
         menuAuditoria.setText("Auditoria");
         menuAuditoria.addActionListener(new java.awt.event.ActionListener() {
@@ -393,11 +403,11 @@ public class FrmPrincipal extends javax.swing.JFrame
                 menuAuditoriaActionPerformed(evt);
             }
         });
-        jMenu1.add(menuAuditoria);
+        jMenuDiversos.add(menuAuditoria);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuDiversos);
 
-        jMenu2.setText("Relatórios");
+        jMenuRelatorio.setText("Relatórios");
 
         jMenuItem1.setText("Produção de leite");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +415,7 @@ public class FrmPrincipal extends javax.swing.JFrame
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenuRelatorio.add(jMenuItem1);
 
         jMenuItem2.setText("Produção de leite hoje");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -413,7 +423,7 @@ public class FrmPrincipal extends javax.swing.JFrame
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenuRelatorio.add(jMenuItem2);
 
         jMenuItem3.setText("Vencimento de vacina");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -421,9 +431,9 @@ public class FrmPrincipal extends javax.swing.JFrame
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenuRelatorio.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenuRelatorio);
 
         setJMenuBar(jMenuBar1);
         jMenuBar1.getAccessibleContext().setAccessibleName("Gerenciador");
@@ -857,16 +867,16 @@ public class FrmPrincipal extends javax.swing.JFrame
     private javax.swing.JButton jButton1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenu jMenuDiversos;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;

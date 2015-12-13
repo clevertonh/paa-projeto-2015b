@@ -54,10 +54,13 @@
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="txtSenha" max="32767" attributes="0"/>
-                  <Component id="txtDescricao" pref="401" max="32767" attributes="0"/>
-                  <Component id="jComboBoxTipoUsuario" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtSenha" max="32767" attributes="0"/>
+                      <Component id="txtDescricao" pref="401" max="32767" attributes="0"/>
+                      <Component id="jComboBoxTipoUsuario" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="eAdministrador" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -85,6 +88,8 @@
                           <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="eAdministrador" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -183,6 +188,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Senha:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="eAdministrador">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc9; administrador"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eAdministradorActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

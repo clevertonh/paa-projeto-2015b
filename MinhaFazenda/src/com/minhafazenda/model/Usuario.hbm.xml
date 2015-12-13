@@ -32,5 +32,8 @@
             </key>
             <one-to-many class="com.minhafazenda.model.UsuarioPropriedadeRural" />
         </set>
+        <property name="administrador" type="java.lang.Integer">
+            <column name="administrador" />
+        </property>
     </class>
 </hibernate-mapping>

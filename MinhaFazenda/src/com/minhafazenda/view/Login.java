@@ -58,6 +58,7 @@ public class Login extends javax.swing.JFrame {
         if (objUsuario != null) {
             //Adiciona informações para o usuário
             UsuarioLogado.setId(objUsuario.get(0).getId());
+            UsuarioLogado.setAdministrador(objUsuario.get(0).getAdministrador());
             
             // abrir tela da aplicação
             FrmPrincipal frm = new FrmPrincipal(getChave());

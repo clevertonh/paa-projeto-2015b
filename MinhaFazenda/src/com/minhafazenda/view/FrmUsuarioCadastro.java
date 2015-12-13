@@ -55,6 +55,13 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         txtDescricao.setText(this.objUsuario.getUsuario());
         //Carrega senha
         txtSenha.setText(this.objUsuario.getSenha());
+        
+        if(this.objUsuario.getAdministrador() == 1){
+            eAdministrador.setSelected(true);
+        }else{
+            eAdministrador.setSelected(false);
+        }
+        
         //Carrega na tela o tipo de usário
         jComboBoxTipoUsuario.getEditor().setItem(this.objUsuario.getUsuarioTipo().toString());
         //Adiciona o status de edição
@@ -86,6 +93,7 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         jComboBoxTipoUsuario = new javax.swing.JComboBox();
         txtSenha = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        eAdministrador = new javax.swing.JCheckBox();
 
         jMenu1.setText("jMenu1");
 
@@ -157,6 +165,13 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
 
         jLabel3.setText("Senha:");
 
+        eAdministrador.setText("É administrador");
+        eAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eAdministradorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,10 +184,12 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSenha)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-                    .addComponent(jComboBoxTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtSenha)
+                        .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                        .addComponent(jComboBoxTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(eAdministrador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
@@ -193,7 +210,9 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eAdministrador))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -213,6 +232,13 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         objUsuario.setUsuario(txtDescricao.getText());
         //Senha
         objUsuario.setSenha(txtSenha.getText());
+        
+        if(eAdministrador.isSelected()){
+            objUsuario.setAdministrador(1);
+        }else{
+            objUsuario.setAdministrador(0);
+        }
+        
         //Recebe o valor selecionado
         ComboBoxItem objItem = (ComboBoxItem)jComboBoxTipoUsuario.getSelectedItem();
         //Solicita o OBJETO do tipo de usuário
@@ -257,11 +283,16 @@ public class FrmUsuarioCadastro extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTipoUsuarioActionPerformed
 
+    private void eAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eAdministradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_eAdministradorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox eAdministrador;
     private javax.swing.JComboBox jComboBoxTipoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
