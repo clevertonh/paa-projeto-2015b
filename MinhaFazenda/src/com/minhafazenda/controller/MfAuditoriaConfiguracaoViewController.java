@@ -21,11 +21,11 @@ public class MfAuditoriaConfiguracaoViewController extends AbstractTableModel {
     private final MfAuditoriaViewModel objModel;
     private ArrayList<MfAuditoriaView> lst = null;
     private String[] lstColunas = null;
-    private String[] column = {"Código", "Usuario", "Chave Primaria 1", "Chave Primaria 2","Ação", "Data"};
+    private String[] column = {"Código", "Chave Primaria 1", "Chave Primaria 2","Ação", "Data"};
     
     public MfAuditoriaConfiguracaoViewController() {
         this.objModel = new MfAuditoriaViewModel();
-        setColunas(new String[]{"id", "usuario", "chave_primaria_1", "chave_primaria_2","acao", "data_hora"});
+        setColunas(new String[]{"id", "chave_primaria_1", "chave_primaria_2","acao", "data_hora"});
     }     
     
     public String getColumnName(int columnIndex) {
@@ -72,18 +72,15 @@ public class MfAuditoriaConfiguracaoViewController extends AbstractTableModel {
                 value = c.getId();
                 break;
             case 1:
-                value = c.getUsuario();
-                break;
-            case 2:
                 value = c.getChave_primaria_1();
                 break;
-            case 3:
+            case 2:
                 value = c.getChave_primaria_2();
                 break;
-            case 4:
+            case 3:
                 value = c.getAcao();
                 break;
-            case 5:
+            case 4:
                 value = c.getData_hora();
                 break;
 

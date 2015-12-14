@@ -1,4 +1,5 @@
 CREATE VIEW view_producao_leite_hoje AS
+
 SELECT 
 	pl.id
 	,pl.data_hora
@@ -18,5 +19,4 @@ FROM
 				LEFT JOIN grau_sangue AS gs ON
 					ani.grau_sangue_id = gs.id
 WHERE
-	pl.data_hora >= curdate()
-	AND pl.data_hora <= curdate()
+    STR_TO_DATE(pl.data_hora, '%Y-%m-%d') = curdate()

@@ -177,7 +177,6 @@ public class FrmPrincipal extends javax.swing.JFrame
         jMenuRelatorio = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -339,7 +338,7 @@ public class FrmPrincipal extends javax.swing.JFrame
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(472, Short.MAX_VALUE)
+                .addContainerGap(484, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -462,16 +461,6 @@ public class FrmPrincipal extends javax.swing.JFrame
             }
         });
         jMenuRelatorio.add(jMenuItem2);
-
-        jMenuItem3.setText("Vencimento de vacina");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenuRelatorio.add(jMenuItem3);
 
         jMenuBar1.add(jMenuRelatorio);
 
@@ -791,23 +780,6 @@ public class FrmPrincipal extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        if (relVencimentoVacina == null) {
-            //Cria o form
-            relVencimentoVacina = new RelVencimentoVacina();
-            //Adiciona o formulario dentro do DESKTOP
-            this.jDesktopPane1.add(relVencimentoVacina);
-            //diz que a janela interna é maximizável
-            relVencimentoVacina.setMaximizable(true);
-            //set o tamanho máximo dela, que depende da janela pai
-            //frmCategoria.setMaximum(true);
-        }
-        if (!relVencimentoVacina.isVisible()) {
-            //Mostra o formulário
-            relVencimentoVacina.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void btnProducaoLeiteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProducaoLeiteActionPerformed
     {//GEN-HEADEREND:event_btnProducaoLeiteActionPerformed
         if (frmProducaoLeiteListagem == null) {
@@ -882,7 +854,6 @@ public class FrmPrincipal extends javax.swing.JFrame
     private javax.swing.JMenu jMenuDiversos;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
