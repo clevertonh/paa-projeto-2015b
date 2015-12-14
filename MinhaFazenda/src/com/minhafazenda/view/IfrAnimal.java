@@ -8,9 +8,10 @@ package com.minhafazenda.view;
 import com.minhafazenda.controller.AnimalController;
 import com.minhafazenda.controller.CategoriaController;
 import com.minhafazenda.controller.GrauSangueController;
+import com.minhafazenda.controller.PropriedadeRuralController;
 import com.minhafazenda.controller.RacaController;
+import com.minhafazenda.model.Animal;
 import com.minhafazenda.util.ForcedListSelectionModel;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
@@ -24,45 +25,31 @@ public class IfrAnimal extends javax.swing.JInternalFrame
 
     private FrmAnimalCadastro frmAnimal;
     private AnimalController objControllerAnimal;
+    private Animal objAnimal;
 
-    private FrmRacaCadastro frmRaca;
+//    private FrmRacaCadastro frmRaca;
     private RacaController objControllerRaca;
 
-    private FrmCategoriaCadastro frmCategoria;
+//    private FrmCategoriaCadastro frmCategoria;
     private CategoriaController objControllerCategoria;
 
-    private FrmGrauSangueCadastro frmGrauSangue;
+//    private FrmGrauSangueCadastro frmGrauSangue;
     private GrauSangueController objControllerGrauSangue;
 
+    private PropriedadeRuralController objControllerPropriedadeRural;
 
     int codAnimal = 0;
+
     /**
-     * 
+     *
      */
     public IfrAnimal()
     {
         initComponents();
 
         //Limpa os componentes
-        txtIdAnimal.setText("");
-        txtNome.setText("");
-        txtIdRaca.setText("");
-        txtDescRaca.setText("");
-        txtIdCategoria.setText("");
-        txtDescCategoria.setText("");
-        txtSexo.setText("");
-        txtIdGrauSangue.setText("");
-        txtDescGrauSangue.setText("");
-        txtDataNascimento.setText("");
-        txtNumBotton.setText("");
-        txtNumRegistro.setText("");
-        txtIdPai.setText("");
-        txtDescPai.setText("");
-        txtIdMae.setText("");
-        txtDescMae.setText("");
-        txtIdPropRural.setText("");
-        txtDescPropRural.setText("");
-
+        limparCampos();
+        
         //Desabilita a edição do componente
         txtIdAnimal.setEnabled(false);
         txtIdRaca.setEnabled(false);
@@ -71,7 +58,6 @@ public class IfrAnimal extends javax.swing.JInternalFrame
         txtIdPai.setEnabled(false);
         txtIdMae.setEnabled(false);
         txtIdPropRural.setEnabled(false);
-
 
         jtpCadastro.remove(jpPesqAnimal);
         jtpCadastro.remove(jpPesqRaca);
@@ -1557,6 +1543,10 @@ public class IfrAnimal extends javax.swing.JInternalFrame
             txtDataNascimento.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 9)));
             txtNumBotton.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 10)));
             txtNumRegistro.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 11)));
+            txtDescPai.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 12)));
+            txtDescMae.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 13)));
+            txtIdPropRural.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 14)));
+            txtDescPropRural.setText(String.valueOf(jTableAnimal.getValueAt(jTableAnimal.getSelectedRow(), 15)));
 
             jtpCadastro.setSelectedIndex(0);
             jtpCadastro.remove(jpPesqAnimal);
@@ -1833,34 +1823,37 @@ public class IfrAnimal extends javax.swing.JInternalFrame
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnExcluirActionPerformed
     {//GEN-HEADEREND:event_btnExcluirActionPerformed
-        //Verificar se o campo id possui valor informado.
-        if (!txtIdAnimal.getText().equals("")) {
-            //            estado.setIdEstado(Integer.parseInt(tfdIdCandidato.getText()));
-
-            //Cria um novo objeto do tipo SetorDAO;
-            //            EstadoDAO estadoDAO = new EstadoDAO();
-            String retorno = "";
-            //            retorno = estadoDAO.deletar(estado);
-
-            if (retorno == null) {
-                txtIdAnimal.setText("");
-                txtNome.setText("");
-                //                tfdSigla.setText("");
-                //                tfdIbge.setText("");
-                txtIdGrauSangue.setText("");
-                txtSexo.setText("");
-                btnNovo.requestFocus();
-                //                new EstadoDAO().popularTabelaEstado(tblVaga, "");
-                JOptionPane.showMessageDialog(null, "Registro excluido com sucesso!");
-                //                codVaga = 0;
-            } else {
-                JOptionPane.showMessageDialog(null, "Problemas ao excluir o registro!\n"
-                        + "---------------------------------------------------------\n"
-                        + "Mensagem técnica:\n" + retorno);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione o registro a ser excluído!");
-        }
+//        //Verificar se o campo id possui valor informado.
+//        if (!txtIdAnimal.getText().equals("")) {
+//            //            estado.setIdEstado(Integer.parseInt(tfdIdCandidato.getText()));
+//
+//            //Cria um novo objeto do tipo SetorDAO;
+//            //            EstadoDAO estadoDAO = new EstadoDAO();
+//            String retorno = "";
+//            //            retorno = estadoDAO.deletar(estado);
+//
+//            if (retorno == null) {
+//                txtIdAnimal.setText("");
+//                txtNome.setText("");
+//                //                tfdSigla.setText("");
+//                //                tfdIbge.setText("");
+//                txtIdGrauSangue.setText("");
+//                txtSexo.setText("");
+//                btnNovo.requestFocus();
+//                //                new EstadoDAO().popularTabelaEstado(tblVaga, "");
+//                JOptionPane.showMessageDialog(null, "Registro excluido com sucesso!");
+//                //                codVaga = 0;
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Problemas ao excluir o registro!\n"
+//                        + "---------------------------------------------------------\n"
+//                        + "Mensagem técnica:\n" + retorno);
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Selecione o registro a ser excluído!");
+//        }
+        objControllerAnimal.delete(objAnimal);
+        //Fecha o formulário
+        this.setVisible(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNovoActionPerformed
@@ -1869,18 +1862,9 @@ public class IfrAnimal extends javax.swing.JInternalFrame
         btnSalvar.setEnabled(true);
         btnExcluir.setEnabled(false);
 
-        //        ClasseDAO classeDAO = new ClasseDAO();
-        //        tfdIdCandidato.setText(classeDAO.consultarUltimoRegistro("estado"));;
-        txtIdAnimal.setText("");
-        txtNome.setText("");
-        txtIdGrauSangue.setText("");
-        txtDescGrauSangue.setText("");
+        limparCampos();
 
-        txtSexo.setText("");
-
-        //        chkSituacaoEstado.setSelected(true);
-        btnPesqAnimal.requestFocus();
-        //        codVaga = 0;
+        txtNome.requestFocus();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelarActionPerformed
@@ -1888,12 +1872,7 @@ public class IfrAnimal extends javax.swing.JInternalFrame
         btnSalvar.setEnabled(false);
         btnExcluir.setEnabled(false);
 
-        txtIdAnimal.setText("");
-        txtNome.setText("");
-        //        tfdSigla.setText("");
-        //        tfdIbge.setText("");
-        txtIdGrauSangue.setText("");
-        txtSexo.setText("");
+        limparCampos();
         btnNovo.requestFocus();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -2295,7 +2274,40 @@ public class IfrAnimal extends javax.swing.JInternalFrame
 
     private void btnPesqPropRuralActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPesqPropRuralActionPerformed
     {//GEN-HEADEREND:event_btnPesqPropRuralActionPerformed
-        // TODO add your handling code here:
+        //Define o título para a janela
+        this.setTitle("SGF - Relação de Propridades");
+        //Inicia o objeto de controller
+        objControllerPropriedadeRural = new PropriedadeRuralController();
+        //Carrega a lista de categorias no controller
+        objControllerPropriedadeRural.findByAll();
+        //Seta o controller no JTABLE
+        jTablePropRural.setModel(objControllerPropriedadeRural);
+        //
+        jTablePropRural.setFillsViewportHeight(true);
+
+        //LIbera a seleção das linhas da jTAble
+        jTablePropRural.setRowSelectionAllowed(true);
+        //Aceita somente uma linha selecionada por vez
+        jTablePropRural.setSelectionModel(new ForcedListSelectionModel());
+
+        //Configuração da Jtable
+        TableColumnModel objColumn = jTablePropRural.getColumnModel();
+        objColumn.getColumn(0).setMaxWidth(100);
+
+        //Adiciona a aba ao painel
+        jtpCadastro.add("Pesquisar Propriedade", jpPesqPropRural);
+        jtpCadastro.setSelectedIndex(1);
+
+        //Define a linha e coluna da tabela que serão inicialmente selecionadas;
+        //        int ultimoReg = Integer.parseInt(classeDAO.consultarUltimoRegistro("candidato"));
+        //        System.out.println("Ultimo Registro: " + ultimoReg);
+        //        if (ultimoReg > 1)
+//        {
+        //            tblCandidatoVaga.addRowSelectionInterval(0, 0);
+        //        }
+        //Desabilita a edição no painel de cadastro
+        jtpCadastro.setEnabledAt(0, false);
+//        }
     }//GEN-LAST:event_btnPesqPropRuralActionPerformed
 
     private void txtBuscarPropRuralActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtBuscarPropRuralActionPerformed
@@ -2315,7 +2327,22 @@ public class IfrAnimal extends javax.swing.JInternalFrame
 
     private void btnEditarPropRuralActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEditarPropRuralActionPerformed
     {//GEN-HEADEREND:event_btnEditarPropRuralActionPerformed
-        // TODO add your handling code here:
+        try {
+            btnSalvar.setEnabled(true);
+            btnExcluir.setEnabled(true);
+
+            txtIdPropRural.setText(String.valueOf(jTablePropRural.getValueAt(jTablePropRural.getSelectedRow(), 0)));
+            txtDescPropRural.setText(String.valueOf(jTablePropRural.getValueAt(jTablePropRural.getSelectedRow(), 1)));
+
+            jtpCadastro.setSelectedIndex(0);
+            jtpCadastro.remove(jpPesqPropRural);
+
+            //Habilita a edição no painel de cadastro
+            jtpCadastro.setEnabledAt(0, true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Selecione um registro para edição!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarPropRuralActionPerformed
 
     private void jTablePropRuralMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTablePropRuralMousePressed
@@ -2337,6 +2364,28 @@ public class IfrAnimal extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_jpPesqPropRuralKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jpPesqPropRuralKeyPressed
+
+    public void limparCampos()
+    {
+        txtIdAnimal.setText("");
+        txtNome.setText("");
+        txtIdRaca.setText("");
+        txtDescRaca.setText("");
+        txtIdCategoria.setText("");
+        txtDescCategoria.setText("");
+        txtSexo.setText("");
+        txtIdGrauSangue.setText("");
+        txtDescGrauSangue.setText("");
+        txtDataNascimento.setText("");
+        txtNumBotton.setText("");
+        txtNumRegistro.setText("");
+        txtIdPai.setText("");
+        txtDescPai.setText("");
+        txtIdMae.setText("");
+        txtDescMae.setText("");
+        txtIdPropRural.setText("");
+        txtDescPropRural.setText("");
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

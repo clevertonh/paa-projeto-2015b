@@ -104,7 +104,7 @@ public class CidadeModel {
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            Query objQuery = objSession.createQuery("from Cidade where descricao like '%" + descricao + "%'");
+            Query objQuery = objSession.createQuery("from Cidade where nome like '%" + descricao + "%'");
             lst = (ArrayList<Cidade>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  

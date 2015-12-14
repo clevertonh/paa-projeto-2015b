@@ -59,7 +59,7 @@ public class AnimalModel {
         Transaction objTransaction = objSession.beginTransaction();
         
         try {    
-            Query query = objSession.createQuery("delete animal where id = :id");
+            Query query = objSession.createQuery("delete Animal where id = :id");
             query.setParameter("id", obj.getId());
             query.executeUpdate();
             objTransaction.commit();

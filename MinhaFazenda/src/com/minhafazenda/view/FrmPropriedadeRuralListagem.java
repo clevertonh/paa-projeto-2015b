@@ -5,7 +5,6 @@
  */
 package com.minhafazenda.view;
 
-import com.minhafazenda.controller.CategoriaController;
 import com.minhafazenda.controller.PropriedadeRuralController;
 import com.minhafazenda.util.ForcedListSelectionModel;
 import java.awt.event.KeyEvent;

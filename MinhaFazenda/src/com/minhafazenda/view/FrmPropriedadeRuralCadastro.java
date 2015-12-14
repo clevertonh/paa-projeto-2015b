@@ -6,7 +6,9 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.controller.PropriedadeRuralController;
+import com.minhafazenda.model.Cidade;
 import com.minhafazenda.model.PropriedadeRural;
+import com.minhafazenda.util.UsuarioLogado;
 
 /**
  *
@@ -18,6 +20,7 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
     private final PropriedadeRuralController objController;
     private PropriedadeRural objPropriedadeRural;
     private boolean edicao;
+    private FrmPesquisarCidade frmPesqCid;
 
     /**
      * Creates new form FrmCategoriaCadastro
@@ -40,7 +43,8 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
         txtEndereco.setText("");
         txtTamanho.setText("");
         txtCEP.setText("");
-        txtCidade.setText("");
+        txtIdCidade.setText("");
+        txtNomeCidade.setText("");
 
         //Adiciona o status de edição
         this.edicao = false;
@@ -57,13 +61,30 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
         txtEndereco.setText(this.objPropriedadeRural.getEndereco());
         txtTamanho.setText(this.objPropriedadeRural.getTamanho().toString());
         txtCEP.setText(this.objPropriedadeRural.getCep());
-        txtCidade.setText(this.objPropriedadeRural.getCidade().getNome());
+        txtIdCidade.setText(this.objPropriedadeRural.getCidade().getId().toString());
+        txtNomeCidade.setText(this.objPropriedadeRural.getCidade().getNome());
         //Adiciona o status de edição
         this.edicao = true;
         //MOstra o botão excluir
         btnExcluir.setEnabled(true);
         //Seta o focu no campo de descrição ao abrir o formulário
         txtDescricao.requestFocus();
+    }
+
+    public void fAbreCadastroPesquisa()
+    {
+        if (frmPesqCid == null) {
+            frmPesqCid = new FrmPesquisarCidade();
+            frmPesqCid.setModal(true);
+        }
+
+        if (frmPesqCid.isVisible()) {
+            frmPesqCid.setVisible(false);
+        } else {
+            frmPesqCid.setLocationRelativeTo(null);
+            frmPesqCid.setVisible(true);
+        }
+
     }
 
     /**
@@ -91,13 +112,15 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
         jLabel4 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCidade = new javax.swing.JTextField();
+        txtNomeCidade = new javax.swing.JTextField();
+        btnPesquisarCidade = new javax.swing.JButton();
+        txtIdCidade = new javax.swing.JTextField();
 
         jMenu1.setText("jMenu1");
 
         jMenuItem1.setText("jMenuItem1");
 
-        setTitle("Cadastro de categoria");
+        setTitle("Cadastro de Propriedades");
         setName(""); // NOI18N
 
         jLabel1.setText("Descrição:");
@@ -193,11 +216,28 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
 
         jLabel5.setText("Cidade:");
 
-        txtCidade.addActionListener(new java.awt.event.ActionListener()
+        txtNomeCidade.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                txtCidadeActionPerformed(evt);
+                txtNomeCidadeActionPerformed(evt);
+            }
+        });
+
+        btnPesquisarCidade.setText("...");
+        btnPesquisarCidade.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnPesquisarCidadeActionPerformed(evt);
+            }
+        });
+
+        txtIdCidade.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtIdCidadeActionPerformed(evt);
             }
         });
 
@@ -207,33 +247,33 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDescricao))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEndereco))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCidade)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnPesquisarCidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                    .addComponent(txtIdCidade, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(164, 164, 164)))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
@@ -241,7 +281,8 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -257,10 +298,16 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPesquisarCidade)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtIdCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(87, 87, 87))))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -276,6 +323,15 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         //Adiciona os atributos
         objPropriedadeRural.setDescricao(txtDescricao.getText());
+        objPropriedadeRural.setEndereco(txtEndereco.getText());
+        objPropriedadeRural.setTamanho(Integer.parseInt(txtTamanho.getText()));
+        objPropriedadeRural.setCep(txtCEP.getText());
+        Cidade a = new Cidade();
+        a.setId(Integer.parseInt(txtIdCidade.getText()));
+        objPropriedadeRural.setCidade(a);
+        objPropriedadeRural.setCidade(a);
+        objPropriedadeRural.setIdUsuarioAlterou(UsuarioLogado.getId());
+
         //Verifica se deve adicionar ou atualizar um registro
         if (this.edicao) {
             //Chama o méotod INSERT do conttroler
@@ -285,7 +341,8 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
                 txtEndereco.setText("");
                 txtTamanho.setText("");
                 txtCEP.setText("");
-                txtCidade.setText("");
+                txtIdCidade.setText("");
+                txtNomeCidade.setText("");
                 //Fecha o formulário
                 this.setVisible(false);
             }
@@ -297,8 +354,9 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
                 txtEndereco.setText("");
                 txtTamanho.setText("");
                 txtCEP.setText("");
-                txtCidade.setText("");
-                
+                txtIdCidade.setText("");
+                txtNomeCidade.setText("");
+
                 //Fecha o formulário
                 this.setVisible(false);
             }
@@ -330,15 +388,28 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCEPActionPerformed
 
-    private void txtCidadeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtCidadeActionPerformed
-    {//GEN-HEADEREND:event_txtCidadeActionPerformed
+    private void txtNomeCidadeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtNomeCidadeActionPerformed
+    {//GEN-HEADEREND:event_txtNomeCidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCidadeActionPerformed
+    }//GEN-LAST:event_txtNomeCidadeActionPerformed
+
+    private void btnPesquisarCidadeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPesquisarCidadeActionPerformed
+    {//GEN-HEADEREND:event_btnPesquisarCidadeActionPerformed
+        fAbreCadastroPesquisa();
+        this.txtIdCidade.setText(String.valueOf(this.frmPesqCid.getIdCid()));
+        this.txtNomeCidade.setText(String.valueOf(this.frmPesqCid.getNomeCid()));
+    }//GEN-LAST:event_btnPesquisarCidadeActionPerformed
+
+    private void txtIdCidadeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtIdCidadeActionPerformed
+    {//GEN-HEADEREND:event_txtIdCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnPesquisarCidade;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -349,9 +420,10 @@ public class FrmPropriedadeRuralCadastro extends javax.swing.JDialog
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCEP;
-    private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtIdCidade;
+    private javax.swing.JTextField txtNomeCidade;
     private javax.swing.JTextField txtTamanho;
     // End of variables declaration//GEN-END:variables
 }

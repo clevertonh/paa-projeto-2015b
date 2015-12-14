@@ -15,6 +15,7 @@ import com.minhafazenda.model.PropriedadeRural;
 import com.minhafazenda.model.PropriedadeRuralModel;
 import com.minhafazenda.model.Raca;
 import com.minhafazenda.model.RacaModel;
+import com.minhafazenda.util.Formatacao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -27,11 +28,12 @@ public final class AnimalController extends AbstractTableModel {
 
     //Cria o objeto do Model
     private final AnimalModel objModel;
+    private Formatacao formatacao;
     //Table model
     private ArrayList<Animal> lstAnimal = null;
     private String[] column = {"Código", "Descrição", "Cód. Raça", "Raça", "Cód. Categoria","Categoria", "Sexo", 
                                "Cód. Grau Sangue","Grau de Sangue", "Data de Nascimento", "Botton", "Tipo de Registro",
-                               "Pai", "Mãe", "Propriedade"};
+                               "Código Propriedade", "Propriedade"};
 
     /*
      * Método construtor da classe
@@ -164,7 +166,7 @@ public final class AnimalController extends AbstractTableModel {
             case 8:                
                 value = new GrauSangueModel().findById(ags.getId()).getDescricao();
                 break;            
-            case 9:                
+            case 9:
                 value = c.getDataNascimento();                
                 break;            
             case 10:                
@@ -173,17 +175,20 @@ public final class AnimalController extends AbstractTableModel {
             case 11:                
                 value = c.getTipoRegistro();                
                 break;            
-            case 12:
-//                value = aniModel.findById(c.getId()).getNome();
-                value = c.getAnimalByIdPai();
-//                value = "Ajustar";
-//               value = new AnimalModel().findById(c.getId()).getNome();                
+//            case 12:
+////                value = aniModel.findById(c.getId()).getNome();
+//                value = c.getAnimalByIdPai();
+////                value = "Ajustar";
+////               value = new AnimalModel().findById(c.getId()).getNome();                
+//                break;            
+//            case 13:                
+//                value = c.getAnimalByIdMae();
+////                value = "Ajustar";               
+//                break;            
+            case 12:                
+                value = new PropriedadeRuralModel().findById(apr.getId()).getId();                
                 break;            
             case 13:                
-                value = c.getAnimalByIdMae();
-//                value = "Ajustar";               
-                break;            
-            case 14:                
                 value = new PropriedadeRuralModel().findById(apr.getId()).getDescricao();                
                 break;            
         }
