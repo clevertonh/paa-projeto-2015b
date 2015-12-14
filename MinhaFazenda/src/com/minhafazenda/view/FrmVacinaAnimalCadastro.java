@@ -6,11 +6,13 @@
 package com.minhafazenda.view;
 
 import com.minhafazenda.controller.AnimalController;
+import com.minhafazenda.controller.VacinaAnimalController;
 import com.minhafazenda.model.Animal;
 import com.minhafazenda.model.Categoria;
 import com.minhafazenda.model.GrauSangue;
 import com.minhafazenda.model.PropriedadeRural;
 import com.minhafazenda.model.Raca;
+import com.minhafazenda.model.VacinaAnimal;
 import com.minhafazenda.util.Formatacao;
 import javax.swing.JOptionPane;
 
@@ -18,13 +20,14 @@ import javax.swing.JOptionPane;
  *
  * @author cleverton
  */
-public class FrmAnimalCadastro extends javax.swing.JDialog
+public class FrmVacinaAnimalCadastro extends javax.swing.JDialog
 {
 
     private Formatacao formatacao;
-    private final AnimalController objController;
-    private Animal objAnimal;
+    private final VacinaAnimalController objController;
+    private VacinaAnimal objVacinaAnimal;
     private boolean edicao;
+    
     private FrmGrauSangueListagem frmGrauSangue;
     private FrmPesquisarRaca frmPesqRaca;
     private FrmPesquisarCategoria frmPesqCategoria;
@@ -34,18 +37,18 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
     /**
      * Creates new form FrmCategoriaCadastro
      */
-    public FrmAnimalCadastro()
+    public FrmVacinaAnimalCadastro()
     {
         initComponents();
         //Cria o objeto de controller
-        this.objController = new AnimalController();
+        this.objController = new VacinaAnimalController();
         desabilitarEdicao();
     }
 
     public void fNovoRegistro()
     {
         //
-        this.objAnimal = new Animal();
+        this.objVacinaAnimal = new VacinaAnimal();
         //Por padrão oculta o botão excluir
         btnExcluir.setEnabled(false);
         //Por padrão limpa o campo texto
@@ -59,36 +62,36 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
     public void fCarregaCadastro(int id)
     {
         //Se for passado um código por parâmetro, pesquisa no banco
-        this.objAnimal = this.objController.findById(id);
+        this.objVacinaAnimal = this.objController.findById(id);
         //Carrega na tela o nome
-        txtNome.setText(this.objAnimal.getNome());
+//        txtNome.setText(this.objVacinaAnimal.getNome());
         //Carrega na tela a raça do animal
-        txtIdRaca.setText(this.objAnimal.getRaca().getId().toString());
-        txtDescRaca.setText(this.objAnimal.getRaca().getDescricao());
+//        txtIdRaca.setText(this.objVacinaAnimal.getRaca().getId().toString());
+//        txtDescRaca.setText(this.objVacinaAnimal.getRaca().getDescricao());
         //Carrega na tela a categoria do animal
-        txtIdCategoria.setText(this.objAnimal.getCategoria().getId().toString());
-        txtDescCategoria.setText(this.objAnimal.getCategoria().getDescricao());
+//        txtIdCategoria.setText(this.objVacinaAnimal.getCategoria().getId().toString());
+//        txtDescCategoria.setText(this.objVacinaAnimal.getCategoria().getDescricao());
         //Carrega na tela o sexo do animal
-        txtSexo.setText(this.objAnimal.getSexo().toString());
+//        txtSexo.setText(this.objVacinaAnimal.getSexo().toString());
         //Carrega na tela o grau de sangue do animal
-        txtIdGrauSangue.setText(this.objAnimal.getGrauSangue().getId().toString());
-        txtDescGrauSangue.setText(this.objAnimal.getGrauSangue().getDescricao());
+//        txtIdGrauSangue.setText(this.objVacinaAnimal.getGrauSangue().getId().toString());
+//        txtDescGrauSangue.setText(this.objVacinaAnimal.getGrauSangue().getDescricao());
         //Carrega na tela a data de nascimento do animal
 //        txtDataNascimento.setText(this.objAnimal.getDataNascimento().toString());
 //        txtDataNascimento.setText("");
-        jdcDataNasc.setDate(this.objAnimal.getDataNascimento());
+//        jdcDataNasc.setDate(this.objVacinaAnimal.getDataNascimento());
         //Carrega na tela o número do botton do animal
-        txtNumBotton.setText(this.objAnimal.getNumeroBotton().toString());
+//        txtNumBotton.setText(this.objVacinaAnimal.getNumeroBotton().toString());
         //Carrega na tela o número do registro do animal
-        txtTipoRegistro.setText(this.objAnimal.getTipoRegistro().toString());
+//        txtTipoRegistro.setText(this.objVacinaAnimal.getTipoRegistro().toString());
         //Carrega na tela o registro do pai do animal
 //        txtCodPai.setText("");
 ////        txtCodPai.setText(this.objAnimal.getAnimalByIdPai().toString());
 //        //Carrega na tela o registro da mãe do animal
 //        txtCodMae.setText(this.objAnimal.getAnimalByIdMae().toString());
         //Carrega na tela o código da propriedade rural do animal
-        txtIdPropRural.setText(this.objAnimal.getPropriedadeRural().getId().toString());
-        txtDescPropRural.setText(this.objAnimal.getPropriedadeRural().getDescricao());
+//        txtIdPropRural.setText(this.objVacinaAnimal.getPropriedadeRural().getId().toString());
+//        txtDescPropRural.setText(this.objVacinaAnimal.getPropriedadeRural().getDescricao());
 
 //         txtMae.setText(this.objAnimal.getAnimalByIdMae().toString());
         //Adiciona o status de edição
@@ -514,40 +517,40 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
         //Adiciona os atributos
-        objAnimal.setNome(txtNome.getText());
+//        objVacinaAnimal.setNome(txtNome.getText());
         Raca r = new Raca();
         r.setId(Integer.parseInt(txtIdRaca.getText()));
-        objAnimal.setRaca(r);
+//        objVacinaAnimal.setRaca(r);
         Categoria c = new Categoria();
         c.setId(Integer.parseInt(txtIdCategoria.getText()));
-        objAnimal.setCategoria(c);
-        objAnimal.setSexo(txtSexo.getText().charAt(0));
+//        objVacinaAnimal.setCategoria(c);
+//        objVacinaAnimal.setSexo(txtSexo.getText().charAt(0));
         GrauSangue gs = new GrauSangue();
         gs.setId(Integer.parseInt(txtIdGrauSangue.getText()));
-        objAnimal.setGrauSangue(gs);
+//        objVacinaAnimal.setGrauSangue(gs);
 //        try {
 //            String dataString = formatacao.ajustaDataAMD(txtDataNascimento.getText());
 //            Date data = new Date();
 //            data = formatacao.formataData(dataString);
-        objAnimal.setDataNascimento(jdcDataNasc.getDate());
+//        objVacinaAnimal.setDataNascimento(jdcDataNasc.getDate());
 //        } catch (Exception ex) {
 //            Logger.getLogger(FrmAnimalCadastro.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
-        objAnimal.setNumeroBotton(Integer.parseInt(txtNumBotton.getText()));
-        objAnimal.setTipoRegistro(Integer.parseInt(txtTipoRegistro.getText()));
-        objAnimal.setAnimalByIdPai(null);
-        objAnimal.setAnimalByIdMae(null);
+//        objVacinaAnimal.setNumeroBotton(Integer.parseInt(txtNumBotton.getText()));
+//        objVacinaAnimal.setTipoRegistro(Integer.parseInt(txtTipoRegistro.getText()));
+//        objVacinaAnimal.setAnimalByIdPai(null);
+//        objVacinaAnimal.setAnimalByIdMae(null);
         PropriedadeRural pr = new PropriedadeRural();
         pr.setId(Integer.parseInt(txtIdPropRural.getText()));
-        objAnimal.setPropriedadeRural(pr);
+//        objVacinaAnimal.setPropriedadeRural(pr);
         try {
 //            int aux = Integer.parseInt(txtDiasValidade.getText());
 //            objAnimal.setDiasValidade(aux);
 //            //Verifica se deve adicionar ou atualizar um registro
             if (this.edicao) {
                 //Chama o méotod INSERT do conttroler
-                if (objController.update(objAnimal)) {
+                if (objController.update(objVacinaAnimal)) {
                     //Limpa os campos
                     limparCampos();
                     //Fecha o formulário
@@ -555,7 +558,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
                 }
             } else {
                 //Chama o méotod INSERT do conttroler
-                if (objController.insert(objAnimal)) {
+                if (objController.insert(objVacinaAnimal)) {
                     //Limpa os campos
                     limparCampos();
                     //Fecha o formulário
@@ -574,7 +577,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        objController.delete(objAnimal);
+        objController.delete(objVacinaAnimal);
 
         //Limpa os campos
         limparCampos();
