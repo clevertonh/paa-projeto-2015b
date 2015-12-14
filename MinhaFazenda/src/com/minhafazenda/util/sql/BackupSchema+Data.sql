@@ -674,7 +674,7 @@ INSERT INTO `pais` (`id`, `nome`, `id_usuario_alterou`) VALUES
 
 -- Copiando estrutura para tabela fazenda.producao_leite
 CREATE TABLE IF NOT EXISTS `producao_leite` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `data_hora` datetime DEFAULT NULL,
   `id_animal` int(11) NOT NULL,
   `quantidade_ml` int(11) DEFAULT NULL,

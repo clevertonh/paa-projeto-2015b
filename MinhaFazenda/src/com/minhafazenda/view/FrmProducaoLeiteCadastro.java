@@ -9,16 +9,14 @@ import com.minhafazenda.controller.ProducaoLeiteController;
 import com.minhafazenda.model.Animal;
 import com.minhafazenda.model.ProducaoLeite;
 import com.minhafazenda.util.Formatacao;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.minhafazenda.util.UsuarioLogado;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author cleverton
  */
-public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
+public class FrmProducaoLeiteCadastro extends javax.swing.JDialog
 {
 
     private Formatacao formatacao;
@@ -61,7 +59,7 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
         txtIdAnimal.setText(this.objProducaoLeite.getAnimal().getId().toString());
         txtNomeAnimal.setText(this.objProducaoLeite.getAnimal().getNome());
 
-        txtDataRegistro.setText("");
+        jDateRegistro.setDate(this.objProducaoLeite.getDataHora());
         //Carrega na tela a quantidade
         txtQuantidade.setText(this.objProducaoLeite.getQuantidadeMl().toString());
         //Adiciona o status de edição
@@ -106,12 +104,12 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
         txtQuantidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtDataRegistro = new javax.swing.JTextField();
         txtIdAnimal = new javax.swing.JTextField();
         btnPesqAnimal = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        jDateRegistro = new com.toedter.calendar.JDateChooser();
 
         jMenu1.setText("jMenu1");
 
@@ -139,7 +137,7 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
             }
         });
 
-        jLabel4.setText("Quantidade:");
+        jLabel4.setText("Quantidade (ml):");
 
         jLabel7.setText("Data:");
 
@@ -194,11 +192,13 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
             }
         });
 
+        jDateRegistro.setDateFormatString("dd/MM/yyyy HH:mm:ss");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
@@ -207,24 +207,21 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDataRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(215, 215, 215)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(txtIdAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNomeAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesqAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnFechar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -238,16 +235,17 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
                     .addComponent(btnPesqAnimal)
                     .addComponent(btnSalvar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluir))
+                    .addComponent(jDateRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -257,25 +255,26 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        //Adiciona os atributos
-//        objProducaoLeite.setId(2);
-        try {
-            String dataString = formatacao.ajustaDataAMD(txtDataRegistro.getText());
-            Date data = new Date();
-            data.getTime();// = formatacao.formataData(dataString);
-            objProducaoLeite.setDataHora(data);
-        } catch (Exception ex) {
-            Logger.getLogger(FrmProducaoLeiteCadastro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        objProducaoLeite.setQuantidadeMl(Integer.parseInt(txtQuantidade.getText()));
-
+//        try {
+//            String dataString = formatacao.ajustaDataHoraAMD(txtFormDataHora.getText());
+//            Date data = new Date();
+//            data = formatacao.formataDataHora(dataString);
+//            objProducaoLeite.setDataHora(data);
+            objProducaoLeite.setDataHora(jDateRegistro.getDate());
+//        } catch (Exception ex) {
+//            Logger.getLogger(FrmAnimalCadastro.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
         Animal a = new Animal();
         a.setId(Integer.parseInt(txtIdAnimal.getText()));
         objProducaoLeite.setAnimal(a);
+
+        objProducaoLeite.setQuantidadeMl(Integer.parseInt(txtQuantidade.getText()));
+
+        objProducaoLeite.setIdUsuarioAlterou(UsuarioLogado.getId());
+
         try {
-//            int aux = Integer.parseInt(txtDiasValidade.getText());
-//            objAnimal.setDiasValidade(aux);
-//            //Verifica se deve adicionar ou atualizar um registro
+            //Verifica se deve adicionar ou atualizar um registro
             if (this.edicao) {
                 //Chama o méotod INSERT do conttroler
                 if (objController.update(objProducaoLeite)) {
@@ -345,8 +344,8 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
 
         txtIdAnimal.setText("");
         txtNomeAnimal.setText("");
-        txtDataRegistro.setText("");
         txtQuantidade.setText("");
+        jDateRegistro.setDate(null);
     }
 
     public void desabilitarEdicao()
@@ -362,12 +361,12 @@ public class FrmProducaoLeiteCadastro extends javax.swing.JInternalFrame
     private javax.swing.JButton btnPesqAnimal;
     private javax.swing.JButton btnSalvar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser jDateRegistro;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JTextField txtDataRegistro;
     private javax.swing.JTextField txtIdAnimal;
     private javax.swing.JTextField txtNomeAnimal;
     private javax.swing.JTextField txtQuantidade;

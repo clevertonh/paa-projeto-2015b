@@ -60,7 +60,6 @@
               </Group>
               <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtDataNascimento" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
                   <Component id="txtNumBotton" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="txtTipoRegistro" min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -104,6 +103,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnPesqPropRural" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jdcDataNasc" min="-2" pref="160" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
@@ -150,9 +150,9 @@
                           <Component id="btnPesqGrauSangue" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel7" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="txtDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel7" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="jdcDataNasc" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -293,8 +293,6 @@
         <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtDataNascimento">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo de Registro:"/>
@@ -367,6 +365,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesqPropRuralActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jdcDataNasc">
     </Component>
   </SubComponents>
 </Form>

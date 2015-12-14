@@ -7,18 +7,12 @@ package com.minhafazenda.controller;
 
 import com.minhafazenda.model.Animal;
 import com.minhafazenda.model.AnimalModel;
-import com.minhafazenda.model.Categoria;
-import com.minhafazenda.model.CategoriaModel;
-import com.minhafazenda.model.GrauSangue;
-import com.minhafazenda.model.GrauSangueModel;
 import com.minhafazenda.model.ProducaoLeite;
 import com.minhafazenda.model.ProducaoLeiteModel;
-import com.minhafazenda.model.PropriedadeRural;
-import com.minhafazenda.model.PropriedadeRuralModel;
-import com.minhafazenda.model.Raca;
-import com.minhafazenda.model.RacaModel;
 import com.minhafazenda.util.Formatacao;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -59,7 +53,7 @@ public final class ProducaoLeiteController extends AbstractTableModel
 
     public Boolean insert(ProducaoLeite obj)
     {
-        if (obj.getDataHora().equals("")) {
+        if (obj.getAnimal().equals("")) {
             JOptionPane.showMessageDialog(null, "O Data não foi informado!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
@@ -75,7 +69,7 @@ public final class ProducaoLeiteController extends AbstractTableModel
 
     public Boolean update(ProducaoLeite obj)
     {
-        if (obj.getDataHora().equals("")) {
+        if (obj.getDataHora     ().equals("")) {
             JOptionPane.showMessageDialog(null, "O Data não foi informado!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
@@ -144,7 +138,13 @@ public final class ProducaoLeiteController extends AbstractTableModel
                 value = c.getId();
                 break;
             case 1:
-                value = c.getDataHora();
+        {
+            try {
+                value = c.getDataHora().toString();
+            } catch (Exception ex) {
+                Logger.getLogger(ProducaoLeiteController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
                 break;
             case 2:
                 value = new AnimalModel().findById(a.getId()).getId();

@@ -198,7 +198,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="197" max="32767" attributes="0"/>
+                  <EmptySpace pref="163" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -257,12 +257,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAGrauSangue" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAPropriedadeRural" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnAAnimal" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAPropriedadeRural" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="7" max="32767" attributes="0"/>
                       <Component id="btnProducaoLeite" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

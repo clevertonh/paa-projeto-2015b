@@ -40,7 +40,7 @@ public class FrmPrincipal extends javax.swing.JFrame
     private IfrAnimal ifrmAnimal;
     private FrmPropriedadeRuralListagem frmPropriedadeRural;
     private FrmPropriedadeRuralCadastro frmPropriedadeCadastro;
-    private FrmProducaoLeiteCadastro frmProducaoLeiteCadastro;
+    private FrmProducaoLeiteListagem frmProducaoLeiteListagem;
     private FrmAuditoriaListagem frmAuditoria;
     private RelProducaoLeite relProducaoLeite;
     private RelProducaoLeiteHoje relProducaoLeiteHoje;
@@ -326,12 +326,12 @@ public class FrmPrincipal extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAGrauSangue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAPropriedadeRural)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAAnimal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAPropriedadeRural)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(btnProducaoLeite)
-                .addContainerGap())
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
@@ -348,7 +348,7 @@ public class FrmPrincipal extends javax.swing.JFrame
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -810,24 +810,24 @@ public class FrmPrincipal extends javax.swing.JFrame
 
     private void btnProducaoLeiteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnProducaoLeiteActionPerformed
     {//GEN-HEADEREND:event_btnProducaoLeiteActionPerformed
-        if (frmProducaoLeiteCadastro == null) {
+        if (frmProducaoLeiteListagem == null) {
             //Cria o form
-            frmProducaoLeiteCadastro = new FrmProducaoLeiteCadastro();
+            frmProducaoLeiteListagem = new FrmProducaoLeiteListagem();
             //Adiciona o formulario dentro do DESKTOP
-            this.jDesktopPane1.add(frmProducaoLeiteCadastro);
+            this.jDesktopPane1.add(frmProducaoLeiteListagem);
             //diz que a janela interna é maximizável
-            frmProducaoLeiteCadastro.setMaximizable(true);
+            frmProducaoLeiteListagem.setMaximizable(true);
             //set o tamanho máximo dela, que depende da janela pai
             //frmCategoria.setMaximum(true);
         }
-        if (!frmProducaoLeiteCadastro.isVisible()) {
+        if (!frmProducaoLeiteListagem.isVisible()) {
             //Mostra o formulário
-            frmProducaoLeiteCadastro.setVisible(true);
+            frmProducaoLeiteListagem.setVisible(true);
         }
     }//GEN-LAST:event_btnProducaoLeiteActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments   
      */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */

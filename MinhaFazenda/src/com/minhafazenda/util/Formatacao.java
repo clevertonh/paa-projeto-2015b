@@ -78,6 +78,22 @@ public class Formatacao
             System.err.println(e);
         }
     }
+    
+    public static void reformatarDataHora(JFormattedTextField campo)
+    {
+        try
+        {
+            MaskFormatter m = new MaskFormatter();
+            m.setPlaceholderCharacter(' ');
+            m.setMask("##/##/#### ##:##:##");
+            campo.setFormatterFactory(null);
+            campo.setFormatterFactory(new DefaultFormatterFactory(m));
+            campo.setValue(null);
+        } catch (Exception e)
+        {
+            System.err.println(e);
+        }
+    }
 
     public static void reformatarCpf(JFormattedTextField campo)
     {
@@ -154,6 +170,20 @@ public class Formatacao
         }
         return (dataFormatada);
     }
+    
+     public static String ajustaDataHoraAMD(String data)
+    {
+        String dataFormatada = null;
+        try
+        {
+            Date dataDMA = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(data);
+            dataFormatada = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(dataDMA);
+        } catch (Exception e)
+        {
+            System.err.println(e);
+        }
+        return (dataFormatada);
+    }
 
     public static String removerFormatacao(String dado)
     {
@@ -212,6 +242,37 @@ public class Formatacao
         }
         return date;
     }
+    
+    
+    /**
+     * Converte uma String para um objeto Date. Caso a String seja vazia ou
+     * nula, retorna null - para facilitar em casos onde formulários podem ter
+     * campos de datas vazios.
+     *
+     * @param data String no formato dd/MM/yyyy a ser formatada
+     * @return Date Objeto Date ou null caso receba uma String vazia ou nula
+     * @throws Exception Caso a String esteja no formato errado
+     */
+    public static Date formataDataHora(String data) throws Exception
+    {
+        System.out.println("Data recebida: " + data);
+        if (data == null || data.equals(""))
+        {
+            return null;
+        }
+
+        Date date = null;
+        try
+        {
+            DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            date = (java.util.Date) formatter.parse(data);
+        } catch (ParseException e)
+        {
+            throw e;
+        }
+        return date;
+    }
+
 
     
 }

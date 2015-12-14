@@ -12,9 +12,6 @@ import com.minhafazenda.model.GrauSangue;
 import com.minhafazenda.model.PropriedadeRural;
 import com.minhafazenda.model.Raca;
 import com.minhafazenda.util.Formatacao;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmAnimalCadastro extends javax.swing.JDialog
 {
+
     private Formatacao formatacao;
     private final AnimalController objController;
     private Animal objAnimal;
@@ -43,7 +41,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         this.objController = new AnimalController();
         desabilitarEdicao();
     }
-    
+
     public void fNovoRegistro()
     {
         //
@@ -57,7 +55,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         //Seta o focu no campo de descrição ao abrir o formulário
         txtNome.requestFocus();
     }
-    
+
     public void fCarregaCadastro(int id)
     {
         //Se for passado um código por parâmetro, pesquisa no banco
@@ -77,7 +75,8 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         txtDescGrauSangue.setText(this.objAnimal.getGrauSangue().getDescricao());
         //Carrega na tela a data de nascimento do animal
 //        txtDataNascimento.setText(this.objAnimal.getDataNascimento().toString());
-        txtDataNascimento.setText("");
+//        txtDataNascimento.setText("");
+        jdcDataNasc.setDate(this.objAnimal.getDataNascimento());
         //Carrega na tela o número do botton do animal
         txtNumBotton.setText(this.objAnimal.getNumeroBotton().toString());
         //Carrega na tela o número do registro do animal
@@ -99,30 +98,30 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         //Seta o focu no campo de descrição ao abrir o formulário
         txtNome.requestFocus();
     }
-    
+
     public void fPesquisaRaca()
     {
         if (frmPesqRaca == null) {
             frmPesqRaca = new FrmPesquisarRaca();
             frmPesqRaca.setModal(true);
         }
-        
+
         if (frmPesqRaca.isVisible()) {
             frmPesqRaca.setVisible(false);
         } else {
             frmPesqRaca.setLocationRelativeTo(null);
             frmPesqRaca.setVisible(true);
         }
-        
+
     }
-    
+
     public void fPesquisaCategoria()
     {
         if (frmPesqCategoria == null) {
             frmPesqCategoria = new FrmPesquisarCategoria();
             frmPesqCategoria.setModal(true);
         }
-        
+
         if (frmPesqCategoria.isVisible()) {
             frmPesqCategoria.setVisible(false);
         } else {
@@ -130,37 +129,37 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
             frmPesqCategoria.setVisible(true);
         }
     }
-    
+
     public void fPesquisaGrauSangue()
     {
         if (frmPesqGrauSangue == null) {
-            frmPesqGrauSangue= new FrmPesquisarGrauSangue();
+            frmPesqGrauSangue = new FrmPesquisarGrauSangue();
             frmPesqGrauSangue.setModal(true);
         }
-        
+
         if (frmPesqGrauSangue.isVisible()) {
             frmPesqGrauSangue.setVisible(false);
         } else {
             frmPesqGrauSangue.setLocationRelativeTo(null);
             frmPesqGrauSangue.setVisible(true);
         }
-        
+
     }
-    
-     public void fPesquisaPropriedadeRural()
+
+    public void fPesquisaPropriedadeRural()
     {
         if (frmPesqPropriedadeRural == null) {
-            frmPesqPropriedadeRural= new FrmPesquisarPropriedadeRural();
+            frmPesqPropriedadeRural = new FrmPesquisarPropriedadeRural();
             frmPesqPropriedadeRural.setModal(true);
         }
-        
+
         if (frmPesqPropriedadeRural.isVisible()) {
             frmPesqPropriedadeRural.setVisible(false);
         } else {
             frmPesqPropriedadeRural.setLocationRelativeTo(null);
             frmPesqPropriedadeRural.setVisible(true);
         }
-        
+
     }
 
     /**
@@ -193,7 +192,6 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         txtDescGrauSangue = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtDataNascimento = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtTipoRegistro = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -207,6 +205,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         btnPesqGrauSangue = new javax.swing.JButton();
         txtDescPropRural = new javax.swing.JTextField();
         btnPesqPropRural = new javax.swing.JButton();
+        jdcDataNasc = new com.toedter.calendar.JDateChooser();
 
         jMenu1.setText("jMenu1");
 
@@ -411,7 +410,6 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
                     .addComponent(jLabel8))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumBotton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTipoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -444,7 +442,8 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
                         .addGap(12, 12, 12)
                         .addComponent(txtDescPropRural, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesqPropRural, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPesqPropRural, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdcDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(78, 78, 78)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -483,9 +482,9 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
                             .addComponent(txtIdGrauSangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnPesqGrauSangue))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdcDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -526,14 +525,15 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         GrauSangue gs = new GrauSangue();
         gs.setId(Integer.parseInt(txtIdGrauSangue.getText()));
         objAnimal.setGrauSangue(gs);
-        try {
-            String dataString = formatacao.ajustaDataAMD(txtDataNascimento.getText());
-            Date data = new Date();
-            data = formatacao.formataData(dataString);
-            objAnimal.setDataNascimento(data);
-        } catch (Exception ex) {
-            Logger.getLogger(FrmAnimalCadastro.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            String dataString = formatacao.ajustaDataAMD(txtDataNascimento.getText());
+//            Date data = new Date();
+//            data = formatacao.formataData(dataString);
+        objAnimal.setDataNascimento(jdcDataNasc.getDate());
+//        } catch (Exception ex) {
+//            Logger.getLogger(FrmAnimalCadastro.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
         objAnimal.setNumeroBotton(Integer.parseInt(txtNumBotton.getText()));
         objAnimal.setTipoRegistro(Integer.parseInt(txtTipoRegistro.getText()));
         objAnimal.setAnimalByIdPai(null);
@@ -562,10 +562,10 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
                     this.setVisible(false);
                 }
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Valor informado para campo 'Dias de Validade' inválido!", "Atenção", JOptionPane.WARNING_MESSAGE);
-            
+
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -646,7 +646,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         this.txtIdPropRural.setText(String.valueOf(this.frmPesqPropriedadeRural.getId()));
         this.txtDescPropRural.setText(String.valueOf(this.frmPesqPropriedadeRural.getNome()));
     }//GEN-LAST:event_btnPesqPropRuralActionPerformed
-    
+
     public void limparCampos()
     {
 //        txtIdAnimal.setText("");
@@ -658,7 +658,8 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         txtSexo.setText("");
         txtIdGrauSangue.setText("");
         txtDescGrauSangue.setText("");
-        txtDataNascimento.setText("");
+//        txtDataNascimento.setText("");
+        jdcDataNasc.setDate(null);
         txtNumBotton.setText("");
         txtTipoRegistro.setText("");
 //        txtIdPai.setText("");
@@ -668,7 +669,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
         txtIdPropRural.setText("");
         txtDescPropRural.setText("");
     }
-    
+
     public void desabilitarEdicao()
     {
         //Desabilita a edição do componente
@@ -704,7 +705,7 @@ public class FrmAnimalCadastro extends javax.swing.JDialog
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtDataNascimento;
+    private com.toedter.calendar.JDateChooser jdcDataNasc;
     private javax.swing.JTextField txtDescCategoria;
     private javax.swing.JTextField txtDescGrauSangue;
     private javax.swing.JTextField txtDescPropRural;

@@ -104,7 +104,7 @@ public class ProducaoLeiteModel {
         Session objSession = this.objSessionFactory.openSession();    
 
         try {  
-            Query objQuery = objSession.createQuery("from ProducaoLeite where descricao like '%" + descricao + "%'");
+            Query objQuery = objSession.createQuery("from ProducaoLeite where id_animal like '%" + descricao + "%'");
             lst = (ArrayList<ProducaoLeite>)objQuery.list();  
         } catch (ObjectNotFoundException e) {  
             return null;  
